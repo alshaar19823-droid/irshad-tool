@@ -1,0 +1,2250 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>منظومة الإرشاد الريادي المتكامل</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0b2545; --gold:#b8902e; --teal:#0e6e6a;
+    --paper:#faf8f4; --ink:#1a1a1f; --muted:#8a8a92; --line:#e4e1d8;
+    --mentor:#0b2545; --owner:#b8902e;
+    --mentor-fill:rgba(11,37,69,.16); --owner-fill:rgba(184,144,46,.20);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; font-family:'Tajawal',Arial,sans-serif; background:var(--paper); color:var(--ink); padding:26px 16px 60px;}
+  .wrap{max-width:1080px; margin:0 auto;}
+  .head{text-align:center; margin-bottom:4px;}
+  .head h1{font-size:28px; font-weight:800; color:var(--navy); margin:0 0 4px;}
+  .head .sub{font-size:14px; font-weight:700; color:var(--gold); letter-spacing:1px; margin:0;}
+  .head .rule{width:210px; height:2px; background:var(--navy); margin:12px auto 0; position:relative;}
+  .head .rule::after{content:"";position:absolute; right:50%; transform:translateX(50%); top:-2px; width:32px; height:6px; background:var(--gold);}
+  .intro-note{max-width:620px; margin:16px auto 0; text-align:center; font-size:13px; color:var(--muted); line-height:1.9; font-weight:500;}
+  .attach-note{max-width:900px; margin:8px auto 0; font-size:12px; color:var(--muted); text-align:center; line-height:1.8;}
+  .attach-card .mode-row{display:flex; gap:16px; margin-bottom:10px; font-size:12.5px; font-weight:700;}
+  .attach-card .mode-row label{display:flex; align-items:center; gap:5px; cursor:pointer;}
+  .attach-card .mode-row input{accent-color:var(--navy); cursor:pointer;}
+  .attach-preview{margin-top:10px;}
+  .attach-preview img{max-width:180px; max-height:120px; border-radius:8px; border:1px solid var(--line); display:block;}
+  .attach-preview a{color:var(--navy); font-weight:700; font-size:13px; word-break:break-all;}
+  .attach-type-badge{display:inline-block; background:var(--teal); color:#fff; font-size:11px; font-weight:800; border-radius:6px; padding:3px 8px; margin-inline-end:6px;}
+
+  .toolbar{display:flex; justify-content:center; gap:8px; margin:16px 0 4px; flex-wrap:wrap;}
+  .btn{font-family:'Tajawal',Arial,sans-serif; font-weight:700; font-size:13px; cursor:pointer; border:1.5px solid var(--navy); background:#fff; color:var(--navy); border-radius:8px; padding:8px 15px; transition:.15s;}
+  .btn:hover{background:var(--navy); color:#fff;}
+  .btn.gold{border-color:var(--gold); color:var(--gold);}
+  .btn.gold:hover{background:var(--gold); color:#fff;}
+  .btn.danger{border-color:#9c2b2b; color:#9c2b2b;}
+  .btn.danger:hover{background:#9c2b2b; color:#fff;}
+  #fileInput{display:none;}
+  .save-note{text-align:center; font-size:12px; color:var(--muted); margin-top:6px; min-height:16px;}
+
+  .meta{display:flex; justify-content:center; gap:14px; margin:18px auto 0; flex-wrap:wrap; max-width:900px;}
+  .meta .field{background:#fff; border:1px solid var(--line); border-radius:10px; padding:9px 14px; min-width:190px; flex:1; box-shadow:0 2px 8px rgba(11,37,69,.04);}
+  .meta .field.wide{flex-basis:100%; min-width:100%;}
+  .meta .field label{display:block; font-size:11.5px; font-weight:700; color:var(--muted); margin-bottom:4px;}
+  .meta .field input, .meta .field select{width:100%; border:none; outline:none; font-family:'Tajawal',Arial,sans-serif; font-weight:700; font-size:14.5px; color:var(--ink); background:transparent;}
+  .meta .field input::placeholder{color:#c7c4b8; font-weight:500;}
+  .meta .field input[type="date"]{cursor:pointer; color:var(--ink);}
+  .meta .field input[type="date"]::-webkit-calendar-picker-indicator{cursor:pointer; filter:invert(28%) sepia(45%) saturate(500%) hue-rotate(360deg); opacity:.75;}
+  .chips-wrap{display:flex; flex-wrap:wrap; gap:7px; padding-top:2px;}
+  .chips-wrap .chip{
+    display:inline-flex; align-items:center; gap:5px; background:#f6f5f0; border:1px solid var(--line); border-radius:7px;
+    padding:5px 9px; font-size:11.5px; font-weight:700; color:var(--ink); cursor:pointer;
+  }
+  .chips-wrap .chip input{accent-color:var(--navy); cursor:pointer;}
+  .chips-wrap .chip.on{background:#eef1f6; border-color:var(--navy); color:var(--navy);}
+  .chip-line{
+    display:flex; align-items:center; justify-content:space-between; gap:8px; background:#f6f5f0; border:1px solid var(--line);
+    border-radius:7px; padding:6px 10px; font-size:12.5px; font-weight:700; color:var(--ink);
+  }
+  .chip-line .del{background:none; border:none; color:#a33; font-weight:800; cursor:pointer; font-size:13px; padding:0 4px;}
+
+  .summary{display:flex; justify-content:center; gap:14px; margin:20px 0 8px; flex-wrap:wrap;}
+  .card{background:#fff; border:1px solid var(--line); border-radius:12px; padding:14px 22px; text-align:center; min-width:150px; box-shadow:0 2px 10px rgba(11,37,69,.05);}
+  .card .who{font-size:12px; font-weight:700; color:var(--muted); margin-bottom:4px;}
+  .card .val{font-size:28px; font-weight:900;}
+  .card.mentor .val{color:var(--mentor);}
+  .card.owner .val{color:var(--owner);}
+  .card .out{font-size:11px; color:var(--muted); margin-top:2px;}
+  .card.delta .val{color:var(--ink);}
+
+  .stage{position:relative; max-width:640px; margin:14px auto 0;}
+  svg{width:100%; height:auto; display:block; overflow:visible;}
+
+  .legend{display:flex; justify-content:center; gap:24px; margin:14px auto 0; font-size:13px; font-weight:700;}
+  .legend span{display:inline-flex; align-items:center; gap:7px;}
+  .legend i{width:14px; height:14px; border-radius:4px; display:inline-block;}
+  .legend i.mentor{background:var(--mentor);}
+  .legend i.owner{background:var(--owner);}
+
+  .scale-guide{max-width:760px; margin:24px auto 0; background:#fff; border:1px solid var(--line); border-radius:12px; padding:16px 20px; box-shadow:0 2px 10px rgba(11,37,69,.05);}
+  .scale-guide h3{margin:0 0 12px; font-size:15px; font-weight:800; color:var(--navy); text-align:center;}
+  .scale-guide .row{display:flex; align-items:center; gap:12px; padding:7px 0; border-bottom:1px dashed var(--line);}
+  .scale-guide .row:last-child{border-bottom:none;}
+  .scale-guide .range{
+    flex:none; min-width:52px; text-align:center; font-weight:800; font-size:13px; color:#fff;
+    border-radius:7px; padding:5px 0;
+  }
+  .scale-guide .desc{font-size:13.5px; color:var(--ink); font-weight:500;}
+
+  .section-title{max-width:900px; margin:36px auto 4px; text-align:center;}
+  .section-title h2{font-size:19px; font-weight:800; color:var(--navy); margin:0 0 4px;}
+  .section-title p{font-size:12.5px; color:var(--muted); margin:0; font-weight:500;}
+
+  .stage-picker{display:flex; justify-content:center; gap:10px; max-width:1000px; margin:14px auto 0; flex-wrap:wrap;}
+  .stage-card{
+    flex:1; min-width:150px; max-width:200px; background:#fff; border:2px solid var(--line); border-radius:12px;
+    padding:12px 12px; cursor:pointer; text-align:center; transition:.15s; box-shadow:0 2px 8px rgba(11,37,69,.04);
+  }
+  .stage-card:hover{border-color:var(--gold);}
+  .stage-card.active{border-color:var(--navy); background:#f3f6fa; box-shadow:0 4px 14px rgba(11,37,69,.12);}
+  .stage-card .num{
+    width:24px; height:24px; border-radius:50%; background:var(--line); color:var(--navy); font-weight:800; font-size:12px;
+    display:flex; align-items:center; justify-content:center; margin:0 auto 8px;
+  }
+  .stage-card.active .num{background:var(--navy); color:#fff;}
+  .stage-card .name{font-size:13.5px; font-weight:800; color:var(--ink); margin-bottom:5px;}
+  .stage-card .desc{font-size:11px; color:var(--muted); line-height:1.5; font-weight:500;}
+  .stage-note{text-align:center; font-size:12.5px; color:var(--muted); margin:10px auto 0; max-width:640px;}
+
+  .priority-badge{
+    display:inline-block; min-width:60px; text-align:center; font-size:11.5px; font-weight:800;
+    border-radius:6px; padding:4px 8px; color:#fff;
+  }
+  .priority-low{background:#b7b4a8;}
+  .priority-med{background:var(--gold);}
+  .priority-high{background:var(--navy);}
+
+  .gate-box{max-width:820px; margin:18px auto 0; background:#fff; border:1px solid var(--line); border-radius:14px; padding:20px 22px; box-shadow:0 2px 10px rgba(11,37,69,.05);}
+  .gate-head{display:flex; align-items:center; justify-content:space-between; gap:14px; margin-bottom:14px; flex-wrap:wrap;}
+  .gate-head h3{font-size:16px; font-weight:800; color:var(--navy); margin:0;}
+  .gate-readiness{display:flex; align-items:center; gap:10px;}
+  .gate-readiness .pct{font-size:22px; font-weight:900; color:var(--navy); min-width:54px; text-align:left;}
+  .gate-bar{width:150px; height:10px; background:var(--line); border-radius:6px; overflow:hidden;}
+  .gate-bar-fill{height:100%; background:linear-gradient(90deg, var(--gold), var(--navy)); border-radius:6px; transition:width .2s;}
+  .gate-item{display:flex; align-items:flex-start; gap:10px; padding:9px 0; border-bottom:1px dashed var(--line);}
+  .gate-item:last-child{border-bottom:none;}
+  .gate-item input[type="checkbox"]{margin-top:3px; width:17px; height:17px; accent-color:var(--navy); flex:none; cursor:pointer;}
+  .gate-item label{font-size:13.5px; color:var(--ink); font-weight:500; line-height:1.6; cursor:pointer;}
+  .gate-item.checked label{color:var(--muted); text-decoration:line-through;}
+
+  .card-list{max-width:900px; margin:16px auto 0; display:flex; flex-direction:column; gap:16px;}
+  .goal-card, .session-card{
+    background:#fff; border:1px solid var(--line); border-radius:14px; padding:18px 20px;
+    box-shadow:0 2px 10px rgba(11,37,69,.05); position:relative;
+  }
+  .card-top{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:12px;}
+  .card-badge{
+    background:var(--navy); color:#fff; font-size:12px; font-weight:800; border-radius:7px;
+    padding:4px 10px; flex:none;
+  }
+  .session-card .card-badge{background:var(--teal);}
+  .remove-btn{
+    background:none; border:1.5px solid #d8b3b3; color:#a33; font-size:12px; font-weight:700;
+    border-radius:7px; padding:4px 10px; cursor:pointer; flex:none;
+  }
+  .remove-btn:hover{background:#fbeaea;}
+  .field-row{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:10px;}
+  .field-col{flex:1; min-width:200px;}
+  .field-col.narrow{flex:none; width:170px;}
+  .field-col label{display:block; font-size:12px; font-weight:700; color:var(--muted); margin-bottom:5px;}
+  .field-col select, .field-col input[type="text"], .field-col input[type="date"], .field-col input[type="number"]{
+    width:100%; border:1.5px solid var(--line); border-radius:8px; padding:8px 10px; font-family:'Tajawal',Arial,sans-serif;
+    font-size:13.5px; color:var(--ink); outline:none;
+  }
+  .field-col select:focus, .field-col input:focus, .field-col textarea:focus{border-color:var(--gold);}
+  .field-col textarea{
+    width:100%; border:1.5px solid var(--line); border-radius:8px; padding:9px 10px; font-family:'Tajawal',Arial,sans-serif;
+    font-size:13.5px; color:var(--ink); outline:none; resize:vertical; min-height:56px; line-height:1.7;
+  }
+  .smart-row{display:flex; gap:8px; flex-wrap:wrap; margin-top:4px; padding-top:12px; border-top:1px dashed var(--line);}
+  .smart-chip{
+    display:flex; align-items:center; gap:6px; background:#f6f5f0; border:1px solid var(--line); border-radius:8px;
+    padding:6px 10px; font-size:12px; font-weight:700; color:var(--ink); cursor:pointer;
+  }
+  .smart-chip input{accent-color:var(--navy); cursor:pointer;}
+  .smart-chip.on{background:#eaf3ea; border-color:#8fbf8f; color:#2a6b2a;}
+  .smart-score{font-size:11.5px; font-weight:800; color:var(--muted); margin-inline-start:auto;}
+
+  .add-card-btn{
+    max-width:900px; margin:4px auto 0; display:block; width:100%; text-align:center;
+    border:2px dashed var(--line); border-radius:12px; padding:12px; background:none;
+    font-family:'Tajawal',Arial,sans-serif; font-weight:800; font-size:13.5px; color:var(--navy); cursor:pointer;
+  }
+  .add-card-btn:hover{border-color:var(--gold); background:#fbf8f0;}
+  .empty-note{text-align:center; color:var(--muted); font-size:13px; padding:14px 0; max-width:900px; margin:0 auto;}
+  .session-counter{text-align:center; font-size:12.5px; color:var(--muted); margin:6px auto 0;}
+
+  .verify-toggle{
+    display:block; width:100%; margin-top:14px; background:#f6f5f0; border:1.5px dashed var(--navy); border-radius:10px;
+    padding:10px; font-family:'Tajawal',Arial,sans-serif; font-weight:800; font-size:13px; color:var(--navy); cursor:pointer;
+  }
+  .verify-toggle:hover{background:#eef1f6;}
+  .verify-wrap{display:none; margin-top:14px; border-top:2px solid var(--line); padding-top:14px;}
+  .verify-wrap.open{display:block;}
+  .verify-crit{background:#fafaf7; border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin-bottom:12px;}
+  .verify-crit h4{margin:0 0 6px; font-size:13.5px; font-weight:800; color:var(--navy);}
+  .verify-crit .q{font-size:12.5px; color:var(--muted); margin-bottom:10px; line-height:1.7;}
+  .verify-indicators{display:flex; flex-direction:column; gap:6px; margin-bottom:10px;}
+  .verify-indicators label{display:flex; align-items:flex-start; gap:8px; font-size:12.5px; color:var(--ink); line-height:1.6; cursor:pointer;}
+  .verify-indicators input{margin-top:3px; accent-color:var(--navy); cursor:pointer;}
+  .verify-met{display:flex; align-items:center; gap:14px; font-size:12.5px; font-weight:700; padding-top:8px; border-top:1px dashed var(--line);}
+  .verify-met label{display:flex; align-items:center; gap:5px; cursor:pointer;}
+  .verify-met input{accent-color:var(--navy); cursor:pointer;}
+  .verify-status{margin-inline-start:auto; font-weight:800; padding:3px 10px; border-radius:6px; font-size:11.5px;}
+  .verify-status.yes{background:#eaf3ea; color:#2a6b2a;}
+  .verify-status.partial{background:#fdf3e0; color:#8a6a1f;}
+  .verify-status.no{background:#fbeaea; color:#a33;}
+  .verify-status.pending{background:#eee; color:var(--muted);}
+  .verify-overall{
+    text-align:center; padding:14px; border-radius:10px; margin-top:6px; font-weight:800; font-size:14px;
+  }
+  .verify-overall.strong{background:#eaf3ea; color:#1e7a3d;}
+  .verify-overall.acceptable{background:#fdf3e0; color:#8a6a1f;}
+  .verify-overall.rework{background:#fbeaea; color:#a33;}
+  .verify-overall.pending{background:#f0f0ec; color:var(--muted);}
+
+  table.cmp{width:100%; border-collapse:collapse; margin:26px auto 0; max-width:900px; background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 2px 10px rgba(11,37,69,.05);}
+  table.cmp th, table.cmp td{padding:10px 12px; text-align:center; font-size:14px; border-bottom:1px solid var(--line);}
+  table.cmp th{background:var(--navy); color:#fff; font-weight:700; font-size:13px;}
+  table.cmp td.dim{text-align:right; font-weight:700;}
+  table.cmp td.dim .dim-inner{display:inline-flex; align-items:center; gap:8px;}
+  table.cmp td.dim i{width:10px; height:10px; border-radius:3px; display:inline-block; flex:none;}
+  table.cmp tr:last-child td{border-bottom:none;}
+  table.cmp tr.total td{background:#faf7ef; font-weight:800; border-top:3px double var(--navy);}
+  table.cmp tr.total td.dim{border-top:3px double var(--navy);}
+  input.score{
+    width:56px; text-align:center; font-family:'Tajawal',Arial,sans-serif; font-weight:700; font-size:14px;
+    border:1.5px solid var(--line); border-radius:6px; padding:5px 2px; outline:none; background:#fff;
+  }
+  input.score:focus{border-color:var(--gold);}
+  input.score.mentor{border-color:var(--mentor);}
+  input.score.owner{border-color:var(--owner);}
+  .delta-pos{color:#1e7a3d; font-weight:800;}
+  .delta-neg{color:#b13030; font-weight:800;}
+  .delta-zero{color:var(--muted); font-weight:700;}
+  .computed-val{
+    display:inline-block; min-width:56px; text-align:center; font-weight:800; font-size:14px;
+    font-style:italic; padding:5px 4px; border-radius:6px; border:1.5px dashed var(--line); background:#faf9f5;
+  }
+  .computed-val.mentor{color:var(--mentor); border-color:var(--mentor);}
+  .computed-val.owner{color:var(--owner); border-color:var(--owner);}
+  .link-mark{font-style:normal; font-size:11px; color:var(--muted); cursor:help;}
+  .table-note{max-width:900px; margin:8px auto 0; font-size:11.5px; color:var(--muted); text-align:center; line-height:1.8;}
+
+  .ka-toggle{
+    background:none; border:1px solid var(--line); border-radius:6px; font-size:11px; font-weight:700; color:var(--navy);
+    padding:3px 8px; cursor:pointer; margin-inline-start:6px;
+  }
+  .ka-toggle:hover{border-color:var(--gold); background:#fbf8f0;}
+  .ka-detail-row td{padding:0 !important; border-bottom:1px solid var(--line) !important;}
+  .ka-detail-wrap{display:none; padding:14px 18px; background:#f9f8f4; text-align:right;}
+  .ka-detail-wrap.open{display:block;}
+  .ka-detail-cols{display:flex; gap:20px; flex-wrap:wrap;}
+  .ka-detail-col{flex:1; min-width:240px;}
+  .ka-detail-col h4{font-size:12.5px; font-weight:800; color:var(--navy); margin:0 0 8px;}
+  .ka-check-item{display:flex; align-items:flex-start; gap:8px; padding:5px 0; font-size:12.5px; color:var(--ink);}
+  .ka-check-item input{margin-top:3px; accent-color:var(--navy); cursor:pointer;}
+  .ka-check-item label{cursor:pointer; line-height:1.6;}
+  .checklist-score-note{font-size:11.5px; color:var(--muted); margin-top:10px; font-weight:700;}
+  .computed-val.shared{border-color:var(--gold); color:#8a6a1f;}
+
+  .na-block{max-width:900px; margin:16px auto 0; background:#fff; border:1px solid var(--line); border-radius:12px; padding:16px 20px; box-shadow:0 2px 8px rgba(11,37,69,.04);}
+  .na-block h3{font-size:14.5px; font-weight:800; color:var(--navy); margin:0 0 12px;}
+  .na-domain{max-width:900px; margin:10px auto 0; background:#fff; border:1px solid var(--line); border-radius:12px; overflow:hidden; box-shadow:0 2px 8px rgba(11,37,69,.04);}
+  .na-domain-head{
+    display:flex; align-items:center; justify-content:space-between; gap:10px; padding:13px 18px; cursor:pointer; background:#fbfaf7;
+  }
+  .na-domain-head:hover{background:#f5f3ec;}
+  .na-domain-head .name{font-size:13.5px; font-weight:800; color:var(--ink);}
+  .na-domain-body{display:none; padding:14px 18px 18px; border-top:1px solid var(--line);}
+  .na-domain-body.open{display:block;}
+  .na-domain.open .na-domain-head{background:#eef1f6;}
+  .na-questions{list-style:none; margin:0 0 12px; padding:0; display:flex; flex-direction:column; gap:6px;}
+  .na-questions li{font-size:12.5px; color:var(--muted); line-height:1.7; padding-inline-start:16px; position:relative;}
+  .na-questions li::before{content:'—'; position:absolute; right:0; color:var(--gold);}
+  .na-domain-body textarea{width:100%; min-height:70px;}
+  .na-arrow{transition:.2s; color:var(--muted); font-size:12px;}
+  .na-domain.open .na-arrow{transform:rotate(90deg);}
+
+  footer.banner{margin-top:32px; background:var(--navy); border-top:4px solid var(--gold); text-align:center; padding:16px 14px 14px; border-radius:2px;}
+  footer.banner .name{color:#fff; font-weight:800; font-size:16px;}
+  footer.banner .sep{color:var(--gold); font-weight:800; margin:0 10px;}
+  footer.banner .title{color:#fff; font-weight:500; font-size:14px;}
+  footer.banner .contact-row{
+    display:flex; justify-content:space-between; align-items:center; max-width:420px; margin:10px auto 0;
+    border-top:1px solid rgba(255,255,255,.18); padding-top:9px;
+  }
+  footer.banner .contact-item{display:flex; align-items:center; gap:6px; direction:ltr; color:rgba(255,255,255,.88); font-size:12px; font-weight:500;}
+  footer.banner .contact-item svg{width:13px; height:13px; flex:none; fill:var(--gold);}
+
+  .hint{text-align:center; color:var(--muted); font-size:12.5px; margin:14px auto 0; max-width:640px; line-height:1.85;}
+
+  .copyright{text-align:center; font-size:11.5px; color:var(--muted); margin:18px auto 0; font-weight:500;}
+
+  @media print{
+    .toolbar,.hint,.save-note,.add-card-btn,.remove-btn,#fileInput,.ka-toggle{display:none !important;}
+    body{padding:0; background:#fff;}
+    .goal-card,.session-card,.gate-box,.scale-guide,.stage-card,table.cmp,.stage{break-inside:avoid;}
+    .section-title{break-after:avoid;}
+    .card-list{break-inside:auto;}
+    .ka-detail-wrap{display:block !important;}
+    .wrap{max-width:100%;}
+    body.print-summary .ka-detail-wrap,
+    body.print-summary .verify-wrap,
+    body.print-summary .na-domain-body{display:none !important;}
+    body.print-summary .na-domain-head{cursor:default;}
+  }
+  @media (max-width:640px){ .head h1{font-size:22px;} table.cmp th, table.cmp td{font-size:12px; padding:7px 4px;} input.score{width:42px; font-size:12px;} .meta{flex-direction:column;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <h1>منظومة الإرشاد الريادي المتكامل</h1>
+    <div class="rule"></div>
+    <p class="intro-note">أداة واحدة تُرافق دورة الإرشاد من أولها لآخرها: تُحدَّد مرحلة المشروع، يُبنى تشخيص مترابط الأرقام من التفصيل إلى الخلاصة، تُصاغ أهداف SMART، ويُوثَّق التقدّم جلسة بعد جلسة — وكل رقم فيها يُعرف من أين جاء.</p>
+  </div>
+
+  <div class="section-title">
+    <h2>معلومات المرشد</h2>
+  </div>
+  <div class="meta">
+    <div class="field">
+      <label>اسم المرشد</label>
+      <input type="text" id="metaMentorName" placeholder="اكتب اسم المرشد">
+    </div>
+    <div class="field">
+      <label>البلد</label>
+      <select id="metaMentorCountry"></select>
+    </div>
+    <div class="field">
+      <label>رمز الدولة</label>
+      <select id="metaMentorPhoneCode"></select>
+    </div>
+    <div class="field">
+      <label>رقم الهاتف</label>
+      <input type="tel" id="metaMentorPhoneNumber" placeholder="79xxxxxxx">
+    </div>
+    <div class="field">
+      <label>البريد الإلكتروني</label>
+      <input type="email" id="metaMentorEmail" placeholder="name@example.com">
+    </div>
+    <div class="field wide">
+      <label>مجالات المعرفة والخبرة</label>
+      <select id="mentorExpertiseSelect"></select>
+      <div id="mentorExpertiseOtherWrap" style="display:none; margin-top:10px;">
+        <div style="display:flex; gap:8px;">
+          <input type="text" id="mentorExpertiseOtherInput" placeholder="اكتب مجال الخبرة الإضافي واضغط إضافة" style="flex:1; border:1.5px solid var(--line); border-radius:8px; padding:8px 10px; font-family:'Tajawal',Arial,sans-serif; font-size:13px;">
+          <button type="button" class="ka-toggle" id="mentorExpertiseOtherAddBtn" style="white-space:nowrap;">إضافة</button>
+        </div>
+      </div>
+      <div class="chips-wrap" id="mentorExpertiseTags" style="margin-top:10px;"></div>
+    </div>
+  </div>
+
+  <div class="section-title">
+    <h2>معلومات صاحب/ة المشروع والمشروع</h2>
+  </div>
+  <div class="meta">
+    <div class="field">
+      <label>اسم صاحب/ة المشروع</label>
+      <input type="text" id="metaOwnerName" placeholder="اكتب اسم صاحب المشروع">
+    </div>
+    <div class="field">
+      <label>رمز الدولة</label>
+      <select id="metaOwnerPhoneCode"></select>
+    </div>
+    <div class="field">
+      <label>رقم الهاتف</label>
+      <input type="tel" id="metaOwnerPhoneNumber" placeholder="79xxxxxxx">
+    </div>
+    <div class="field">
+      <label>البريد الإلكتروني</label>
+      <input type="email" id="metaOwnerEmail" placeholder="name@example.com">
+    </div>
+    <div class="field">
+      <label>اسم المشروع</label>
+      <input type="text" id="metaProjectName" placeholder="اكتب اسم المشروع">
+    </div>
+    <div class="field">
+      <label>البلد</label>
+      <select id="metaCountry"></select>
+    </div>
+    <div class="field">
+      <label>المحافظة أو المدينة أو القرية</label>
+      <input type="text" id="metaRegion" placeholder="اكتب المحافظة أو المدينة أو القرية">
+    </div>
+    <div class="field">
+      <label>القطاع</label>
+      <select id="metaSector"></select>
+    </div>
+    <div class="field">
+      <label>منذ متى بدأ المشروع بالعمل</label>
+      <select id="metaOperatingSince"></select>
+    </div>
+    <div class="field">
+      <label>نوع المشروع</label>
+      <select id="metaBusinessType"></select>
+    </div>
+    <div class="field">
+      <label>حالة التسجيل</label>
+      <select id="metaRegistrationStatus"></select>
+    </div>
+    <div class="field">
+      <label>تاريخ التقييم</label>
+      <input type="date" id="metaDate">
+    </div>
+  </div>
+
+  <div class="section-title">
+    <h2>مرحلة المشروع الحالية</h2>
+    <p>اختر المرحلة التي يمر بها المشروع الآن — هذا الاختيار يحدد أولوية مجالات المعرفة وقائمة بوابة الانتقال أدناه</p>
+  </div>
+  <div class="stage-picker" id="stagePicker"></div>
+  <p class="stage-note" id="stageNote"></p>
+
+  <div class="toolbar">
+    <button class="btn" onclick="doExport()">تنزيل نسخة (Export)</button>
+    <button class="btn" onclick="document.getElementById('fileInput').click()">تحميل نسخة (Import)</button>
+    <input type="file" id="fileInput" accept="application/json" onchange="doImport(event)">
+    <button class="btn gold" onclick="window.print()">طباعة كاملة (بكل التفاصيل)</button>
+    <button class="btn gold" onclick="printSummary()">طباعة ملخص</button>
+    <button class="btn danger" onclick="resetAll()">تفريغ الكل</button>
+  </div>
+  <div class="save-note" id="saveNote"></div>
+
+  <div class="section-title">
+    <h2>التشخيص العام</h2>
+    <p>نظرة سريعة على المحاور التسعة الأساسية للمشروع</p>
+  </div>
+
+  <div class="summary">
+    <div class="card mentor"><div class="who">إجمالي المرشد</div><div class="val" id="mentorTotal">–</div><div class="out">من 90</div></div>
+    <div class="card owner"><div class="who">إجمالي صاحب المشروع</div><div class="val" id="ownerTotal">–</div><div class="out">من 90</div></div>
+    <div class="card delta"><div class="who">الفرق الكلي</div><div class="val" id="totalDelta">–</div><div class="out">نقطة</div></div>
+  </div>
+
+  <div class="stage">
+    <svg id="radar" viewBox="0 0 640 640" xmlns="http://www.w3.org/2000/svg"></svg>
+  </div>
+
+  <div class="legend">
+    <span><i class="mentor"></i> المرشد</span>
+    <span><i class="owner"></i> صاحب المشروع</span>
+  </div>
+
+  <div class="scale-guide">
+    <h3>سلم التقييم</h3>
+    <div class="row"><span class="range" style="background:#8a8a92">1-2</span><span class="desc">لا يوجد وضوح تقريباً هنا</span></div>
+    <div class="row"><span class="range" style="background:#7d6a52">3-4</span><span class="desc">بعض المعرفة ولكن ليس بما يكفي</span></div>
+    <div class="row"><span class="range" style="background:#6e6b45">5-6</span><span class="desc">الأداء مقبول ولكن بشكل غير منتظم</span></div>
+    <div class="row"><span class="range" style="background:#0e6e6a">7-8</span><span class="desc">شعور بالثقة</span></div>
+    <div class="row"><span class="range" style="background:#b8902e">9-10</span><span class="desc">إحدى نقاط القوة</span></div>
+  </div>
+
+  <table class="cmp" id="cmpTable">
+    <thead>
+      <tr><th style="text-align:right">المحور</th><th>المرشد</th><th>صاحب المشروع</th><th>الفرق</th></tr>
+    </thead>
+    <tbody id="cmpBody"></tbody>
+    <tfoot>
+      <tr class="total"><td class="dim">المجموع</td><td id="sumMentor">—</td><td id="sumOwner">—</td><td id="sumDelta">—</td></tr>
+    </tfoot>
+  </table>
+  <p class="table-note">العلامة ⚭ تشير إلى أن قيمة المحور محسوبة تلقائياً من نتائج المسح التفصيلي أدناه، ومنها محور جاهزية رائد/ة الأعمال المحسوب من مجالي تخطيط الأعمال والموارد البشرية باعتبارهما أقرب انعكاس لفهمه لمشروعه وقدرته على الإدارة والتنظيم والقيادة.</p>
+
+  <div class="section-title">
+    <h2>تقييم الاحتياجات</h2>
+    <p>أسئلة إرشادية أساسية تتراكم عليها أسئلة إضافية مع تقدّم المشروع من مرحلة إلى أخرى، وملاحظات نوعية تُبنى عليها أرقام المسح التفصيلي أدناه</p>
+  </div>
+
+  <div class="na-block">
+    <h3>لمحة عامة عن المشروع بكلمات صاحب/ة المشروع</h3>
+    <div class="field-row">
+      <div class="field-col" style="flex-basis:100%"><label>نشاط المشروع والمنتجات أو الخدمات التي يقدّمها</label>
+        <textarea id="naActivity"></textarea>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field-col" style="flex-basis:100%"><label>أهم الإنجازات حتى الآن</label>
+        <textarea id="naAchievements"></textarea>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field-col" style="flex-basis:100%"><label>أهم التحديات الحالية التي تواجه المشروع</label>
+        <textarea id="naChallenges"></textarea>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field-col" style="flex-basis:100%"><label>ما يميّز هذا المشروع عن المنافسين (عرض القيمة المضافة)</label>
+        <textarea id="naDifferentiation"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div id="naDomainsList"></div>
+
+  <div class="na-block">
+    <h3>لمحة عن الأداء الحالي (أرقام تقريبية إن توفرت)</h3>
+    <div class="field-row">
+      <div class="field-col narrow"><label>متوسط المبيعات الشهرية (تقريباً)</label>
+        <input type="text" id="naAvgSales">
+      </div>
+      <div class="field-col narrow"><label>متوسط عدد الزبائن أو الطلبات شهرياً</label>
+        <input type="text" id="naAvgCustomers">
+      </div>
+      <div class="field-col narrow"><label>عدد العاملين في المشروع</label>
+        <input type="text" id="naTeamSize">
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field-col" style="flex-basis:100%"><label>أهم بنود التكاليف</label>
+        <textarea id="naMainCosts"></textarea>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field-col" style="flex-basis:100%"><label>ملاحظات حول الاتجاه العام: نمو، ثبات، تراجع</label>
+        <textarea id="naTrend"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="na-block">
+    <h3>التحديات الرئيسية وطلبات صاحب/ة المشروع</h3>
+    <div class="field-row">
+      <div class="field-col" style="flex-basis:100%"><label>أكبر التحديات من وجهة نظر صاحب/ة المشروع، ويُفضَّل استخدام كلماته/ها قدر الإمكان</label>
+        <textarea id="naBiggestChallenges"></textarea>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field-col" style="flex-basis:100%"><label>نوع الدعم أو المساندة التي يتوقعها صاحب/ة المشروع من الإرشاد</label>
+        <textarea id="naSupportExpected"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="na-block">
+    <h3>تحليل المرشد وتحديد الاحتياجات ذات الأولوية</h3>
+    <div class="field-row">
+      <div class="field-col" style="flex-basis:100%"><label>نقاط القوة الرئيسية في المشروع</label>
+        <textarea id="naStrengths"></textarea>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field-col" style="flex-basis:100%"><label>الفجوات والمخاطر الرئيسية</label>
+        <textarea id="naGaps"></textarea>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field-col" style="flex-basis:100%"><label>جملة أو جملتان تلخّصان القضية الأساسية التي سيتم العمل عليها</label>
+        <textarea id="naPrioritySummary"></textarea>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field-col" style="flex-basis:100%"><label>إحالات محتملة أو أي دعم إضافي مطلوب</label>
+        <textarea id="naReferrals"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">
+    <h2>المسح التفصيلي حسب مجالات المعرفة</h2>
+    <p>اثنا عشر مجالاً معرفياً؛ عمود الأولوية يتغيّر تلقائياً حسب المرحلة المختارة أعلاه</p>
+  </div>
+
+  <table class="cmp" id="kaTable">
+    <thead>
+      <tr><th style="text-align:right">مجال المعرفة</th><th>الأولوية بهذه المرحلة</th><th>المرشد</th><th>صاحب المشروع</th><th>الفرق</th></tr>
+    </thead>
+    <tbody id="kaBody"></tbody>
+    <tfoot>
+      <tr class="total"><td class="dim">المجموع</td><td></td><td id="kaSumMentor">—</td><td id="kaSumOwner">—</td><td id="kaSumDelta">—</td></tr>
+    </tfoot>
+  </table>
+
+  <div class="stage">
+    <svg id="radarKA" viewBox="0 0 640 640" xmlns="http://www.w3.org/2000/svg"></svg>
+  </div>
+  <div class="legend">
+    <span><i class="mentor"></i> المرشد</span>
+    <span><i class="owner"></i> صاحب المشروع</span>
+  </div>
+  <p class="table-note">تعرض هذه الشبكة نفس بيانات جدول المسح التفصيلي أعلاه بصورة بصرية؛ أي تعديل على تقييم أي مجال معرفة ينعكس هنا وعلى محاور التشخيص العام المرتبطة به فوراً.</p>
+
+  <div class="section-title">
+    <h2>بوابة الانتقال للمرحلة القادمة</h2>
+    <p>قائمة تحقق موضوعية تحدد مدى جاهزية المشروع للانتقال من المرحلة الحالية إلى ما بعدها</p>
+  </div>
+
+  <div class="gate-box">
+    <div class="gate-head">
+      <h3 id="gateTitle">—</h3>
+      <div class="gate-readiness">
+        <div class="gate-bar"><div class="gate-bar-fill" id="gateBarFill" style="width:0%"></div></div>
+        <div class="pct" id="gatePct">0%</div>
+      </div>
+    </div>
+    <div id="gateItems"></div>
+  </div>
+
+  <div class="section-title">
+    <h2>الأهداف بصيغة SMART</h2>
+    <p>هدف واحد أو أكثر لكل احتياج ذي أولوية، مرتبط بمجال معرفي محدد — يُعَدّ مرة واحدة في بداية دورة الإرشاد</p>
+  </div>
+  <div class="card-list" id="goalsList"></div>
+  <p class="empty-note" id="goalsEmptyNote">لم تتم إضافة أي هدف بعد</p>
+  <button class="add-card-btn" onclick="addGoal()">+ إضافة هدف جديد</button>
+
+  <div class="section-title">
+    <h2>سجل الجلسات</h2>
+    <p>سجل يُستكمل بعد كل جلسة إرشادية؛ يمكن ربط كل جلسة بأحد الأهداف الذكية أعلاه لتتبع التقدم بشكل تكاملي</p>
+  </div>
+  <p class="session-counter" id="sessionCounter"></p>
+  <div class="card-list" id="sessionsList"></div>
+  <p class="empty-note" id="sessionsEmptyNote">لم تتم إضافة أي جلسة بعد</p>
+  <button class="add-card-btn" onclick="addSession()">+ إضافة جلسة جديدة</button>
+
+  <div class="section-title">
+    <h2>التوثيق والمرفقات</h2>
+    <p>صور، فيديوهات، مستندات، أو روابط خارجية (كملفات جوجل درايف) داعمة للتشخيص أو الجلسات</p>
+  </div>
+  <p class="attach-note">الملفات الصغيرة (كالصور) يمكن رفعها مباشرة، أما الفيديوهات والملفات الكبيرة فيُفضَّل إرفاقها كرابط خارجي (جوجل درايف أو غيره) تجنّباً لحدود التخزين في المتصفح.</p>
+  <div class="card-list" id="attachmentsList"></div>
+  <p class="empty-note" id="attachmentsEmptyNote">لم تتم إضافة أي مرفق بعد</p>
+  <button class="add-card-btn" onclick="addAttachment()">+ إضافة مرفق جديد</button>
+
+  <p class="hint">
+    اختر مرحلة المشروع الحالية أولاً، ثم يُدخِل كلٌّ من المرشد وصاحب المشروع تقييمه الخاص من (1 إلى 10) للمحاور التسعة الأساسية ولمجالات المعرفة الاثني عشر، وتُحدَّث شبكة العنكبوت والجداول وبوابة الانتقال تلقائياً فور الإدخال.
+    بعد التشخيص، تُصاغ الأهداف بصيغة SMART مرة واحدة في بداية دورة الإرشاد، ثم يُستكمل سجل الجلسات بعد كل لقاء لتتبع التقدم تجاه هذه الأهداف أولاً بأول.
+    تُحفَظ جميع البيانات محلياً في هذا المتصفح تلقائياً؛ ولضمان حفظها بشكل دائم أو نقلها إلى جهاز أو عميل آخر، يُستخدَم زر تنزيل نسخة لحفظ ملف البيانات،
+    ثم يُستعاد لاحقاً عبر زر تحميل نسخة لاسترجاع التقييم بالتفصيل ذاته.
+  </p>
+
+  <p class="copyright" id="copyrightNote"></p>
+
+  <footer class="banner">
+    <span class="name">رامي الشعر</span><span class="sep">|</span><span class="title">مستشار تطوير الأعمال وإدارة المشاريع</span>
+    <div class="contact-row">
+      <span class="contact-item">
+        <svg viewBox="0 0 24 24"><path d="M2 4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4zm2 .4V6l8 5 8-5V4.4l-8 5-8-5z"/></svg>
+        <span>alshaar19823@gmail.com</span>
+      </span>
+      <span class="contact-item">
+        <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.7 3.6 4.9 6.3 6.3l2.1-2.1c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.5.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.1 21 3 13.9 3 5c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.4 0 .8-.2 1L6.6 10.8z"/></svg>
+        <span>+962799596482</span>
+      </span>
+    </div>
+  </footer>
+</div>
+
+<script>
+const AXES = [{"label": "وضوح المشروع", "short": ["وضوح المشروع"], "color": "#4d208c"}, {"label": "قوة المنتج / الخدمة", "short": ["قوة المنتج /", "الخدمة"], "color": "#8c2083"}, {"label": "معرفة العملاء", "short": ["معرفة العملاء"], "color": "#8c203b"}, {"label": "التسويق والوصول للعملاء", "short": ["التسويق والوصول", "للعملاء"], "color": "#8c4d20"}, {"label": "المبيعات والدخل", "short": ["المبيعات والدخل"], "color": "#838c20"}, {"label": "إدارة المبيعات", "short": ["إدارة المبيعات"], "color": "#3b8c20"}, {"label": "الإدارة المالية", "short": ["الإدارة المالية"], "color": "#208c4d"}, {"label": "الشراكات وبناء العلاقات", "short": ["الشراكات و", "بناء العلاقات"], "color": "#20838c"}, {"label": "جاهزية رائد/ة الأعمال", "short": ["جاهزية رائد/ة", "الأعمال"], "color": "#203b8c"}];
+const STAGES = [{"id": "ideation", "name": "مرحلة الفكرة", "desc": "استكشاف مدى توافق المشكلة مع الحل المقترح من خلال التواصل مع عملاء حقيقيين وإجراء اختبارات منخفضة الكلفة.", "gate": ["إجراء عشر محادثات على الأقل مع عملاء محتملين حقيقيين وتوثيقها", "الحصول على إشارة طلب واحدة على الأقل تثبت وجود اهتمام فعلي بالفكرة", "تحديد نطاق المنتج الأولي ومعايير القبول الخاصة به بوضوح تام", "صياغة عرض القيمة المقترح بجملة واحدة واضحة ومفهومة", "اتخاذ قرار الشروع أو عدم الشروع بالمشروع استناداً إلى الأدلة المجمعة"]}, {"id": "setup", "name": "مرحلة التأسيس", "desc": "تحويل الفكرة التي جرى التحقق منها إلى منتج أولي جاهز، واستيفاء الإجراءات الرسمية الأساسية، وإطلاق أولى عمليات البيع.", "gate": ["بناء المنتج الأولي واختباره مقابل معايير القبول المحددة مسبقاً", "إتمام ما بين خمس وعشر عمليات بيع أو تجربة مدفوعة مع توثيق ملاحظات العملاء", "إعداد قائمة أسعار أو عرض واضح وجاهز للاستخدام", "تطبيق طريقة أساسية لتوثيق الفواتير أو تسجيل المبيعات والمصروفات", "استيفاء الإجراءات الرسمية الأساسية اللازمة لبدء النشاط"]}, {"id": "operations", "name": "مرحلة التشغيل", "desc": "الانتقال من العمل غير المنتظم إلى إجراءات ثابتة وموثقة، مع جودة منتظمة ومتابعة أساسية للأداء.", "gate": ["توثيق شروط الموردين ونقاط إعادة طلب المخزون إن وُجد", "متابعة مؤشرات الأداء الأسبوعية بانتظام لمدة لا تقل عن أربعة أسابيع", "استخدام إجراءات عمل موثقة وثابتة لمدة أربعة أسابيع متواصلة على الأقل", "تسجيل كامل المبيعات والمصروفات للشهر الأخير دون استثناء", "إعداد ملخص أداء شهري لشهرين متتاليين على الأقل"]}, {"id": "profitability", "name": "مرحلة الربحية", "desc": "تحقيق هوامش ربح صحية والالتزام بانضباط التدفق النقدي، مع خفض الهدر وتحسين الاحتفاظ بالعملاء.", "gate": ["تحقيق هامش الربح المستهدف أو تجاوزه لمدة شهرين متتاليين", "تقليص دورة تحصيل المستحقات المالية لتصل إلى الحد المستهدف", "إعداد موازنة الربع القادم واعتمادها", "تقليل نسبة الهدر والمرتجعات إلى أدنى حد ممكن", "إجراء مراجعة شهرية منتظمة لقائمة الأرباح والخسائر"]}, {"id": "growth", "name": "مرحلة التوسع", "desc": "توسيع القنوات والشراكات بحذر، وتحديث الأنظمة والكفاءات البشرية بما يواكب النمو.", "gate": ["إثبات قدرة قناة نمو واحدة على الأقل على التكرار بثبات وفاعلية", "نشر التحديثات اللازمة على الأنظمة والتأكد من استقرارها", "الحفاظ على مستوى الجودة رغم ازدياد حجم العمل", "اعتماد موازنة النمو ومؤشراته الزمنية بوضوح", "توثيق المخاطر المحتملة وإجراءات التخفيف منها"]}];
+const KA = [{"label": "تخطيط الأعمال وتصميم النموذج", "matrix": [2, 2, 1, 1, 1], "short": ["تخطيط الأعمال", "والنموذج"], "color": "#602ca9"}, {"label": "تطوير المنتج/الخدمة والجودة", "matrix": [2, 2, 1, 1, 1], "short": ["تطوير المنتج", "والجودة"], "color": "#9e2ca9"}, {"label": "التسويق والعلامة التجارية", "matrix": [0, 2, 2, 2, 2], "short": ["التسويق والعلامة", "التجارية"], "color": "#a92c75"}, {"label": "التواصل الاجتماعي والبيع الرقمي", "matrix": [0, 2, 2, 2, 2], "short": ["التواصل الاجتماعي", "والبيع الرقمي"], "color": "#a92c37"}, {"label": "المبيعات واكتساب العملاء", "matrix": [0, 2, 2, 2, 2], "short": ["المبيعات واكتساب", "العملاء"], "color": "#a9602c"}, {"label": "الإدارة المالية والتدفق النقدي", "matrix": [0, 2, 2, 2, 2], "short": ["الإدارة المالية", "والتدفق النقدي"], "color": "#a99e2c"}, {"label": "الوصول إلى التمويل", "matrix": [0, 1, 1, 2, 2], "short": ["الوصول إلى", "التمويل"], "color": "#75a92c"}, {"label": "الجوانب القانونية والضريبية والترخيص", "matrix": [0, 2, 1, 2, 2], "short": ["الجوانب القانونية", "والضريبية"], "color": "#37a92c"}, {"label": "العمليات والخدمات اللوجستية", "matrix": [0, 2, 2, 2, 2], "short": ["العمليات", "اللوجستية"], "color": "#2ca960"}, {"label": "الموارد البشرية والتعاقد", "matrix": [0, 1, 1, 2, 2], "short": ["الموارد البشرية", "والتعاقد"], "color": "#2ca99e"}, {"label": "الأنظمة الرقمية والأتمتة والتحليلات", "matrix": [0, 1, 2, 2, 2], "short": ["الأنظمة الرقمية", "والأتمتة"], "color": "#2c75a9"}, {"label": "جاهزية التصدير والتجارة عبر الحدود", "matrix": [0, 0, 1, 1, 2], "short": ["جاهزية التصدير", "والتجارة"], "color": "#2c37a9"}];
+const KN = KA.length;
+const NEEDS_QUESTIONS = [{"base": ["ما هو نشاط المشروع؟ وما المنتجات أو الخدمات التي يقدّمها؟", "ما الذي يميّز هذا المشروع عن المنافسين، أي عرض القيمة المضافة؟"], "stages": ["هل تم اختبار فرضية المشكلة والحل مع عملاء حقيقيين؟", "هل توجد خطة عمل مكتوبة، ولو مبسطة، توجّه القرارات الأولى؟", "هل يُراجَع نموذج العمل بانتظام في ضوء بيانات التشغيل الفعلية؟", "هل يعكس نموذج العمل مصادر الربحية الفعلية للمشروع بدقة؟", "هل يحتمل نموذج العمل الحالي التوسع لأسواق أو قنوات جديدة دون تغييرات جوهرية؟"]}, {"base": ["ما هي المنتجات أو الخدمات الرئيسية؟ وهل توجد معايير جودة محددة؟", "ما آراء الزبائن حول المنتجات والجودة؟"], "stages": ["هل تم بناء نموذج أولي للمنتج أو الخدمة واختباره مع مستخدمين حقيقيين؟", "هل معايير القبول للمنتج أو الخدمة موثقة وواضحة؟", "هل تُتابَع مؤشرات الجودة بانتظام أثناء التشغيل اليومي؟", "هل تكلفة ضمان الجودة متوازنة مع هامش الربح المستهدف؟", "هل تتحمل عمليات إنتاج المنتج أو تقديم الخدمة زيادة الحجم دون تراجع بالجودة؟"]}, {"base": ["كيف يتم استخدام العلامة التجارية: الاسم، الشعار، الهوية البصرية، قصة المشروع؟", "من هم الزبائن النموذجيون؟ وهل توجد صورة واضحة عن شرائح السوق المستهدفة؟"], "stages": ["هل صيغت رسالة تسويقية أولية تشرح المشكلة والحل ببساطة؟", "هل توجد هوية بصرية أساسية جاهزة قبل الإطلاق؟", "هل تُقاس نتائج الأنشطة التسويقية وتُقارَن بالتكلفة؟", "هل العلامة التجارية تدعم هامش ربح أعلى مقارنة بالمنافسين؟", "هل تصلح الهوية والرسائل الحالية للتوسع نحو شرائح أو أسواق جديدة؟"]}, {"base": ["ما منصات التواصل الاجتماعي المستخدمة حالياً للتسويق أو البيع؟", "هل يتم البيع مباشرة عبر منصات رقمية، مثل متجر إلكتروني أو صفحة تواصل أو تطبيقات توصيل؟"], "stages": ["هل تم اختبار الاهتمام بالفكرة عبر منشور أو استطلاع رقمي أولي؟", "هل توجد قناة بيع رقمية جاهزة عند إطلاق المشروع؟", "هل يُنشَر محتوى بشكل منتظم ويُتابَع أداؤه؟", "هل تُستخدم بيانات التفاعل الرقمي لتحسين العائد على الإنفاق التسويقي؟", "هل تحتمل القنوات الرقمية الحالية زيادة كبيرة في حجم الطلبات؟"]}, {"base": ["كيف يتم توليد الفرص البيعية وتحويلها إلى مبيعات فعلية؟", "من هم المنافسون الرئيسيون؟ وكيف يقارَن المشروع بهم؟"], "stages": ["هل جرى التواصل المباشر مع عملاء محتملين حقيقيين لتأكيد الطلب؟", "هل توجد عملية بيع واضحة من أول تواصل حتى إتمام الشراء؟", "هل يوجد سجل موثق للمبيعات يُستخدم لتتبع الأداء؟", "هل معدل تكرار الشراء من نفس العملاء يدعم استقرار الإيرادات؟", "هل توجد مصادر متعددة ومستقرة لاكتساب عملاء جدد بشكل متكرر؟"]}, {"base": ["هل يتم تتبع الدخل والمصاريف؟ وكيف؟ وهل توجد سجلات بسيطة كدفتر أو ملف إكسل أو تطبيق؟", "ما مدى وضوح التكاليف وهامش الربح وتحديات التدفق النقدي؟"], "stages": ["هل جرى تقدير أولي لتكلفة تشغيل المشروع ونقطة التعادل؟", "هل طريقة تسجيل الدخل والمصاريف مطبقة منذ أول عملية بيع؟", "هل تُراجَع الأرقام المالية بشكل دوري لاتخاذ قرارات تشغيلية؟", "هل هامش الربح الفعلي يطابق أو يتجاوز الهامش المستهدف؟", "هل يوجد احتياطي نقدي كافٍ يدعم خطط التوسع دون مخاطرة عالية؟"]}, {"base": ["هل سبق للمشروع التقدم للحصول على تمويل أو قرض؟ وما كانت النتيجة؟", "ما مدى معرفة صاحب المشروع بمصادر التمويل المتاحة، كالبنوك ومؤسسات التمويل الصغير والجهات المانحة؟"], "stages": ["هل يحتاج المشروع تمويلاً أولياً لبدء الاختبار أو بناء نموذج أولي؟", "هل تتوفر المستندات الأساسية اللازمة لطلب تمويل صغير عند التأسيس؟", "هل التمويل الحالي كافٍ لتغطية احتياجات التشغيل اليومي؟", "هل يوجد تناسب بين حجم التمويل المتاح ومستوى الربحية الحالي؟", "هل توجد خطة تمويلية واضحة تدعم مرحلة التوسع القادمة؟"]}, {"base": ["ما حالة التسجيل والترخيص الحالية للمشروع؟", "هل توجد أي مشكلات معروفة تتعلق بالضرائب أو الالتزام بالتشريعات؟"], "stages": ["هل جرى الاطلاع على المتطلبات القانونية الأساسية قبل البدء الفعلي؟", "هل استُكملت إجراءات التسجيل أو الترخيص الأساسية اللازمة للانطلاق؟", "هل الالتزامات الضريبية والتأمينية الدورية تُدار بانتظام؟", "هل السجل القانوني للمشروع متوافق مع متطلبات النمو في الإيرادات؟", "هل الوضع القانوني الحالي يسمح بالتوسع أو التعاقد مع أطراف جديدة دون عوائق؟"]}, {"base": ["كيف يتم إنتاج المنتج أو الخدمة وتسليمه للزبون؟", "هل توجد إشكاليات متكررة، مثل التأخير أو نفاد المخزون أو مشكلات الجودة؟"], "stages": ["هل جرى تحديد الخطوات الأساسية لإنتاج أو تقديم المنتج أو الخدمة ولو بشكل أولي؟", "هل توجد قائمة موردين أو أدوات تشغيل أساسية جاهزة للانطلاق؟", "هل الإجراءات التشغيلية موثقة ومستخدمة فعلياً بشكل يومي؟", "هل الكفاءة التشغيلية الحالية تدعم هامش الربح المستهدف؟", "هل تتحمل العمليات الحالية زيادة كبيرة في الطلب دون اختناقات؟"]}, {"base": ["من يعمل في المشروع؟ أفراد الأسرة، موظفون، شركاء", "ما المهارات المتوفرة وما المهارات الناقصة؟"], "stages": ["هل تم تحديد الأدوار الأساسية المطلوبة عند إطلاق المشروع؟", "هل توجد ولو ترتيبات عمل أولية موثقة مع أي عاملين أو شركاء؟", "هل توزيع المهام والمسؤوليات واضح بين العاملين حالياً؟", "هل تكلفة العمالة الحالية متوازنة مع الإنتاجية والربحية؟", "هل تسمح البنية الحالية للفريق بتحمل توسع العمليات دون اختناق؟"]}, {"base": ["ما الأدوات الرقمية المستخدمة حالياً في التسويق أو المبيعات أو الإدارة المالية أو العمليات؟", "ما مدى ارتياح صاحب المشروع في استخدام المنصات الرقمية؟"], "stages": ["هل استُخدمت أدوات رقمية بسيطة لاختبار الفكرة، كنماذج التواصل أو الاستطلاعات؟", "هل توجد أداة رقمية أساسية واحدة على الأقل جاهزة للتشغيل عند الانطلاق؟", "هل تُستخدم بيانات رقمية لمتابعة الأداء التشغيلي اليومي؟", "هل تساهم الأتمتة الحالية في تحسين هامش الربح عبر خفض التكاليف؟", "هل الأنظمة الرقمية الحالية قادرة على استيعاب زيادة كبيرة في حجم البيانات أو العمليات؟"]}, {"base": ["هل يفكر المشروع حالياً بالتوسع خارج السوق المحلي؟", "هل توجد معرفة بمتطلبات التصدير أو التجارة عبر الحدود، كالجمارك والشهادات والشحن الدولي؟"], "stages": ["هل جرى استكشاف مبدئي لوجود طلب محتمل خارج السوق المحلي؟", "هل المنتج أو الخدمة مصمَّم بطريقة تسمح مستقبلاً بالتكيف مع أسواق أخرى؟", "هل التشغيل الحالي يراعي أي معايير قد تُطلب مستقبلاً للتصدير؟", "هل الربحية الحالية تحتمل تكاليف إضافية للدخول إلى سوق خارجي؟", "هل توجد خطة أو نية واضحة للتوسع خارج السوق المحلي في مرحلة النمو؟"]}];
+const COUNTRIES = ["آيسلندا", "أذربيجان", "أرمينيا", "أستراليا", "أفغانستان", "ألبانيا", "ألمانيا", "أنتيغوا وباربودا", "أندورا", "أنغولا", "أوروغواي", "أوزبكستان", "أوغندا", "أوكرانيا", "أيرلندا", "إثيوبيا", "إريتريا", "إسبانيا", "إستونيا", "إسواتيني", "إندونيسيا", "إيران", "إيطاليا", "الأرجنتين", "الأردن", "الإكوادور", "الإمارات العربية المتحدة", "الباهاما", "البحرين", "البرازيل", "البرتغال", "البوسنة والهرسك", "التشيك", "الجبل الأسود", "الجزائر", "الدنمارك", "الرأس الأخضر", "السعودية", "السلفادور", "السنغال", "السودان", "السويد", "الصومال", "الصين", "العراق", "الغابون", "الفاتيكان", "الفلبين", "الكاميرون", "الكويت", "المالديف", "المجر", "المغرب", "المكسيك", "المملكة المتحدة", "النرويج", "النمسا", "النيجر", "الهند", "الولايات المتحدة الأمريكية", "اليابان", "اليمن", "اليونان", "بابوا غينيا الجديدة", "باراغواي", "باكستان", "بالاو", "بربادوس", "بروناي", "بلجيكا", "بلغاريا", "بليز", "بنغلاديش", "بنما", "بنين", "بوتان", "بوتسوانا", "بوركينا فاسو", "بوروندي", "بولندا", "بوليفيا", "بيرو", "بيلاروسيا", "تايلاند", "تايوان", "تركمانستان", "تركيا", "ترينيداد وتوباغو", "تشاد", "تشيلي", "تنزانيا", "توغو", "توفالو", "تونس", "تونغا", "تيمور الشرقية", "جامايكا", "جزر القمر", "جزر سليمان", "جزر مارشال", "جمهورية أفريقيا الوسطى", "جمهورية الدومينيكان", "جمهورية الكونغو", "جمهورية الكونغو الديمقراطية", "جنوب أفريقيا", "جنوب السودان", "جورجيا", "جيبوتي", "دومينيكا", "رواندا", "روسيا", "رومانيا", "زامبيا", "زيمبابوي", "ساحل العاج", "ساموا", "سان مارينو", "سانت فينسنت والغرينادين", "سانت كيتس ونيفيس", "سانت لوسيا", "ساو تومي وبرينسيبي", "سريلانكا", "سلوفاكيا", "سلوفينيا", "سنغافورة", "سوريا", "سورينام", "سويسرا", "سيراليون", "سيشل", "صربيا", "طاجيكستان", "عمان", "غامبيا", "غانا", "غرينادا", "غواتيمالا", "غيانا", "غينيا", "غينيا الاستوائية", "غينيا بيساو", "فانواتو", "فرنسا", "فلسطين", "فنزويلا", "فنلندا", "فيتنام", "فيجي", "قبرص", "قطر", "قيرغيزستان", "كازاخستان", "كرواتيا", "كمبوديا", "كندا", "كوبا", "كوريا الجنوبية", "كوريا الشمالية", "كوستاريكا", "كولومبيا", "كيريباتي", "كينيا", "لاتفيا", "لاوس", "لبنان", "لوكسمبورغ", "ليبيا", "ليبيريا", "ليتوانيا", "ليختنشتاين", "ليسوتو", "مالاوي", "مالطا", "مالي", "ماليزيا", "مدغشقر", "مصر", "مقدونيا الشمالية", "منغوليا", "موريتانيا", "موريشيوس", "موزمبيق", "مولدوفا", "موناكو", "ميانمار", "ميكرونيزيا", "ناميبيا", "ناورو", "نيبال", "نيجيريا", "نيكاراغوا", "نيوزيلندا", "هايتي", "هندوراس", "هولندا"];
+const SECTORS = ["الزراعة والثروة الحيوانية والسمكية", "التعدين واستغلال المحاجر", "الصناعات التحويلية والتصنيع", "الطاقة والمرافق (كهرباء، مياه، غاز)", "البناء والتشييد", "تجارة الجملة والتجزئة", "النقل والتخزين", "خدمات الإقامة والضيافة والفنادق", "المطاعم وخدمات الطعام", "السياحة والسفر", "المعلومات والاتصالات وتكنولوجيا المعلومات", "الأنشطة المالية والتأمين", "الأنشطة العقارية", "الأنشطة المهنية والعلمية والتقنية (استشارات، محاماة، هندسة)", "الخدمات الإدارية وخدمات الدعم", "التعليم والتدريب", "الأنشطة الصحية والعمل الاجتماعي", "الفنون والترفيه والتسلية", "الحرف اليدوية والصناعات التقليدية", "الأزياء والمنسوجات والخياطة", "التجميل والعناية الشخصية", "أخرى"];
+const BUSINESS_TYPES = ["فكرة مشروع (لم يُطلق بعد)", "مشروع منزلي", "مشروع متناهي الصغر", "مشروع صغير", "مشروع متوسط", "مؤسسة فردية", "شركة تضامن", "شركة توصية بسيطة", "شركة ذات مسؤولية محدودة", "شركة مساهمة خاصة", "شركة مساهمة عامة", "جمعية تعاونية", "مشروع اجتماعي", "مشروع ناشئ تقني (Startup)", "أخرى"];
+const OPERATING_SINCE = ["لم يبدأ العمل بعد (فكرة مشروع)", "أقل من 6 أشهر", "من 6 أشهر إلى سنة", "من سنة إلى 3 سنوات", "من 3 إلى 5 سنوات", "أكثر من 5 سنوات"];
+const REGISTRATION_STATUS = ["غير مسجَّل", "قيد التسجيل", "مسجَّل"];
+const DIAL_CODES = [{"country": "آيسلندا", "code": "+354"}, {"country": "أذربيجان", "code": "+994"}, {"country": "أرمينيا", "code": "+374"}, {"country": "أستراليا", "code": "+61"}, {"country": "أفغانستان", "code": "+93"}, {"country": "ألبانيا", "code": "+355"}, {"country": "ألمانيا", "code": "+49"}, {"country": "أنتيغوا وباربودا", "code": "+1268"}, {"country": "أندورا", "code": "+376"}, {"country": "أنغولا", "code": "+244"}, {"country": "أوروغواي", "code": "+598"}, {"country": "أوزبكستان", "code": "+998"}, {"country": "أوغندا", "code": "+256"}, {"country": "أوكرانيا", "code": "+380"}, {"country": "أيرلندا", "code": "+353"}, {"country": "إثيوبيا", "code": "+251"}, {"country": "إريتريا", "code": "+291"}, {"country": "إسبانيا", "code": "+34"}, {"country": "إستونيا", "code": "+372"}, {"country": "إسواتيني", "code": "+268"}, {"country": "إندونيسيا", "code": "+62"}, {"country": "إيران", "code": "+98"}, {"country": "إيطاليا", "code": "+39"}, {"country": "الأرجنتين", "code": "+54"}, {"country": "الأردن", "code": "+962"}, {"country": "الإكوادور", "code": "+593"}, {"country": "الإمارات العربية المتحدة", "code": "+971"}, {"country": "الباهاما", "code": "+1242"}, {"country": "البحرين", "code": "+973"}, {"country": "البرازيل", "code": "+55"}, {"country": "البرتغال", "code": "+351"}, {"country": "البوسنة والهرسك", "code": "+387"}, {"country": "التشيك", "code": "+420"}, {"country": "الجبل الأسود", "code": "+382"}, {"country": "الجزائر", "code": "+213"}, {"country": "الدنمارك", "code": "+45"}, {"country": "الرأس الأخضر", "code": "+238"}, {"country": "السعودية", "code": "+966"}, {"country": "السلفادور", "code": "+503"}, {"country": "السنغال", "code": "+221"}, {"country": "السودان", "code": "+249"}, {"country": "السويد", "code": "+46"}, {"country": "الصومال", "code": "+252"}, {"country": "الصين", "code": "+86"}, {"country": "العراق", "code": "+964"}, {"country": "الغابون", "code": "+241"}, {"country": "الفاتيكان", "code": "+379"}, {"country": "الفلبين", "code": "+63"}, {"country": "الكاميرون", "code": "+237"}, {"country": "الكويت", "code": "+965"}, {"country": "المالديف", "code": "+960"}, {"country": "المجر", "code": "+36"}, {"country": "المغرب", "code": "+212"}, {"country": "المكسيك", "code": "+52"}, {"country": "المملكة المتحدة", "code": "+44"}, {"country": "النرويج", "code": "+47"}, {"country": "النمسا", "code": "+43"}, {"country": "النيجر", "code": "+227"}, {"country": "الهند", "code": "+91"}, {"country": "الولايات المتحدة الأمريكية", "code": "+1"}, {"country": "اليابان", "code": "+81"}, {"country": "اليمن", "code": "+967"}, {"country": "اليونان", "code": "+30"}, {"country": "بابوا غينيا الجديدة", "code": "+675"}, {"country": "باراغواي", "code": "+595"}, {"country": "باكستان", "code": "+92"}, {"country": "بالاو", "code": "+680"}, {"country": "بربادوس", "code": "+1246"}, {"country": "بروناي", "code": "+673"}, {"country": "بلجيكا", "code": "+32"}, {"country": "بلغاريا", "code": "+359"}, {"country": "بليز", "code": "+501"}, {"country": "بنغلاديش", "code": "+880"}, {"country": "بنما", "code": "+507"}, {"country": "بنين", "code": "+229"}, {"country": "بوتان", "code": "+975"}, {"country": "بوتسوانا", "code": "+267"}, {"country": "بوركينا فاسو", "code": "+226"}, {"country": "بوروندي", "code": "+257"}, {"country": "بولندا", "code": "+48"}, {"country": "بوليفيا", "code": "+591"}, {"country": "بيرو", "code": "+51"}, {"country": "بيلاروسيا", "code": "+375"}, {"country": "تايلاند", "code": "+66"}, {"country": "تايوان", "code": "+886"}, {"country": "تركمانستان", "code": "+993"}, {"country": "تركيا", "code": "+90"}, {"country": "ترينيداد وتوباغو", "code": "+1868"}, {"country": "تشاد", "code": "+235"}, {"country": "تشيلي", "code": "+56"}, {"country": "تنزانيا", "code": "+255"}, {"country": "توغو", "code": "+228"}, {"country": "توفالو", "code": "+688"}, {"country": "تونس", "code": "+216"}, {"country": "تونغا", "code": "+676"}, {"country": "تيمور الشرقية", "code": "+670"}, {"country": "جامايكا", "code": "+1876"}, {"country": "جزر القمر", "code": "+269"}, {"country": "جزر سليمان", "code": "+677"}, {"country": "جزر مارشال", "code": "+692"}, {"country": "جمهورية أفريقيا الوسطى", "code": "+236"}, {"country": "جمهورية الدومينيكان", "code": "+1809"}, {"country": "جمهورية الكونغو", "code": "+242"}, {"country": "جمهورية الكونغو الديمقراطية", "code": "+243"}, {"country": "جنوب أفريقيا", "code": "+27"}, {"country": "جنوب السودان", "code": "+211"}, {"country": "جورجيا", "code": "+995"}, {"country": "جيبوتي", "code": "+253"}, {"country": "دومينيكا", "code": "+1767"}, {"country": "رواندا", "code": "+250"}, {"country": "روسيا", "code": "+7"}, {"country": "رومانيا", "code": "+40"}, {"country": "زامبيا", "code": "+260"}, {"country": "زيمبابوي", "code": "+263"}, {"country": "ساحل العاج", "code": "+225"}, {"country": "ساموا", "code": "+685"}, {"country": "سان مارينو", "code": "+378"}, {"country": "سانت فينسنت والغرينادين", "code": "+1784"}, {"country": "سانت كيتس ونيفيس", "code": "+1869"}, {"country": "سانت لوسيا", "code": "+1758"}, {"country": "ساو تومي وبرينسيبي", "code": "+239"}, {"country": "سريلانكا", "code": "+94"}, {"country": "سلوفاكيا", "code": "+421"}, {"country": "سلوفينيا", "code": "+386"}, {"country": "سنغافورة", "code": "+65"}, {"country": "سوريا", "code": "+963"}, {"country": "سورينام", "code": "+597"}, {"country": "سويسرا", "code": "+41"}, {"country": "سيراليون", "code": "+232"}, {"country": "سيشل", "code": "+248"}, {"country": "صربيا", "code": "+381"}, {"country": "طاجيكستان", "code": "+992"}, {"country": "عمان", "code": "+968"}, {"country": "غامبيا", "code": "+220"}, {"country": "غانا", "code": "+233"}, {"country": "غرينادا", "code": "+1473"}, {"country": "غواتيمالا", "code": "+502"}, {"country": "غيانا", "code": "+592"}, {"country": "غينيا", "code": "+224"}, {"country": "غينيا الاستوائية", "code": "+240"}, {"country": "غينيا بيساو", "code": "+245"}, {"country": "فانواتو", "code": "+678"}, {"country": "فرنسا", "code": "+33"}, {"country": "فلسطين", "code": "+970"}, {"country": "فنزويلا", "code": "+58"}, {"country": "فنلندا", "code": "+358"}, {"country": "فيتنام", "code": "+84"}, {"country": "فيجي", "code": "+679"}, {"country": "قبرص", "code": "+357"}, {"country": "قطر", "code": "+974"}, {"country": "قيرغيزستان", "code": "+996"}, {"country": "كازاخستان", "code": "+7"}, {"country": "كرواتيا", "code": "+385"}, {"country": "كمبوديا", "code": "+855"}, {"country": "كندا", "code": "+1"}, {"country": "كوبا", "code": "+53"}, {"country": "كوريا الجنوبية", "code": "+82"}, {"country": "كوريا الشمالية", "code": "+850"}, {"country": "كوستاريكا", "code": "+506"}, {"country": "كولومبيا", "code": "+57"}, {"country": "كيريباتي", "code": "+686"}, {"country": "كينيا", "code": "+254"}, {"country": "لاتفيا", "code": "+371"}, {"country": "لاوس", "code": "+856"}, {"country": "لبنان", "code": "+961"}, {"country": "لوكسمبورغ", "code": "+352"}, {"country": "ليبيا", "code": "+218"}, {"country": "ليبيريا", "code": "+231"}, {"country": "ليتوانيا", "code": "+370"}, {"country": "ليختنشتاين", "code": "+423"}, {"country": "ليسوتو", "code": "+266"}, {"country": "مالاوي", "code": "+265"}, {"country": "مالطا", "code": "+356"}, {"country": "مالي", "code": "+223"}, {"country": "ماليزيا", "code": "+60"}, {"country": "مدغشقر", "code": "+261"}, {"country": "مصر", "code": "+20"}, {"country": "مقدونيا الشمالية", "code": "+389"}, {"country": "منغوليا", "code": "+976"}, {"country": "موريتانيا", "code": "+222"}, {"country": "موريشيوس", "code": "+230"}, {"country": "موزمبيق", "code": "+258"}, {"country": "مولدوفا", "code": "+373"}, {"country": "موناكو", "code": "+377"}, {"country": "ميانمار", "code": "+95"}, {"country": "ميكرونيزيا", "code": "+691"}, {"country": "ناميبيا", "code": "+264"}, {"country": "ناورو", "code": "+674"}, {"country": "نيبال", "code": "+977"}, {"country": "نيجيريا", "code": "+234"}, {"country": "نيكاراغوا", "code": "+505"}, {"country": "نيوزيلندا", "code": "+64"}, {"country": "هايتي", "code": "+509"}, {"country": "هندوراس", "code": "+504"}, {"country": "هولندا", "code": "+31"}];
+const PRIORITY_LABELS = ["منخفضة","متوسطة","عالية"];
+const PRIORITY_CLASSES = ["priority-low","priority-med","priority-high"];
+const SMART_LABELS = ["محدد","قابل للقياس","قابل للتحقيق","ذو صلة","محدد زمنياً"];
+const SMART_VERIFY = [
+  { key:'specific', label:'محدد', question:'ما الشيء الذي سيتغيّر أو سيتحسّن بشكل محدد وواضح؟',
+    indicators:[
+      'أستطيع وصف ما الذي نريد تحقيقه بشكل واضح، وليس فقط تحسين المشروع بشكل عام',
+      'أعرف من المعني بتحقيق الهدف: صاحب أو صاحبة المشروع، أفراد العائلة، الموظفون',
+      'أعرف أين أو في أي جزء من المشروع ينطبق هذا الهدف: المبيعات، المطبخ، الورشة، الإنترنت'
+    ], metQuestion:'هل الهدف محدد بوضوح؟' },
+  { key:'measurable', label:'قابل للقياس', question:'كيف سنعرف أننا نتقدّم أو أننا حققنا الهدف؟',
+    indicators:[
+      'لدينا أرقام أو دلائل واضحة، مثل عدد الطلبات أو قيمة المبيعات أو عدد المنشورات',
+      'نستطيع متابعة التقدّم مع الوقت أسبوعياً أو شهرياً',
+      'في نهاية فترة الإرشاد نستطيع أن نقول بوضوح إن كنا وصلنا للهدف أم لا'
+    ], metQuestion:'هل الهدف قابل للقياس بوضوح؟' },
+  { key:'achievable', label:'قابل للتحقيق', question:'هل هذا الهدف واقعي خلال المدة المتاحة حسب وقت وإمكانات وخبرة صاحب أو صاحبة المشروع؟',
+    indicators:[
+      'يملك صاحب أو صاحبة المشروع، أو يمكنه الحصول على، المهارات والأدوات والمال والدعم اللازم',
+      'الهدف يأخذ بعين الاعتبار موسمية المشروع، مثل السياحة أو الطعام أو الموسم الدراسي',
+      'لا نحاول تغيير أشياء كثيرة جداً في الوقت نفسه'
+    ], metQuestion:'هل الهدف قابل للتحقيق خلال المدة المحددة؟' },
+  { key:'relevant', label:'ذو صلة', question:'هل يعالج هذا الهدف احتياجاً ذا أولوية تم تحديده في تقييم الاحتياجات ومرحلة المشروع؟',
+    indicators:[
+      'الهدف مرتبط مباشرة بأحد أهم الاحتياجات التي تم تحديدها سابقاً',
+      'الهدف ذو صلة بالاحتياجات ذات الأولوية ومرحلة المشروع الحالية',
+      'تحقيق هذا الهدف سيُحدث فرقاً حقيقياً في المشروع الآن، وليس مجرد شيء ثانوي'
+    ], metQuestion:'هل الهدف متصل بأولويات المشروع بوضوح؟' },
+  { key:'timebound', label:'محدد زمنياً', question:'متى سنحقق هذا الهدف، وهل هناك محطات أو مراحل خلال المدة المتاحة؟',
+    indicators:[
+      'لدينا تاريخ نهائي واضح لتحقيق الهدف',
+      'نعرف ما الذي يجب إنجازه بنهاية كل شهر من مدة العمل على الهدف',
+      'الهدف مرتبط بشكل واضح بخطة الإرشاد وجدول الجلسات'
+    ], metQuestion:'هل الهدف محدد زمنياً بشكل واضح؟' }
+];
+function computeCriterionStatus(c){
+  if(!c || c.met===null || c.met===undefined) return null;
+  if(c.met===true) return c.checks.every(Boolean) ? 'نعم' : 'جزئياً';
+  return 'لا';
+}
+function computeOverallRating(g){
+  const statuses = SMART_VERIFY.map(sv => computeCriterionStatus(g.verify.criteria[sv.key]));
+  if(statuses.some(s=>s===null)) return null;
+  if(statuses.every(s=>s==='نعم')) return 'هدف قوي بصيغة SMART';
+  if(statuses.some(s=>s==='لا')) return 'هدف يحتاج إلى إعادة صياغة';
+  return 'هدف مقبول لكن يمكن تحسينه';
+}
+// كل محور من المحاور التسعة مرتبط بمجال أو أكثر من مجالات المعرفة الاثني عشر (بالفهرس صفر الأساس)
+// محور جاهزية رائد/ة الأعمال مرتبط بتخطيط الأعمال (فهمه للمشروع وتموضعه) والموارد البشرية (مهارات الإدارة والتنظيم والقيادة)
+// دمج الشراكات وبناء العلاقات مع الوصول إلى التمويل (علاقات الممولين) والعمليات (علاقات الموردين) بدل جاهزية التصدير الضيقة النطاق
+const DIM_KA_MAP = [[0],[1],[2,4],[2,3],[4],[4,10],[5,6],[6,8],[0,9]];
+// قوائم تحقق موضوعية لمجالي الجوانب القانونية والموارد البشرية، كل منها بجزأين: المعرفة بالأنظمة، والحالة الفعلية
+const KA_CHECKLISTS = {
+  0: {knowledge: ["الإلمام بمفهوم نموذج العمل وعناصره الأساسية", "الإلمام بأساليب تحليل السوق والمنافسين", "الإلمام بأساسيات تسعير المنتج أو الخدمة", "الإلمام بمفهوم عرض القيمة المقترح وكيفية صياغته", "الإلمام بأدوات التخطيط الأساسية كنموذج العمل بصفحة واحدة"], status: ["يوجد نموذج عمل أو خطة عمل موثقة ولو بشكل مبسط", "تم تحديد شريحة العملاء المستهدفة بوضوح", "تم تحديد عرض القيمة المقترح بجملة واضحة", "تمت مراجعة نموذج العمل أو تحديثه خلال آخر ستة أشهر", "تتوفر مؤشرات أو بيانات تدعم افتراضات النموذج"]},
+  1: {knowledge: ["الإلمام بمعايير الجودة الخاصة بمجال المشروع", "الإلمام بأساسيات تطوير المنتج أو الخدمة وتحسينها", "الإلمام بطرق جمع ملاحظات العملاء وتحليلها", "الإلمام بأساسيات التغليف أو طريقة تقديم الخدمة", "الإلمام بمفهوم دورة حياة المنتج أو الخدمة"], status: ["توجد معايير جودة موثقة ومطبقة فعلياً", "تُجمع ملاحظات العملاء بشكل منتظم", "تم تطوير أو تحسين المنتج أو الخدمة خلال آخر فترة", "التغليف أو طريقة تقديم الخدمة متسقة وموحدة", "توجد آلية للتعامل مع الشكاوى المتعلقة بالجودة"]},
+  2: {knowledge: ["الإلمام بمفهوم العلامة التجارية وعناصرها", "الإلمام بأساسيات التسويق وقنواته المختلفة", "الإلمام بتحديد شرائح السوق المستهدفة", "الإلمام بأساسيات صياغة رسائل تسويقية فعالة", "الإلمام بطرق تحليل أداء الأنشطة التسويقية"], status: ["توجد هوية بصرية موحدة: اسم، شعار، ألوان", "توجد قصة أو رسالة واضحة للمشروع", "تُنفَّذ أنشطة تسويقية منتظمة", "تم تحديد شرائح السوق المستهدفة بوضوح", "تُقاس نتائج الأنشطة التسويقية بشكل ما"]},
+  3: {knowledge: ["الإلمام بمنصات التواصل الاجتماعي الأنسب لمجال المشروع", "الإلمام بأساسيات صناعة المحتوى الرقمي", "الإلمام بمفهوم قمع التحويل من المتابع إلى الزبون", "الإلمام بأساسيات الإعلانات المدفوعة على المنصات الرقمية", "الإلمام بأدوات قياس التفاعل والأداء الرقمي"], status: ["توجد حسابات نشطة على منصة تواصل واحدة على الأقل", "يُنشَر محتوى بانتظام", "توجد قناة بيع رقمية مباشرة كمتجر إلكتروني أو صفحة طلبات أو تطبيق توصيل", "تُستخدم بيانات التفاعل لتوجيه المحتوى القادم", "توجد استجابة منتظمة لاستفسارات المتابعين والزبائن"]},
+  4: {knowledge: ["الإلمام بمراحل رحلة العميل من الاهتمام إلى الشراء", "الإلمام بأساسيات التفاوض وإتمام البيع", "الإلمام بمفهوم الاحتفاظ بالعملاء وولائهم", "الإلمام بطرق توليد فرص بيعية جديدة", "الإلمام بأساسيات تحليل سلوك المنافسين"], status: ["يوجد سجل موثق للزبائن أو المبيعات", "توجد عملية واضحة لتحويل الاهتمام إلى بيع فعلي", "تُتابَع نسبة تكرار الشراء من نفس العملاء", "توجد مصادر متعددة لاكتساب عملاء جدد", "تتوفر مقارنة واضحة مع أبرز المنافسين"]},
+  5: {knowledge: ["الإلمام بالفرق بين الإيرادات والأرباح والتدفق النقدي", "الإلمام بأساسيات حساب تكلفة المنتج أو الخدمة", "الإلمام بمفهوم هامش الربح وكيفية حسابه", "الإلمام بأساسيات إعداد ميزانية بسيطة", "الإلمام بمخاطر التدفق النقدي السلبي"], status: ["يتم تسجيل الدخل والمصاريف بشكل منتظم", "تتوفر سجلات مالية بسيطة كدفتر أو ملف إلكتروني أو تطبيق", "هامش الربح محسوب ومعروف لصاحب المشروع", "تُراجَع الأرقام المالية بشكل دوري", "يوجد احتياطي نقدي أو خطة لمواجهة العجز المالي"]},
+  6: {knowledge: ["الإلمام بمصادر التمويل المتاحة كالبنوك ومؤسسات التمويل الصغير والجهات المانحة", "الإلمام بالمستندات المطلوبة عادة لطلب تمويل", "الإلمام بالفرق بين أنواع التمويل: قرض، منحة، استثمار", "الإلمام بأساسيات إعداد مقترح تمويلي", "الإلمام بمعايير الأهلية الشائعة للحصول على تمويل"], status: ["سبق للمشروع التقدم لطلب تمويل أو قرض", "تتوفر سجلات مالية جاهزة تدعم طلب التمويل", "تتوفر خطة عمل مكتوبة يمكن تقديمها لجهة تمويل", "لدى صاحب المشروع فكرة واضحة عن احتياجه التمويلي المحدد", "توجد علاقة قائمة مع جهة تمويل واحدة على الأقل"]},
+  7: {knowledge: ["الإلمام بأساسيات قانون الشركات ذات الصلة بنوع المشروع", "الإلمام بالالتزامات الضريبية المطلوبة", "الإلمام بأحكام الضمان الاجتماعي", "الإلمام بأساسيات صياغة العقود", "وجود سياسات وإجراءات داخلية موثقة"], status: ["المشروع مسجَّل رسمياً", "المشروع مرخَّص لمزاولة نشاطه", "المشروع مسجَّل في الضمان الاجتماعي كمنشأة", "توجد عقود موثقة مع الموظفين إن وُجدوا", "توجد عقود أو اتفاقيات موثقة مع أصحاب المصلحة الآخرين"]},
+  8: {knowledge: ["الإلمام بخطوات إنتاج أو تقديم المنتج أو الخدمة", "الإلمام بأساسيات إدارة المخزون", "الإلمام بمعايير اختيار الموردين وتقييمهم", "الإلمام بأساسيات التسليم والخدمات اللوجستية", "الإلمام بطرق تحسين الكفاءة التشغيلية"], status: ["توجد خطوات موثقة لعملية الإنتاج أو تقديم الخدمة", "يوجد نظام ولو بسيط لتتبع المخزون", "تتوفر قائمة موردين موثوقين مع شروط واضحة", "تُسلَّم الطلبات في الوقت المتفق عليه غالباً", "توجد آلية للتعامل مع مشكلات التشغيل المتكررة"]},
+  9: {knowledge: ["الإلمام بأساسيات قانون العمل المعمول به", "الإلمام بمتطلبات الضمان الاجتماعي للعاملين", "الإلمام بأساسيات صياغة عقود التوظيف", "الإلمام بسياسات الأجور والمزايا", "الإلمام بإجراءات إنهاء الخدمة"], status: ["توجد عقود عمل موثقة مع جميع العاملين", "العاملون مسجَّلون في الضمان الاجتماعي", "توجد سياسة مكتوبة للأجور والمزايا", "توجد آلية موثقة لتقييم الأداء أو الحضور والانصراف", "توجد أوصاف وظيفية واضحة للأدوار الرئيسية"]},
+  10: {knowledge: ["الإلمام بالأدوات الرقمية المناسبة لمجال المشروع", "الإلمام بمفهوم أتمتة العمليات المتكررة", "الإلمام بأساسيات جمع البيانات وتحليلها", "الإلمام بأدوات إدارة علاقات العملاء الرقمية", "الإلمام بأساسيات أمن المعلومات وحماية البيانات"], status: ["تُستخدم أداة رقمية واحدة على الأقل في التسويق أو المبيعات أو المالية", "توجد بيانات أو مؤشرات يتم تتبعها رقمياً", "تم أتمتة إجراء واحد على الأقل من الإجراءات المتكررة", "صاحب المشروع مرتاح لاستخدام المنصات الرقمية", "تتوفر نسخ احتياطية للبيانات المهمة"]},
+  11: {knowledge: ["الإلمام بمفهوم التصدير ومتطلباته الأساسية", "الإلمام بإجراءات الجمارك والشهادات المطلوبة", "الإلمام بأساسيات الشحن الدولي والتغليف التصديري", "الإلمام بمعايير الأسواق المستهدفة للتصدير", "الإلمام بطرق التسعير للأسواق الخارجية"], status: ["تم تقييم جاهزية المنتج أو الخدمة للأسواق الخارجية", "توجد معرفة بمتطلبات سوق خارجي محدد واحد على الأقل", "سبق التعامل مع عميل أو طلب من خارج السوق المحلي", "تتوفر القدرة الإنتاجية لتلبية طلبات تصدير محتملة", "توجد خطة أو نية واضحة للتوسع خارج السوق المحلي"]}
+};
+const OBJECTIVE_KA_INDICES = [7, 9];
+function fmtVal(v){
+  if(v===null || v===undefined || isNaN(v)) return '—';
+  const r = Math.round(v*10)/10;
+  return Number.isInteger(r) ? String(r) : r.toFixed(1);
+}
+function computeDim(dimIdx, kaArr){
+  const ids = DIM_KA_MAP[dimIdx];
+  if(!ids || ids.length===0) return undefined; // محور مستقل غير محسوب
+  const vals = ids.map(i=>kaArr[i]).filter(v=>v!==null && v!==undefined);
+  if(vals.length===0) return null;
+  return vals.reduce((a,b)=>a+b,0)/vals.length;
+}
+const N = AXES.length;
+const NS = "http://www.w3.org/2000/svg";
+const CX = 320, CY = 320, RMAX = 210;
+const LEVELS = [2,4,6,8,10];
+const STORAGE_KEY = "business_xray_compare_v3";
+const ATTACHMENTS_STORAGE_KEY = "business_xray_attachments_v1";
+
+function el(tag, attrs){ const e=document.createElementNS(NS,tag); for(const k in attrs) e.setAttribute(k, attrs[k]); return e; }
+function angleFor(i){ return (360/N)*i; } // 0 = top, clockwise
+function pointAt(i, value){
+  const a = (angleFor(i) - 90) * Math.PI/180; // -90 to start at top, svg angle math (x right, y down)
+  const r = (value/10) * RMAX;
+  return [CX + r*Math.cos(a), CY + r*Math.sin(a)];
+}
+function axisEnd(i, r){
+  const a = (angleFor(i) - 90) * Math.PI/180;
+  return [CX + r*Math.cos(a), CY + r*Math.sin(a)];
+}
+
+let mentor = new Array(N).fill(null);
+let owner  = new Array(N).fill(null);
+let meta = {
+  mentorName:'', mentorCountry:'', mentorPhoneCode:'', mentorPhoneNumber:'', mentorEmail:'', mentorExpertise:[],
+  ownerName:'', ownerPhoneCode:'', ownerPhoneNumber:'', ownerEmail:'', projectName:'', country:'', region:'', sector:'',
+  operatingSince:'', businessType:'', registrationStatus:'', date:''
+};
+
+const META_TEXT_MAP = { metaMentorName:'mentorName', metaMentorPhoneNumber:'mentorPhoneNumber', metaMentorEmail:'mentorEmail', metaOwnerName:'ownerName', metaOwnerPhoneNumber:'ownerPhoneNumber', metaOwnerEmail:'ownerEmail', metaProjectName:'projectName', metaRegion:'region', metaDate:'date' };
+const META_SELECT_MAP = { metaMentorCountry:'mentorCountry', metaCountry:'country', metaSector:'sector', metaOperatingSince:'operatingSince', metaBusinessType:'businessType', metaRegistrationStatus:'registrationStatus' };
+const META_SELECT_OPTIONS = { metaMentorCountry: COUNTRIES, metaCountry: COUNTRIES, metaSector: SECTORS, metaOperatingSince: OPERATING_SINCE, metaBusinessType: BUSINESS_TYPES, metaRegistrationStatus: REGISTRATION_STATUS };
+
+function populateMetaSelects(){
+  Object.keys(META_SELECT_MAP).forEach(id=>{
+    const sel = document.getElementById(id);
+    sel.innerHTML = "";
+    const optEmpty = document.createElement('option'); optEmpty.value=''; optEmpty.textContent='— اختيار —';
+    sel.appendChild(optEmpty);
+    META_SELECT_OPTIONS[id].forEach(v=>{
+      const o = document.createElement('option'); o.value = v; o.textContent = v;
+      sel.appendChild(o);
+    });
+  });
+
+  ['metaMentorPhoneCode','metaOwnerPhoneCode'].forEach(selId=>{
+    const codeSel = document.getElementById(selId);
+    codeSel.innerHTML = "";
+    const optEmpty = document.createElement('option'); optEmpty.value=''; optEmpty.textContent='— رمز الدولة —';
+    codeSel.appendChild(optEmpty);
+    DIAL_CODES.forEach(d=>{
+      const o = document.createElement('option'); o.value = d.code; o.textContent = d.country + ' (' + d.code + ')';
+      codeSel.appendChild(o);
+    });
+  });
+}
+
+function buildExpertiseUI(){
+  const select = document.getElementById('mentorExpertiseSelect');
+  const tagsWrap = document.getElementById('mentorExpertiseTags');
+  select.innerHTML = "";
+  const optPlaceholder = document.createElement('option'); optPlaceholder.value=''; optPlaceholder.textContent='— إضافة مجال معرفة —';
+  select.appendChild(optPlaceholder);
+  KA.forEach(k=>{
+    if(meta.mentorExpertise.includes(k.label)) return;
+    const o = document.createElement('option'); o.value = k.label; o.textContent = k.label;
+    select.appendChild(o);
+  });
+  const optOther = document.createElement('option'); optOther.value = '__other__'; optOther.textContent = 'أخرى (إضافة مجال مخصص)';
+  select.appendChild(optOther);
+
+  tagsWrap.innerHTML = "";
+  meta.mentorExpertise.forEach(label=>{
+    const tag = document.createElement('span'); tag.className = 'chip-line';
+    const sp = document.createElement('span'); sp.textContent = label;
+    const del = document.createElement('button'); del.type='button'; del.className='del'; del.textContent='حذف';
+    del.addEventListener('click', ()=>{
+      meta.mentorExpertise = meta.mentorExpertise.filter(x=>x!==label);
+      save();
+      buildExpertiseUI();
+    });
+    tag.appendChild(sp); tag.appendChild(del);
+    tagsWrap.appendChild(tag);
+  });
+}
+
+function addExpertiseOtherPoint(){
+  const inp = document.getElementById('mentorExpertiseOtherInput');
+  const val = inp.value.trim();
+  if(!val) return;
+  if(!meta.mentorExpertise.includes(val)) meta.mentorExpertise.push(val);
+  inp.value = '';
+  document.getElementById('mentorExpertiseOtherWrap').style.display = 'none';
+  save();
+  buildExpertiseUI();
+}
+
+function wireMeta(){
+  populateMetaSelects();
+  Object.keys(META_TEXT_MAP).forEach(id=>{
+    const input = document.getElementById(id);
+    input.value = meta[META_TEXT_MAP[id]] || '';
+    input.addEventListener('input', ()=>{ meta[META_TEXT_MAP[id]] = input.value; save(); });
+  });
+  Object.keys(META_SELECT_MAP).forEach(id=>{
+    const sel = document.getElementById(id);
+    sel.value = meta[META_SELECT_MAP[id]] || '';
+    sel.addEventListener('change', ()=>{ meta[META_SELECT_MAP[id]] = sel.value; save(); });
+  });
+  document.getElementById('metaMentorPhoneCode').value = meta.mentorPhoneCode || '';
+  document.getElementById('metaMentorPhoneCode').addEventListener('change', (e)=>{ meta.mentorPhoneCode = e.target.value; save(); });
+  document.getElementById('metaOwnerPhoneCode').value = meta.ownerPhoneCode || '';
+  document.getElementById('metaOwnerPhoneCode').addEventListener('change', (e)=>{ meta.ownerPhoneCode = e.target.value; save(); });
+
+  document.getElementById('mentorExpertiseOtherAddBtn').addEventListener('click', addExpertiseOtherPoint);
+  document.getElementById('mentorExpertiseOtherInput').addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter'){ e.preventDefault(); addExpertiseOtherPoint(); }
+  });
+  document.getElementById('mentorExpertiseSelect').addEventListener('change', (e)=>{
+    const val = e.target.value;
+    if(!val) return;
+    if(val === '__other__'){
+      document.getElementById('mentorExpertiseOtherWrap').style.display = 'block';
+      document.getElementById('mentorExpertiseOtherInput').focus();
+      e.target.value = '';
+      return;
+    }
+    if(!meta.mentorExpertise.includes(val)) meta.mentorExpertise.push(val);
+    save();
+    buildExpertiseUI();
+  });
+
+  buildExpertiseUI();
+}
+function syncMeta(){
+  Object.keys(META_TEXT_MAP).forEach(id=>{
+    document.getElementById(id).value = meta[META_TEXT_MAP[id]] || '';
+  });
+  Object.keys(META_SELECT_MAP).forEach(id=>{
+    document.getElementById(id).value = meta[META_SELECT_MAP[id]] || '';
+  });
+  document.getElementById('metaMentorPhoneCode').value = meta.mentorPhoneCode || '';
+  document.getElementById('metaOwnerPhoneCode').value = meta.ownerPhoneCode || '';
+  buildExpertiseUI();
+}
+
+// ===== تقييم الاحتياجات =====
+let needsAssessment = {
+  overview: { activity:'', achievements:'', challenges:'', differentiation:'' },
+  domains: new Array(KN).fill(''),
+  performance: { avgSales:'', avgCustomers:'', teamSize:'', mainCosts:'', trend:'' },
+  challengesRequests: { biggestChallenges:'', supportExpected:'' },
+  analysis: { strengths:'', gaps:'', prioritySummary:'', referrals:'' }
+};
+
+const NA_FIELD_MAP = {
+  naActivity: ['overview','activity'], naAchievements: ['overview','achievements'], naChallenges: ['overview','challenges'], naDifferentiation: ['overview','differentiation'],
+  naAvgSales: ['performance','avgSales'], naAvgCustomers: ['performance','avgCustomers'], naTeamSize: ['performance','teamSize'], naMainCosts: ['performance','mainCosts'], naTrend: ['performance','trend'],
+  naBiggestChallenges: ['challengesRequests','biggestChallenges'], naSupportExpected: ['challengesRequests','supportExpected'],
+  naStrengths: ['analysis','strengths'], naGaps: ['analysis','gaps'], naPrioritySummary: ['analysis','prioritySummary'], naReferrals: ['analysis','referrals']
+};
+
+function wireNeedsAssessment(){
+  Object.keys(NA_FIELD_MAP).forEach(id=>{
+    const [group, key] = NA_FIELD_MAP[id];
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.value = needsAssessment[group][key] || '';
+    el.addEventListener('input', ()=>{ needsAssessment[group][key] = el.value; save(); });
+  });
+  buildNADomains();
+}
+
+function syncNeedsAssessment(){
+  Object.keys(NA_FIELD_MAP).forEach(id=>{
+    const [group, key] = NA_FIELD_MAP[id];
+    const el = document.getElementById(id);
+    if(el) el.value = needsAssessment[group][key] || '';
+  });
+  KA.forEach((k,i)=>{
+    const ta = document.getElementById('naNotes'+i);
+    if(ta) ta.value = needsAssessment.domains[i] || '';
+  });
+}
+
+function toggleNADomain(i){
+  const body = document.getElementById('naBody'+i);
+  const wrap = document.getElementById('naDomain'+i);
+  if(body){ body.classList.toggle('open'); wrap.classList.toggle('open'); }
+}
+
+function visibleQuestionsFor(i){
+  const d = NEEDS_QUESTIONS[i];
+  const list = d.base.map(q => ({text:q, stageLabel:null}));
+  for(let s=0; s<=stageIndex; s++){
+    list.push({text: d.stages[s], stageLabel: STAGES[s].name});
+  }
+  return list;
+}
+
+function renderNAQuestions(i){
+  const ul = document.getElementById('naQList'+i);
+  if(!ul) return;
+  ul.innerHTML = "";
+  visibleQuestionsFor(i).forEach(q=>{
+    const li = document.createElement('li');
+    li.textContent = q.text + (q.stageLabel ? ' ' : '');
+    if(q.stageLabel){
+      const tag = document.createElement('span');
+      tag.style.cssText = 'color:var(--gold); font-size:10.5px; font-weight:800;';
+      tag.textContent = '(' + q.stageLabel + ')';
+      li.appendChild(tag);
+    }
+    ul.appendChild(li);
+  });
+}
+
+function updateNAQuestions(){
+  KA.forEach((k,i)=> renderNAQuestions(i));
+}
+
+function buildNADomains(){
+  const wrap = document.getElementById('naDomainsList');
+  wrap.innerHTML = "";
+  KA.forEach((k,i)=>{
+    const domain = document.createElement('div'); domain.className = 'na-domain'; domain.id = 'naDomain'+i;
+
+    const head = document.createElement('div'); head.className = 'na-domain-head';
+    head.addEventListener('click', ()=> toggleNADomain(i));
+    const nameWrap = document.createElement('div');
+    const name = document.createElement('span'); name.className = 'name'; name.textContent = k.label;
+    nameWrap.appendChild(name);
+    const prio = document.createElement('span'); prio.id = 'naPrio'+i; prio.style.marginInlineStart = '10px';
+    nameWrap.appendChild(prio);
+    const arrow = document.createElement('span'); arrow.className = 'na-arrow'; arrow.textContent = '◂';
+    head.appendChild(nameWrap); head.appendChild(arrow);
+
+    const body = document.createElement('div'); body.className = 'na-domain-body'; body.id = 'naBody'+i;
+    const ul = document.createElement('ul'); ul.className = 'na-questions'; ul.id = 'naQList'+i;
+    body.appendChild(ul);
+
+    const lbl = document.createElement('label'); lbl.style.cssText='display:block;font-size:11.5px;font-weight:700;color:var(--muted);margin-bottom:5px;';
+    lbl.textContent = 'ملاحظات المرشد';
+    body.appendChild(lbl);
+    const ta = document.createElement('textarea'); ta.id = 'naNotes'+i;
+    ta.value = needsAssessment.domains[i] || '';
+    ta.addEventListener('input', ()=>{ needsAssessment.domains[i] = ta.value; save(); });
+    body.appendChild(ta);
+
+    domain.appendChild(head); domain.appendChild(body);
+    wrap.appendChild(domain);
+    renderNAQuestions(i);
+  });
+  updateKAPriorities();
+}
+
+// ===== Stage selection =====
+let stageIndex = 0;
+
+function buildStagePicker(){
+  const wrap = document.getElementById('stagePicker');
+  wrap.innerHTML = "";
+  STAGES.forEach((st,i)=>{
+    const card = document.createElement('div');
+    card.className = 'stage-card' + (i===stageIndex ? ' active':'');
+    card.id = 'stageCard'+i;
+    card.innerHTML = '<div class="num">'+(i+1)+'</div><div class="name">'+st.name+'</div><div class="desc">'+st.desc+'</div>';
+    card.addEventListener('click', ()=>{ selectStage(i); });
+    wrap.appendChild(card);
+  });
+  updateStageNote();
+}
+
+function selectStage(i){
+  stageIndex = i;
+  document.querySelectorAll('.stage-card').forEach((c,idx)=>{ c.classList.toggle('active', idx===i); });
+  updateStageNote();
+  updateKAPriorities();
+  updateNAQuestions();
+  buildGate();
+  save();
+}
+
+function updateStageNote(){
+  const note = document.getElementById('stageNote');
+  const st = STAGES[stageIndex];
+  note.textContent = 'المرحلة المختارة: ' + st.name + ' — ' + st.desc;
+}
+
+
+function buildStatic(svg){
+  svg.innerHTML = "";
+  // level grids (nonagon rings)
+  LEVELS.forEach(lv=>{
+    let pts = [];
+    for(let i=0;i<N;i++){ pts.push(pointAt(i, lv).join(",")); }
+    svg.appendChild(el('polygon', {points:pts.join(" "), fill:'none', stroke:'#e1ded4', 'stroke-width':1}));
+  });
+  // outer boundary bold
+  let outerPts=[]; for(let i=0;i<N;i++){ outerPts.push(pointAt(i,10).join(",")); }
+  svg.appendChild(el('polygon', {points:outerPts.join(" "), fill:'none', stroke:'#cfcabb', 'stroke-width':1.5}));
+
+  // axis lines + labels
+  AXES.forEach((ax,i)=>{
+    const [ex,ey] = axisEnd(i, RMAX);
+    svg.appendChild(el('line', {x1:CX, y1:CY, x2:ex, y2:ey, stroke:'#e1ded4', 'stroke-width':1}));
+    const [lx,ly] = axisEnd(i, RMAX+58);
+    const dot = el('circle', {cx:axisEnd(i,RMAX)[0], cy:axisEnd(i,RMAX)[1], r:3, fill:ax.color});
+    svg.appendChild(dot);
+    const t = el('text', {x:lx, y:ly, 'text-anchor':'middle', 'dominant-baseline':'middle', 'font-size':13, 'font-weight':700, fill:'#3a3a40'});
+    if(ax.short.length===1){ t.textContent = ax.short[0]; svg.appendChild(t); }
+    else{
+      ax.short.forEach((line,li)=>{
+        const tt = el('text', {x:lx, y:ly + (li-0.5)*15, 'text-anchor':'middle', 'dominant-baseline':'middle', 'font-size':13, 'font-weight':700, fill:'#3a3a40'});
+        tt.textContent = line;
+        svg.appendChild(tt);
+      });
+    }
+  });
+
+  // level value labels along the vertical (first) axis-ish, placed near top axis
+  LEVELS.forEach(lv=>{
+    const [x,y] = axisEnd(0, (lv/10)*RMAX);
+    const t = el('text', {x:x+10, y:y-4, 'font-size':10, fill:'#b5b0a0', 'font-weight':700});
+    t.textContent = lv;
+    svg.appendChild(t);
+  });
+
+  svg.appendChild(el('circle', {cx:CX, cy:CY, r:3, fill:'#b8902e'}));
+}
+
+function drawSeries(svg, values, colorStroke, colorFill, idPrefix){
+  document.querySelectorAll('.series-'+idPrefix).forEach(n=>n.remove());
+  const vals = values.map(v => v===null ? 0 : v);
+  let pts = [];
+  for(let i=0;i<N;i++){ pts.push(pointAt(i, vals[i]).join(",")); }
+  const poly = el('polygon', {points:pts.join(" "), fill:colorFill, stroke:colorStroke, 'stroke-width':2.5, class:'series-'+idPrefix});
+  svg.appendChild(poly);
+  values.forEach((v,i)=>{
+    if(v===null) return;
+    const [x,y] = pointAt(i, v);
+    svg.appendChild(el('circle', {cx:x, cy:y, r:4.5, fill:colorStroke, stroke:'#fff', 'stroke-width':1.5, class:'series-'+idPrefix}));
+  });
+}
+
+function render(){
+  const svg = document.getElementById('radar');
+  buildStatic(svg);
+  drawSeries(svg, mentor, getCss('--mentor'), getCss('--mentor-fill'), 'mentor');
+  drawSeries(svg, owner, getCss('--owner'), getCss('--owner-fill'), 'owner');
+  renderSummary();
+  updateTotalsRow();
+}
+
+// ===== شبكة العنكبوت الخاصة بالمسح التفصيلي (اثنا عشر مجال معرفة) =====
+function angleForKA(i){ return (360/KN)*i; }
+function pointAtKA(i, value){
+  const a = (angleForKA(i) - 90) * Math.PI/180;
+  const r = (value/10) * RMAX;
+  return [CX + r*Math.cos(a), CY + r*Math.sin(a)];
+}
+function axisEndKA(i, r){
+  const a = (angleForKA(i) - 90) * Math.PI/180;
+  return [CX + r*Math.cos(a), CY + r*Math.sin(a)];
+}
+
+function buildStaticKA(svg){
+  svg.innerHTML = "";
+  LEVELS.forEach(lv=>{
+    let pts = [];
+    for(let i=0;i<KN;i++){ pts.push(pointAtKA(i, lv).join(",")); }
+    svg.appendChild(el('polygon', {points:pts.join(" "), fill:'none', stroke:'#e1ded4', 'stroke-width':1}));
+  });
+  let outerPts=[]; for(let i=0;i<KN;i++){ outerPts.push(pointAtKA(i,10).join(",")); }
+  svg.appendChild(el('polygon', {points:outerPts.join(" "), fill:'none', stroke:'#cfcabb', 'stroke-width':1.5}));
+
+  KA.forEach((k,i)=>{
+    const [ex,ey] = axisEndKA(i, RMAX);
+    svg.appendChild(el('line', {x1:CX, y1:CY, x2:ex, y2:ey, stroke:'#e1ded4', 'stroke-width':1}));
+    const [lx,ly] = axisEndKA(i, RMAX+58);
+    const dot = el('circle', {cx:axisEndKA(i,RMAX)[0], cy:axisEndKA(i,RMAX)[1], r:3, fill:k.color});
+    svg.appendChild(dot);
+    k.short.forEach((line,li)=>{
+      const tt = el('text', {x:lx, y:ly + (li-0.5)*15, 'text-anchor':'middle', 'dominant-baseline':'middle', 'font-size':12, 'font-weight':700, fill:'#3a3a40'});
+      tt.textContent = line;
+      svg.appendChild(tt);
+    });
+  });
+
+  LEVELS.forEach(lv=>{
+    const [x,y] = axisEndKA(0, (lv/10)*RMAX);
+    const t = el('text', {x:x+10, y:y-4, 'font-size':10, fill:'#b5b0a0', 'font-weight':700});
+    t.textContent = lv;
+    svg.appendChild(t);
+  });
+
+  svg.appendChild(el('circle', {cx:CX, cy:CY, r:3, fill:'#b8902e'}));
+}
+
+function drawSeriesKA(svg, values, colorStroke, colorFill, idPrefix){
+  document.querySelectorAll('.serieska-'+idPrefix).forEach(n=>n.remove());
+  const vals = values.map(v => (v===null||v===undefined) ? 0 : v);
+  let pts = [];
+  for(let i=0;i<KN;i++){ pts.push(pointAtKA(i, vals[i]).join(",")); }
+  const poly = el('polygon', {points:pts.join(" "), fill:colorFill, stroke:colorStroke, 'stroke-width':2.5, class:'serieska-'+idPrefix});
+  svg.appendChild(poly);
+  values.forEach((v,i)=>{
+    if(v===null || v===undefined) return;
+    const [x,y] = pointAtKA(i, v);
+    svg.appendChild(el('circle', {cx:x, cy:y, r:4.5, fill:colorStroke, stroke:'#fff', 'stroke-width':1.5, class:'serieska-'+idPrefix}));
+  });
+}
+
+function renderKA(){
+  const svg = document.getElementById('radarKA');
+  if(!svg) return;
+  buildStaticKA(svg);
+  drawSeriesKA(svg, kaMentor, getCss('--mentor'), getCss('--mentor-fill'), 'mentor');
+  drawSeriesKA(svg, kaOwner, getCss('--owner'), getCss('--owner-fill'), 'owner');
+}
+
+function getCss(v){ return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
+
+function buildTable(){
+  const body = document.getElementById('cmpBody');
+  body.innerHTML = "";
+  AXES.forEach((ax,i)=>{
+    const tr = document.createElement('tr');
+    const isComputed = DIM_KA_MAP[i].length > 0;
+
+    const tdDim = document.createElement('td'); tdDim.className='dim';
+    tdDim.innerHTML = '<span class="dim-inner"><i style="background:'+ax.color+'"></i>'+ax.label+(isComputed?' <span class="link-mark" title="محسوب تلقائياً من المسح التفصيلي">⚭</span>':'')+'</span>';
+
+    const tdM = document.createElement('td');
+    if(isComputed){
+      const sp = document.createElement('span'); sp.className='computed-val mentor'; sp.id='dimM'+i; sp.textContent='—';
+      tdM.appendChild(sp);
+    } else {
+      const inpM = document.createElement('input');
+      inpM.type='number'; inpM.min=1; inpM.max=10; inpM.className='score mentor'; inpM.placeholder='—';
+      inpM.id = 'inpM'+i;
+      if(mentor[i]!==null) inpM.value = mentor[i];
+      inpM.addEventListener('input', ()=>{ mentor[i] = clampVal(inpM.value); save(); updateRow(i); render(); });
+      tdM.appendChild(inpM);
+    }
+
+    const tdO = document.createElement('td');
+    if(isComputed){
+      const sp = document.createElement('span'); sp.className='computed-val owner'; sp.id='dimO'+i; sp.textContent='—';
+      tdO.appendChild(sp);
+    } else {
+      const inpO = document.createElement('input');
+      inpO.type='number'; inpO.min=1; inpO.max=10; inpO.className='score owner'; inpO.placeholder='—';
+      inpO.id = 'inpO'+i;
+      if(owner[i]!==null) inpO.value = owner[i];
+      inpO.addEventListener('input', ()=>{ owner[i] = clampVal(inpO.value); save(); updateRow(i); render(); });
+      tdO.appendChild(inpO);
+    }
+
+    const tdD = document.createElement('td'); tdD.id = 'tdD'+i;
+
+    tr.appendChild(tdDim); tr.appendChild(tdM); tr.appendChild(tdO); tr.appendChild(tdD);
+    body.appendChild(tr);
+  });
+  syncComputedDimensions();
+  updateTotalsRow();
+}
+
+// refresh only the input VALUE (used after load/import/reset) without rebuilding DOM
+function syncInputs(){
+  AXES.forEach((ax,i)=>{
+    if(DIM_KA_MAP[i].length > 0) return; // computed dims refreshed via syncComputedDimensions
+    const inpM = document.getElementById('inpM'+i);
+    const inpO = document.getElementById('inpO'+i);
+    if(inpM) inpM.value = mentor[i]===null ? '' : mentor[i];
+    if(inpO) inpO.value = owner[i]===null ? '' : owner[i];
+    updateRow(i);
+  });
+  syncComputedDimensions();
+  updateTotalsRow();
+}
+
+// يعيد حساب المحاور المرتبطة بمجالات المعرفة، انطلاقاً من قيم المسح التفصيلي الحالية
+function syncComputedDimensions(){
+  AXES.forEach((ax,i)=>{
+    if(DIM_KA_MAP[i].length === 0) return;
+    const cm = computeDim(i, kaMentor);
+    const co = computeDim(i, kaOwner);
+    mentor[i] = (cm===null || cm===undefined) ? null : cm;
+    owner[i]  = (co===null || co===undefined) ? null : co;
+    const spM = document.getElementById('dimM'+i);
+    const spO = document.getElementById('dimO'+i);
+    if(spM) spM.textContent = fmtVal(mentor[i]);
+    if(spO) spO.textContent = fmtVal(owner[i]);
+    updateRow(i);
+  });
+}
+
+function updateRow(i){
+  const tdD = document.getElementById('tdD'+i);
+  if(!tdD) return;
+  const m = mentor[i], o = owner[i];
+  if(m!==null && o!==null && m!==undefined && o!==undefined){
+    const d = o-m;
+    tdD.innerHTML = '<span class="'+(d>0?'delta-pos':(d<0?'delta-neg':'delta-zero'))+'">'+(d>0?'+':'')+fmtVal(d)+'</span>';
+  } else { tdD.textContent = '—'; }
+}
+
+function updateTotalsRow(){
+  let sumM=0,sumO=0,cM=0,cO=0;
+  mentor.forEach(v=>{ if(v!==null && v!==undefined){ sumM+=v; cM++; } });
+  owner.forEach(v=>{ if(v!==null && v!==undefined){ sumO+=v; cO++; } });
+  document.getElementById('sumMentor').textContent = cM? fmtVal(sumM) : '—';
+  document.getElementById('sumOwner').textContent = cO? fmtVal(sumO) : '—';
+  const sd = document.getElementById('sumDelta');
+  if(cM && cO){
+    const totalD = sumO - sumM;
+    sd.textContent = (totalD>0?'+':'') + fmtVal(totalD);
+    sd.className = totalD>0? 'delta-pos' : (totalD<0? 'delta-neg':'delta-zero');
+  } else {
+    sd.textContent = '—'; sd.className = '';
+  }
+}
+
+function renderSummary(){
+  const mVals = mentor.filter(v=>v!==null);
+  const oVals = owner.filter(v=>v!==null);
+  const mSum = mVals.reduce((a,b)=>a+b,0);
+  const oSum = oVals.reduce((a,b)=>a+b,0);
+  document.getElementById('mentorTotal').textContent = mVals.length? mSum : '–';
+  document.getElementById('ownerTotal').textContent = oVals.length? oSum : '–';
+  const dEl = document.getElementById('totalDelta');
+  if(mVals.length && oVals.length){
+    const d = oSum - mSum;
+    dEl.textContent = (d>0?'+':'') + d;
+    dEl.className = 'val ' + (d>0?'delta-pos':(d<0?'delta-neg':'delta-zero'));
+  } else { dEl.textContent = '–'; dEl.className='val'; }
+}
+
+function clampVal(raw){
+  let v = parseInt(raw,10);
+  if(isNaN(v)) return null;
+  return Math.max(1, Math.min(10, v));
+}
+
+// ===== Knowledge Areas detailed table =====
+let kaMentor = new Array(KN).fill(null);
+let kaOwner  = new Array(KN).fill(null);
+
+let kaChecklist = {}; // { idx: {shared:[10 bool]} } للموضوعي، أو { idx: {mentor:[10 bool], owner:[10 bool]} } للذاتي
+
+function defaultKaChecklist(){
+  const obj = {};
+  KA.forEach((k,i)=>{
+    obj[i] = OBJECTIVE_KA_INDICES.includes(i)
+      ? { shared: new Array(10).fill(false) }
+      : { mentor: new Array(10).fill(false), owner: new Array(10).fill(false) };
+  });
+  return obj;
+}
+
+function computeChecklistScore(idx, rater){
+  const entry = kaChecklist[idx];
+  if(!entry) return null;
+  const arr = OBJECTIVE_KA_INDICES.includes(idx) ? entry.shared : entry[rater];
+  if(!arr) return null;
+  return arr.filter(Boolean).length;
+}
+
+function highlightItemsFor(idx, rater){
+  const allItems = KA_CHECKLISTS[idx].knowledge.concat(KA_CHECKLISTS[idx].status);
+  const entry = kaChecklist[idx];
+  const arr = OBJECTIVE_KA_INDICES.includes(idx) ? entry.shared : entry[rater];
+  return allItems.filter((_,j)=>arr[j]);
+}
+
+function applyChecklistScore(idx){
+  const isObjective = OBJECTIVE_KA_INDICES.includes(idx);
+  if(isObjective){
+    const score = computeChecklistScore(idx);
+    kaMentor[idx] = score; kaOwner[idx] = score;
+    const spM = document.getElementById('kaSharedM'+idx);
+    const spO = document.getElementById('kaSharedO'+idx);
+    if(spM) spM.textContent = fmtVal(score);
+    if(spO) spO.textContent = fmtVal(score);
+  } else {
+    kaMentor[idx] = computeChecklistScore(idx,'mentor');
+    kaOwner[idx] = computeChecklistScore(idx,'owner');
+    const spM = document.getElementById('kaSharedM'+idx);
+    const spO = document.getElementById('kaSharedO'+idx);
+    if(spM) spM.textContent = fmtVal(kaMentor[idx]);
+    if(spO) spO.textContent = fmtVal(kaOwner[idx]);
+  }
+  updateHighlights(idx);
+  save();
+  updateKARow(idx); updateKATotalsRow();
+  syncComputedDimensions(); updateTotalsRow(); render(); renderKA();
+}
+
+function updateHighlights(idx){
+  const isObjective = OBJECTIVE_KA_INDICES.includes(idx);
+  if(isObjective){
+    const box = document.getElementById('kaHighlight'+idx+'_shared');
+    if(box) renderHighlightBox(box, highlightItemsFor(idx));
+  } else {
+    const boxM = document.getElementById('kaHighlight'+idx+'_mentor');
+    const boxO = document.getElementById('kaHighlight'+idx+'_owner');
+    if(boxM) renderHighlightBox(boxM, highlightItemsFor(idx,'mentor'));
+    if(boxO) renderHighlightBox(boxO, highlightItemsFor(idx,'owner'));
+  }
+}
+
+function renderHighlightBox(box, items){
+  if(!items.length){ box.innerHTML = '<p class="checklist-score-note">لم يتم تحديد أي بند بعد</p>'; return; }
+  const ul = document.createElement('ul'); ul.className = 'na-questions';
+  items.forEach(it=>{ const li = document.createElement('li'); li.textContent = it; ul.appendChild(li); });
+  box.innerHTML = "";
+  box.appendChild(ul);
+}
+
+function toggleKADetail(idx){
+  const wrap = document.getElementById('kaDetail'+idx);
+  if(wrap) wrap.classList.toggle('open');
+}
+
+function buildChecklistColumns(idx, rater, storeArr){
+  const cols = document.createElement('div'); cols.className = 'ka-detail-cols';
+  const mkCol = (title, items, offset) => {
+    const col = document.createElement('div'); col.className = 'ka-detail-col';
+    const h = document.createElement('h4'); h.textContent = title; col.appendChild(h);
+    items.forEach((item, j)=>{
+      const idxInArr = offset + j;
+      const row = document.createElement('div'); row.className = 'ka-check-item';
+      const cbId = 'kaChk'+idx+'_'+(rater||'shared')+'_'+idxInArr;
+      const cb = document.createElement('input'); cb.type = 'checkbox'; cb.id = cbId;
+      cb.checked = storeArr[idxInArr];
+      cb.addEventListener('change', ()=>{ storeArr[idxInArr] = cb.checked; applyChecklistScore(idx); });
+      const lbl = document.createElement('label'); lbl.setAttribute('for', cbId); lbl.textContent = item;
+      row.appendChild(cb); row.appendChild(lbl);
+      col.appendChild(row);
+    });
+    return col;
+  };
+  cols.appendChild(mkCol('المعرفة بالأنظمة والإجراءات', KA_CHECKLISTS[idx].knowledge, 0));
+  cols.appendChild(mkCol('الحالة الفعلية للمشروع', KA_CHECKLISTS[idx].status, 5));
+  return cols;
+}
+
+function buildKAChecklistDetail(idx){
+  const wrap = document.createElement('div'); wrap.className = 'ka-detail-wrap'; wrap.id = 'kaDetail'+idx;
+  const isObjective = OBJECTIVE_KA_INDICES.includes(idx);
+
+  if(isObjective){
+    wrap.appendChild(buildChecklistColumns(idx, null, kaChecklist[idx].shared));
+    const note = document.createElement('p'); note.className = 'checklist-score-note';
+    note.textContent = 'هذا التقييم موضوعي مبني على وقائع محقَّقة، لذا يُعتمد نفس القيمة لكلٍّ من المرشد وصاحب المشروع.';
+    wrap.appendChild(note);
+    const hTitle = document.createElement('h4'); hTitle.textContent = 'أبرز البنود المحقَّقة'; hTitle.style.marginTop='14px';
+    wrap.appendChild(hTitle);
+    const hBox = document.createElement('div'); hBox.id = 'kaHighlight'+idx+'_shared';
+    wrap.appendChild(hBox);
+    renderHighlightBox(hBox, highlightItemsFor(idx));
+  } else {
+    const tabsNote = document.createElement('p'); tabsNote.className = 'checklist-score-note';
+    tabsNote.textContent = 'كل من المرشد وصاحب المشروع يقيّم هذا المجال وفق تصوره الخاص لنفس المعايير.';
+    wrap.appendChild(tabsNote);
+
+    const mentorHead = document.createElement('h4'); mentorHead.textContent = 'تقييم المرشد'; mentorHead.style.color='var(--mentor)';
+    wrap.appendChild(mentorHead);
+    wrap.appendChild(buildChecklistColumns(idx, 'mentor', kaChecklist[idx].mentor));
+    const hBoxM = document.createElement('div'); hBoxM.id = 'kaHighlight'+idx+'_mentor'; hBoxM.style.marginBottom='14px';
+    wrap.appendChild(hBoxM);
+    renderHighlightBox(hBoxM, highlightItemsFor(idx,'mentor'));
+
+    const ownerHead = document.createElement('h4'); ownerHead.textContent = 'تقييم صاحب المشروع'; ownerHead.style.color='var(--owner)'; ownerHead.style.marginTop='10px';
+    wrap.appendChild(ownerHead);
+    wrap.appendChild(buildChecklistColumns(idx, 'owner', kaChecklist[idx].owner));
+    const hBoxO = document.createElement('div'); hBoxO.id = 'kaHighlight'+idx+'_owner';
+    wrap.appendChild(hBoxO);
+    renderHighlightBox(hBoxO, highlightItemsFor(idx,'owner'));
+  }
+
+  return wrap;
+}
+
+function buildKATable(){
+  const body = document.getElementById('kaBody');
+  body.innerHTML = "";
+  KA.forEach((k,i)=>{
+    const tr = document.createElement('tr');
+
+    const tdDim = document.createElement('td'); tdDim.className='dim';
+    tdDim.innerHTML = '<span class="dim-inner">'+k.label+'</span>';
+    const btn = document.createElement('button'); btn.className='ka-toggle'; btn.textContent='عرض التفاصيل';
+    btn.addEventListener('click', ()=> toggleKADetail(i));
+    tdDim.appendChild(btn);
+
+    const tdPrio = document.createElement('td'); tdPrio.id = 'kaPrio'+i;
+
+    const tdM = document.createElement('td');
+    const spM = document.createElement('span'); spM.className='computed-val shared'; spM.id='kaSharedM'+i;
+    spM.textContent = fmtVal(kaMentor[i]);
+    tdM.appendChild(spM);
+
+    const tdO = document.createElement('td');
+    const spO = document.createElement('span'); spO.className='computed-val shared'; spO.id='kaSharedO'+i;
+    spO.textContent = fmtVal(kaOwner[i]);
+    tdO.appendChild(spO);
+
+    const tdD = document.createElement('td'); tdD.id = 'kaTdD'+i;
+
+    tr.appendChild(tdDim); tr.appendChild(tdPrio); tr.appendChild(tdM); tr.appendChild(tdO); tr.appendChild(tdD);
+    body.appendChild(tr);
+    updateKARow(i);
+
+    const detailTr = document.createElement('tr'); detailTr.className = 'ka-detail-row';
+    const detailTd = document.createElement('td'); detailTd.colSpan = 5;
+    detailTd.appendChild(buildKAChecklistDetail(i));
+    detailTr.appendChild(detailTd);
+    body.appendChild(detailTr);
+  });
+  updateKAPriorities();
+  updateKATotalsRow();
+}
+
+function syncKAInputs(){
+  KA.forEach((k,i)=>{
+    const spM = document.getElementById('kaSharedM'+i);
+    const spO = document.getElementById('kaSharedO'+i);
+    if(spM) spM.textContent = fmtVal(kaMentor[i]);
+    if(spO) spO.textContent = fmtVal(kaOwner[i]);
+    const isObjective = OBJECTIVE_KA_INDICES.includes(i);
+    (KA_CHECKLISTS[i].knowledge.concat(KA_CHECKLISTS[i].status)).forEach((_,j)=>{
+      if(isObjective){
+        const cb = document.getElementById('kaChk'+i+'_shared_'+j);
+        if(cb) cb.checked = kaChecklist[i].shared[j];
+      } else {
+        const cbM = document.getElementById('kaChk'+i+'_mentor_'+j);
+        const cbO = document.getElementById('kaChk'+i+'_owner_'+j);
+        if(cbM) cbM.checked = kaChecklist[i].mentor[j];
+        if(cbO) cbO.checked = kaChecklist[i].owner[j];
+      }
+    });
+    updateHighlights(i);
+    updateKARow(i);
+  });
+  updateKAPriorities();
+  updateKATotalsRow();
+}
+
+function updateKAPriorities(){
+  KA.forEach((k,i)=>{
+    const cell = document.getElementById('kaPrio'+i);
+    const level = k.matrix[stageIndex];
+    if(cell) cell.innerHTML = '<span class="priority-badge '+PRIORITY_CLASSES[level]+'">'+PRIORITY_LABELS[level]+'</span>';
+    const naBadge = document.getElementById('naPrio'+i);
+    if(naBadge) naBadge.innerHTML = '<span class="priority-badge '+PRIORITY_CLASSES[level]+'">'+PRIORITY_LABELS[level]+'</span>';
+  });
+}
+
+function updateKARow(i){
+  const tdD = document.getElementById('kaTdD'+i);
+  if(!tdD) return;
+  const m = kaMentor[i], o = kaOwner[i];
+  if(m!==null && o!==null){
+    const d = o-m;
+    tdD.innerHTML = '<span class="'+(d>0?'delta-pos':(d<0?'delta-neg':'delta-zero'))+'">'+(d>0?'+':'')+d+'</span>';
+  } else { tdD.textContent = '—'; }
+}
+
+function updateKATotalsRow(){
+  let sumM=0,sumO=0,cM=0,cO=0;
+  kaMentor.forEach(v=>{ if(v!==null){ sumM+=v; cM++; } });
+  kaOwner.forEach(v=>{ if(v!==null){ sumO+=v; cO++; } });
+  document.getElementById('kaSumMentor').textContent = cM? sumM : '—';
+  document.getElementById('kaSumOwner').textContent = cO? sumO : '—';
+  const sd = document.getElementById('kaSumDelta');
+  if(cM && cO){
+    const totalD = sumO - sumM;
+    sd.textContent = (totalD>0?'+':'') + totalD;
+    sd.className = totalD>0? 'delta-pos' : (totalD<0? 'delta-neg':'delta-zero');
+  } else {
+    sd.textContent = '—'; sd.className = '';
+  }
+}
+
+// ===== Stage-Gate checklist =====
+let gateState = {}; // { stageId: [bool, bool, ...] }
+
+function buildGate(){
+  const st = STAGES[stageIndex];
+  if(!gateState[st.id] || gateState[st.id].length !== st.gate.length){
+    gateState[st.id] = new Array(st.gate.length).fill(false);
+  }
+  const nextName = STAGES[stageIndex+1] ? STAGES[stageIndex+1].name : null;
+  document.getElementById('gateTitle').textContent = nextName
+    ? 'معايير الانتقال من ' + st.name + ' إلى ' + nextName
+    : 'معايير النضج والاستقرار في ' + st.name;
+
+  const wrap = document.getElementById('gateItems');
+  wrap.innerHTML = "";
+  st.gate.forEach((item,i)=>{
+    const row = document.createElement('div');
+    row.className = 'gate-item' + (gateState[st.id][i] ? ' checked':'');
+    row.id = 'gateItem'+i;
+    const cb = document.createElement('input');
+    cb.type = 'checkbox'; cb.id = 'gateCb'+i;
+    cb.checked = gateState[st.id][i];
+    cb.addEventListener('change', ()=>{
+      gateState[st.id][i] = cb.checked;
+      row.classList.toggle('checked', cb.checked);
+      save(); updateGateReadiness();
+    });
+    const label = document.createElement('label');
+    label.setAttribute('for','gateCb'+i);
+    label.textContent = item;
+    row.appendChild(cb); row.appendChild(label);
+    wrap.appendChild(row);
+  });
+  updateGateReadiness();
+}
+
+function updateGateReadiness(){
+  const st = STAGES[stageIndex];
+  const arr = gateState[st.id] || [];
+  const total = arr.length;
+  const done = arr.filter(Boolean).length;
+  const pct = total ? Math.round((done/total)*100) : 0;
+  document.getElementById('gatePct').textContent = pct + '%';
+  document.getElementById('gateBarFill').style.width = pct + '%';
+}
+
+// ===== SMART Goals =====
+let goals = [];
+let goalIdCounter = 0;
+
+function buildVerifyDetail(g){
+  const wrap = document.createElement('div'); wrap.className = 'verify-wrap'; wrap.id = 'verifyWrap'+g.id;
+
+  SMART_VERIFY.forEach(sv=>{
+    const c = g.verify.criteria[sv.key];
+    const block = document.createElement('div'); block.className = 'verify-crit';
+    const h = document.createElement('h4'); h.textContent = sv.label; block.appendChild(h);
+    const q = document.createElement('div'); q.className = 'q'; q.textContent = sv.question; block.appendChild(q);
+
+    const indWrap = document.createElement('div'); indWrap.className = 'verify-indicators';
+    sv.indicators.forEach((ind, ii)=>{
+      const lbl = document.createElement('label');
+      const cb = document.createElement('input'); cb.type = 'checkbox'; cb.checked = !!c.checks[ii];
+      cb.addEventListener('change', ()=>{ c.checks[ii] = cb.checked; save(); refreshVerifyStatus(g, sv.key, statusEl); refreshOverall(g); });
+      lbl.appendChild(cb);
+      const sp = document.createElement('span'); sp.textContent = ind; lbl.appendChild(sp);
+      indWrap.appendChild(lbl);
+    });
+    block.appendChild(indWrap);
+
+    const metRow = document.createElement('div'); metRow.className = 'verify-met';
+    const metLabel = document.createElement('span'); metLabel.textContent = sv.metQuestion; metLabel.style.fontWeight='700';
+    metRow.appendChild(metLabel);
+
+    const yesLbl = document.createElement('label');
+    const yesRadio = document.createElement('input'); yesRadio.type='radio'; yesRadio.name='met_'+g.id+'_'+sv.key;
+    yesRadio.checked = c.met === true;
+    yesRadio.addEventListener('change', ()=>{ c.met = true; save(); refreshVerifyStatus(g, sv.key, statusEl); refreshOverall(g); });
+    yesLbl.appendChild(yesRadio); yesLbl.appendChild(document.createTextNode('نعم'));
+
+    const noLbl = document.createElement('label');
+    const noRadio = document.createElement('input'); noRadio.type='radio'; noRadio.name='met_'+g.id+'_'+sv.key;
+    noRadio.checked = c.met === false;
+    noRadio.addEventListener('change', ()=>{ c.met = false; save(); refreshVerifyStatus(g, sv.key, statusEl); refreshOverall(g); });
+    noLbl.appendChild(noRadio); noLbl.appendChild(document.createTextNode('لا'));
+
+    metRow.appendChild(yesLbl); metRow.appendChild(noLbl);
+
+    const statusEl = document.createElement('span'); statusEl.className = 'verify-status';
+    metRow.appendChild(statusEl);
+    block.appendChild(metRow);
+
+    wrap.appendChild(block);
+    setStatusEl(statusEl, computeCriterionStatus(c));
+  });
+
+  const overall = document.createElement('div'); overall.className = 'verify-overall'; overall.id = 'overall'+g.id;
+  wrap.appendChild(overall);
+
+  const impLabel = document.createElement('div'); impLabel.innerHTML = '<label style="font-size:12px;font-weight:700;color:var(--muted);display:block;margin:10px 0 5px;">كيف يمكن تحسين صياغة الهدف</label>';
+  wrap.appendChild(impLabel);
+  const impTa = document.createElement('textarea'); impTa.value = g.verify.improvementNotes || '';
+  impTa.style.width='100%';
+  impTa.addEventListener('input', ()=>{ g.verify.improvementNotes = impTa.value; save(); });
+  wrap.appendChild(impTa);
+
+  setOverallEl(overall, computeOverallRating(g));
+  return wrap;
+}
+
+function setStatusEl(el, status){
+  el.classList.remove('yes','partial','no','pending');
+  if(status==='نعم'){ el.textContent='نعم'; el.classList.add('yes'); }
+  else if(status==='جزئياً'){ el.textContent='جزئياً'; el.classList.add('partial'); }
+  else if(status==='لا'){ el.textContent='لا'; el.classList.add('no'); }
+  else { el.textContent='لم يُقيَّم بعد'; el.classList.add('pending'); }
+}
+function setOverallEl(el, rating){
+  el.classList.remove('strong','acceptable','rework','pending');
+  if(rating==='هدف قوي بصيغة SMART'){ el.textContent = rating; el.classList.add('strong'); }
+  else if(rating==='هدف مقبول لكن يمكن تحسينه'){ el.textContent = rating; el.classList.add('acceptable'); }
+  else if(rating==='هدف يحتاج إلى إعادة صياغة'){ el.textContent = rating; el.classList.add('rework'); }
+  else { el.textContent = 'التقييم العام: لم تكتمل مراجعة جميع المعايير بعد'; el.classList.add('pending'); }
+}
+function refreshVerifyStatus(g, key, statusEl){
+  setStatusEl(statusEl, computeCriterionStatus(g.verify.criteria[key]));
+}
+function refreshOverall(g){
+  const overall = document.getElementById('overall'+g.id);
+  if(overall) setOverallEl(overall, computeOverallRating(g));
+}
+function toggleVerify(g){
+  const wrap = document.getElementById('verifyWrap'+g.id);
+  if(wrap) wrap.classList.toggle('open');
+}
+
+function makeGoalCard(g){
+  const card = document.createElement('div'); card.className = 'goal-card';
+
+  const top = document.createElement('div'); top.className = 'card-top';
+  const badge = document.createElement('span'); badge.className = 'card-badge'; badge.textContent = 'هدف';
+  const rm = document.createElement('button'); rm.className = 'remove-btn'; rm.textContent = 'حذف';
+  rm.addEventListener('click', ()=> removeGoal(g.id));
+  top.appendChild(badge); top.appendChild(rm);
+  card.appendChild(top);
+
+  // الصف الأول: مجال المعرفة المرتبط
+  const row1 = document.createElement('div'); row1.className = 'field-row';
+  const col1 = document.createElement('div'); col1.className = 'field-col'; col1.style.flexBasis = '100%';
+  col1.innerHTML = '<label>مجال المعرفة المرتبط</label>';
+  const sel = document.createElement('select');
+  const optEmpty = document.createElement('option'); optEmpty.value=''; optEmpty.textContent='— اختيار مجال المعرفة —';
+  sel.appendChild(optEmpty);
+  KA.forEach(k=>{
+    const o = document.createElement('option'); o.value = k.label; o.textContent = k.label;
+    if(g.ka === k.label) o.selected = true;
+    sel.appendChild(o);
+  });
+  const optOther = document.createElement('option'); optOther.value='__other__'; optOther.textContent='غير ذلك';
+  if(g.ka === '__other__') optOther.selected = true;
+  sel.appendChild(optOther);
+
+  const otherWrap = document.createElement('div'); otherWrap.style.marginTop = '8px';
+  otherWrap.style.display = g.ka === '__other__' ? 'block' : 'none';
+  const otherInp = document.createElement('input'); otherInp.type = 'text'; otherInp.placeholder = 'اكتب مجال المعرفة';
+  otherInp.value = g.kaOther || '';
+  otherInp.style.cssText = 'width:100%; border:1.5px solid var(--line); border-radius:8px; padding:8px 10px; font-family:"Tajawal",Arial,sans-serif; font-size:13.5px;';
+  otherInp.addEventListener('input', ()=>{ g.kaOther = otherInp.value; save(); refreshSessionGoalOptions(); });
+  otherWrap.appendChild(otherInp);
+
+  sel.addEventListener('change', ()=>{
+    g.ka = sel.value;
+    otherWrap.style.display = sel.value === '__other__' ? 'block' : 'none';
+    save(); refreshSessionGoalOptions();
+  });
+  col1.appendChild(sel);
+  col1.appendChild(otherWrap);
+  row1.appendChild(col1);
+  card.appendChild(row1);
+
+  // صيغة الهدف
+  const row2 = document.createElement('div'); row2.className = 'field-row';
+  const col2 = document.createElement('div'); col2.className = 'field-col'; col2.style.flexBasis = '100%';
+  col2.innerHTML = '<label>صيغة الهدف</label>';
+  const ta1 = document.createElement('textarea'); ta1.placeholder = 'صياغة الهدف بشكل محدد وقابل للقياس...'; ta1.value = g.statement || '';
+  ta1.addEventListener('input', ()=>{ g.statement = ta1.value; save(); refreshSessionGoalOptions(); });
+  col2.appendChild(ta1);
+  row2.appendChild(col2);
+  card.appendChild(row2);
+
+  // مؤشرات قياس النجاح
+  const row3 = document.createElement('div'); row3.className = 'field-row';
+  const col3 = document.createElement('div'); col3.className = 'field-col'; col3.style.flexBasis = '100%';
+  col3.innerHTML = '<label>مؤشرات قياس النجاح</label>';
+  const ta2 = document.createElement('textarea'); ta2.placeholder = 'كيف سيُعرف أن الهدف قد تحقق؟'; ta2.value = g.indicators || '';
+  ta2.addEventListener('input', ()=>{ g.indicators = ta2.value; save(); });
+  col3.appendChild(ta2);
+  row3.appendChild(col3);
+  card.appendChild(row3);
+
+  // تاريخ الإنجاز المستهدف + عدد الجلسات المتوقع
+  const row4 = document.createElement('div'); row4.className = 'field-row';
+  const col4 = document.createElement('div'); col4.className = 'field-col narrow';
+  col4.innerHTML = '<label>تاريخ الإنجاز المستهدف</label>';
+  const dateInp = document.createElement('input'); dateInp.type = 'date'; dateInp.value = g.targetDate || '';
+  dateInp.addEventListener('input', ()=>{ g.targetDate = dateInp.value; save(); });
+  col4.appendChild(dateInp);
+  row4.appendChild(col4);
+
+  const col5 = document.createElement('div'); col5.className = 'field-col narrow';
+  col5.innerHTML = '<label>عدد الجلسات المتوقع</label>';
+  const numInp = document.createElement('input'); numInp.type = 'number'; numInp.min = 1; numInp.max = 20; numInp.value = g.sessionsExpected || '';
+  numInp.addEventListener('input', ()=>{ g.sessionsExpected = numInp.value; save(); });
+  col5.appendChild(numInp);
+  row4.appendChild(col5);
+  card.appendChild(row4);
+
+  // المحطات الرئيسية للوصول للهدف
+  const row5 = document.createElement('div'); row5.className = 'field-row';
+  const col6 = document.createElement('div'); col6.className = 'field-col'; col6.style.flexBasis = '100%';
+  col6.innerHTML = '<label>المحطات الرئيسية للوصول للهدف</label>';
+  const ta3 = document.createElement('textarea'); ta3.placeholder = 'ما الذي يجب إنجازه في كل مرحلة زمنية على طريق تحقيق الهدف؟'; ta3.value = g.milestones || '';
+  ta3.addEventListener('input', ()=>{ g.milestones = ta3.value; save(); });
+  col6.appendChild(ta3);
+  row5.appendChild(col6);
+  card.appendChild(row5);
+
+  // زر فتح نموذج التحقق من الهدف
+  const verifyBtn = document.createElement('button'); verifyBtn.className = 'verify-toggle';
+  verifyBtn.textContent = 'نموذج التحقق من الهدف بصيغة SMART';
+  verifyBtn.addEventListener('click', ()=> toggleVerify(g));
+  card.appendChild(verifyBtn);
+  card.appendChild(buildVerifyDetail(g));
+
+  return card;
+}
+
+function ensureGoalShape(g){
+  if(g.kaOther === undefined) g.kaOther = '';
+  if(g.milestones === undefined) g.milestones = '';
+  if(!g.verify || !g.verify.criteria){
+    g.verify = newVerifyState();
+  } else {
+    SMART_VERIFY.forEach(sv=>{
+      if(!g.verify.criteria[sv.key]) g.verify.criteria[sv.key] = { checks:[false,false,false], met:null };
+    });
+    if(g.verify.improvementNotes === undefined) g.verify.improvementNotes = '';
+  }
+  return g;
+}
+
+function buildGoals(){
+  const wrap = document.getElementById('goalsList');
+  wrap.innerHTML = "";
+  goals.forEach(g => wrap.appendChild(makeGoalCard(ensureGoalShape(g))));
+  document.getElementById('goalsEmptyNote').style.display = goals.length ? 'none' : 'block';
+}
+
+function newVerifyState(){
+  const criteria = {};
+  SMART_VERIFY.forEach(sv=>{ criteria[sv.key] = { checks:[false,false,false], met:null }; });
+  return { criteria, improvementNotes:'' };
+}
+
+function addGoal(){
+  goals.push({
+    id:'g'+(goalIdCounter++), ka:'', kaOther:'', statement:'', indicators:'',
+    targetDate:'', sessionsExpected:'', milestones:'',
+    verify: newVerifyState()
+  });
+  buildGoals();
+  refreshSessionGoalOptions();
+  save();
+}
+
+function removeGoal(id){
+  if(!confirm('هل تريد حذف هذا الهدف؟')) return;
+  goals = goals.filter(g => g.id !== id);
+  buildGoals();
+  refreshSessionGoalOptions();
+  save();
+}
+
+// ===== Session Log =====
+let sessions = [];
+let sessionIdCounter = 0;
+
+function goalLabelFor(g, idx){
+  const kaText = g.ka === '__other__' ? (g.kaOther || 'مجال آخر') : (g.ka || 'مجال غير محدد');
+  const stmt = (g.statement || '').trim();
+  const stmtShort = stmt ? (stmt.length > 34 ? stmt.slice(0,34) + '…' : stmt) : 'بلا صياغة بعد';
+  return 'هدف ' + (idx+1) + ' — ' + kaText + ': ' + stmtShort;
+}
+
+function makeSessionCard(s, num){
+  const card = document.createElement('div'); card.className = 'session-card';
+
+  const top = document.createElement('div'); top.className = 'card-top';
+  const badge = document.createElement('span'); badge.className = 'card-badge'; badge.textContent = 'جلسة رقم ' + num;
+  const rm = document.createElement('button'); rm.className = 'remove-btn'; rm.textContent = 'حذف';
+  rm.addEventListener('click', ()=> removeSession(s.id));
+  top.appendChild(badge); top.appendChild(rm);
+  card.appendChild(top);
+
+  const row1 = document.createElement('div'); row1.className = 'field-row';
+
+  const col1 = document.createElement('div'); col1.className = 'field-col narrow';
+  col1.innerHTML = '<label>تاريخ الجلسة</label>';
+  const dateInp = document.createElement('input'); dateInp.type = 'date'; dateInp.value = s.date || '';
+  dateInp.addEventListener('input', ()=>{ s.date = dateInp.value; save(); });
+  col1.appendChild(dateInp);
+  row1.appendChild(col1);
+
+  const col1b = document.createElement('div'); col1b.className = 'field-col narrow';
+  col1b.innerHTML = '<label>طريقة الانعقاد</label>';
+  const modeSel = document.createElement('select');
+  ['حضوري','عن بُعد (أونلاين)'].forEach(opt=>{
+    const o = document.createElement('option'); o.value = opt; o.textContent = opt;
+    if(s.mode === opt) o.selected = true;
+    modeSel.appendChild(o);
+  });
+  modeSel.addEventListener('change', ()=>{ s.mode = modeSel.value; save(); });
+  col1b.appendChild(modeSel);
+  row1.appendChild(col1b);
+
+  const col1c = document.createElement('div'); col1c.className = 'field-col narrow'; col1c.style.width = '230px'; col1c.style.flex = 'none';
+  col1c.innerHTML = '<label>وقت الجلسة</label>';
+  const timeGroup = document.createElement('div');
+  timeGroup.style.cssText = 'display:flex; align-items:center; gap:6px; flex-wrap:nowrap;';
+  const timeFrom = document.createElement('input'); timeFrom.type = 'time'; timeFrom.value = s.timeFrom || '';
+  timeFrom.style.cssText = 'width:auto; flex:1; min-width:0;';
+  timeFrom.addEventListener('input', ()=>{ s.timeFrom = timeFrom.value; save(); });
+  const dash = document.createElement('span'); dash.textContent = '–'; dash.style.cssText = 'color:var(--muted); flex:none;';
+  const timeTo = document.createElement('input'); timeTo.type = 'time'; timeTo.value = s.timeTo || '';
+  timeTo.style.cssText = 'width:auto; flex:1; min-width:0;';
+  timeTo.addEventListener('input', ()=>{ s.timeTo = timeTo.value; save(); });
+  timeGroup.appendChild(timeFrom); timeGroup.appendChild(dash); timeGroup.appendChild(timeTo);
+  col1c.appendChild(timeGroup);
+  row1.appendChild(col1c);
+
+  card.appendChild(row1);
+
+  const row1e = document.createElement('div'); row1e.className = 'field-row';
+  const col2 = document.createElement('div'); col2.className = 'field-col'; col2.style.flexBasis = '100%';
+  col2.innerHTML = '<label>الهدف المرتبط بهذه الجلسة</label>';
+  const sel = document.createElement('select'); sel.className = 'goal-select';
+  const optNone = document.createElement('option'); optNone.value=''; optNone.textContent='— غير مرتبطة بهدف محدد —';
+  sel.appendChild(optNone);
+  goals.forEach((g,gi)=>{
+    const o = document.createElement('option'); o.value = g.id; o.textContent = goalLabelFor(g,gi);
+    if(s.goalId === g.id) o.selected = true;
+    sel.appendChild(o);
+  });
+  sel.addEventListener('change', ()=>{ s.goalId = sel.value; save(); });
+  col2.appendChild(sel);
+  const hint = document.createElement('div');
+  hint.style.cssText = 'font-size:11px; color:var(--muted); margin-top:5px; line-height:1.6;';
+  hint.textContent = goals.length
+    ? 'اربط هذه الجلسة بأحد الأهداف المضافة في قسم الأهداف بصيغة SMART أعلاه، لتتبع التقدم تجاه كل هدف جلسة بعد جلسة.'
+    : 'لا توجد أهداف مضافة بعد؛ أضف هدفاً في قسم الأهداف بصيغة SMART أعلاه لتتمكن من ربط هذه الجلسة به.';
+  col2.appendChild(hint);
+  row1e.appendChild(col2);
+  card.appendChild(row1e);
+
+  const row2 = document.createElement('div'); row2.className = 'field-row';
+  const col3 = document.createElement('div'); col3.className = 'field-col'; col3.style.flexBasis = '100%';
+  col3.innerHTML = '<label>أهم النقاط التي جرت مناقشتها</label>';
+  const ta1 = document.createElement('textarea'); ta1.value = s.points || '';
+  ta1.addEventListener('input', ()=>{ s.points = ta1.value; save(); });
+  col3.appendChild(ta1);
+  row2.appendChild(col3);
+  card.appendChild(row2);
+
+  const row2b = document.createElement('div'); row2b.className = 'field-row';
+  const col3b = document.createElement('div'); col3b.className = 'field-col'; col3b.style.flexBasis = '100%';
+  col3b.innerHTML = '<label>التحديات التي تم مواجهتها</label>';
+  const ta1b = document.createElement('textarea'); ta1b.value = s.challenges || '';
+  ta1b.addEventListener('input', ()=>{ s.challenges = ta1b.value; save(); });
+  col3b.appendChild(ta1b);
+  row2b.appendChild(col3b);
+  card.appendChild(row2b);
+
+  const row2c = document.createElement('div'); row2c.className = 'field-row';
+  const col3c = document.createElement('div'); col3c.className = 'field-col'; col3c.style.flexBasis = '100%';
+  col3c.innerHTML = '<label>الخطوات والإجراءات القادمة</label>';
+  const ta1c = document.createElement('textarea'); ta1c.value = s.nextSteps || '';
+  ta1c.addEventListener('input', ()=>{ s.nextSteps = ta1c.value; save(); });
+  col3c.appendChild(ta1c);
+  row2c.appendChild(col3c);
+  card.appendChild(row2c);
+
+  const row3 = document.createElement('div'); row3.className = 'field-row';
+  const col4 = document.createElement('div'); col4.className = 'field-col'; col4.style.flexBasis = '100%';
+  col4.innerHTML = '<label>المهام الموكلة إلى صاحب المشروع</label>';
+  const ta2 = document.createElement('textarea'); ta2.value = s.tasks || '';
+  ta2.addEventListener('input', ()=>{ s.tasks = ta2.value; save(); });
+  col4.appendChild(ta2);
+  row3.appendChild(col4);
+  card.appendChild(row3);
+
+  const row4 = document.createElement('div'); row4.className = 'field-row';
+  const col5 = document.createElement('div'); col5.className = 'field-col'; col5.style.flexBasis = '100%';
+  col5.innerHTML = '<label>ملاحظات وتوصيات المرشد</label>';
+  const ta3 = document.createElement('textarea'); ta3.value = s.notes || '';
+  ta3.addEventListener('input', ()=>{ s.notes = ta3.value; save(); });
+  col5.appendChild(ta3);
+  row4.appendChild(col5);
+  card.appendChild(row4);
+
+  return card;
+}
+
+function buildSessions(){
+  const wrap = document.getElementById('sessionsList');
+  wrap.innerHTML = "";
+  sessions.forEach((s,i) => wrap.appendChild(makeSessionCard(s, i+1)));
+  document.getElementById('sessionsEmptyNote').style.display = sessions.length ? 'none' : 'block';
+  document.getElementById('sessionCounter').textContent = sessions.length ? ('عدد الجلسات المسجَّلة حتى الآن: ' + sessions.length) : '';
+}
+
+function refreshSessionGoalOptions(){
+  // rebuild session cards so their goal dropdown options reflect the current goals list
+  buildSessions();
+}
+
+function addSession(){
+  sessions.push({ id:'s'+(sessionIdCounter++), date:'', mode:'حضوري', timeFrom:'', timeTo:'', goalId:'', points:'', challenges:'', nextSteps:'', tasks:'', notes:'' });
+  buildSessions();
+  save();
+}
+
+function removeSession(id){
+  if(!confirm('هل تريد حذف هذه الجلسة؟')) return;
+  sessions = sessions.filter(s => s.id !== id);
+  buildSessions();
+  save();
+}
+
+// ===== التوثيق والمرفقات =====
+const ATTACHMENT_TYPES = ["صورة","فيديو","مستند وورد","ملف إكسل","عرض تقديمي","ملف PDF","رابط خارجي","أخرى"];
+const MAX_LOCAL_FILE_KB = 800;
+let attachments = [];
+let attachmentIdCounter = 0;
+
+function makeAttachmentCard(a){
+  const card = document.createElement('div'); card.className = 'goal-card attach-card';
+
+  const top = document.createElement('div'); top.className = 'card-top';
+  const badge = document.createElement('span'); badge.className = 'card-badge'; badge.textContent = 'مرفق';
+  const rm = document.createElement('button'); rm.className = 'remove-btn'; rm.textContent = 'حذف';
+  rm.addEventListener('click', ()=> removeAttachment(a.id));
+  top.appendChild(badge); top.appendChild(rm);
+  card.appendChild(top);
+
+  const row1 = document.createElement('div'); row1.className = 'field-row';
+  const col1 = document.createElement('div'); col1.className = 'field-col';
+  col1.innerHTML = '<label>نوع المرفق</label>';
+  const typeSel = document.createElement('select');
+  ATTACHMENT_TYPES.forEach(t=>{
+    const o = document.createElement('option'); o.value = t; o.textContent = t;
+    if(a.type === t) o.selected = true;
+    typeSel.appendChild(o);
+  });
+  typeSel.addEventListener('change', ()=>{ a.type = typeSel.value; saveAttachments(); });
+  col1.appendChild(typeSel);
+  row1.appendChild(col1);
+
+  const col2 = document.createElement('div'); col2.className = 'field-col';
+  col2.innerHTML = '<label>عنوان أو وصف مختصر</label>';
+  const titleInp = document.createElement('input'); titleInp.type = 'text'; titleInp.value = a.title || '';
+  titleInp.style.cssText = 'width:100%; border:1.5px solid var(--line); border-radius:8px; padding:8px 10px; font-family:"Tajawal",Arial,sans-serif; font-size:13.5px;';
+  titleInp.addEventListener('input', ()=>{ a.title = titleInp.value; saveAttachments(); });
+  col2.appendChild(titleInp);
+  row1.appendChild(col2);
+  card.appendChild(row1);
+
+  const modeRow = document.createElement('div'); modeRow.className = 'mode-row';
+  const modeUpload = document.createElement('label');
+  const rUpload = document.createElement('input'); rUpload.type = 'radio'; rUpload.name = 'mode_'+a.id; rUpload.checked = a.mode !== 'link';
+  modeUpload.appendChild(rUpload); modeUpload.appendChild(document.createTextNode('تحميل من الجهاز'));
+  const modeLink = document.createElement('label');
+  const rLink = document.createElement('input'); rLink.type = 'radio'; rLink.name = 'mode_'+a.id; rLink.checked = a.mode === 'link';
+  modeLink.appendChild(rLink); modeLink.appendChild(document.createTextNode('رابط خارجي (جوجل درايف أو موقع)'));
+  modeRow.appendChild(modeUpload); modeRow.appendChild(modeLink);
+  card.appendChild(modeRow);
+
+  const inputWrap = document.createElement('div');
+  const preview = document.createElement('div'); preview.className = 'attach-preview';
+
+  function renderInputArea(){
+    inputWrap.innerHTML = "";
+    if(a.mode === 'link'){
+      const linkInp = document.createElement('input'); linkInp.type = 'url'; linkInp.placeholder = 'https://drive.google.com/...';
+      linkInp.value = a.url || '';
+      linkInp.style.cssText = 'width:100%; border:1.5px solid var(--line); border-radius:8px; padding:8px 10px; font-family:"Tajawal",Arial,sans-serif; font-size:13.5px;';
+      linkInp.addEventListener('input', ()=>{ a.url = linkInp.value; a.dataUrl=''; saveAttachments(); renderPreview(); });
+      inputWrap.appendChild(linkInp);
+    } else {
+      const fileInp = document.createElement('input'); fileInp.type = 'file';
+      fileInp.addEventListener('change', ()=>{
+        const file = fileInp.files[0];
+        if(!file) return;
+        const sizeKB = file.size / 1024;
+        if(sizeKB > MAX_LOCAL_FILE_KB){
+          alert('حجم الملف كبير على التخزين المحلي (الحد الأقصى تقريباً ' + MAX_LOCAL_FILE_KB + ' كيلوبايت). يُفضَّل رفعه إلى جوجل درايف أو مكان مشابه وإرفاق رابطه بدلاً من ذلك.');
+          fileInp.value = '';
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = (e)=>{
+          a.dataUrl = e.target.result; a.fileName = file.name; a.url = '';
+          saveAttachments(); renderPreview();
+        };
+        reader.readAsDataURL(file);
+      });
+      inputWrap.appendChild(fileInp);
+    }
+  }
+
+  function renderPreview(){
+    preview.innerHTML = "";
+    if(a.mode === 'link' && a.url){
+      const link = document.createElement('a'); link.href = a.url; link.target = '_blank'; link.rel = 'noopener'; link.textContent = a.url;
+      preview.appendChild(link);
+    } else if(a.mode !== 'link' && a.dataUrl){
+      if((a.dataUrl||'').startsWith('data:image')){
+        const img = document.createElement('img'); img.src = a.dataUrl;
+        preview.appendChild(img);
+      } else {
+        const span = document.createElement('span'); span.style.fontSize='12.5px'; span.style.fontWeight='700'; span.style.color='var(--navy)';
+        span.textContent = 'الملف المرفق: ' + (a.fileName || 'بدون اسم');
+        preview.appendChild(span);
+      }
+    }
+  }
+
+  rUpload.addEventListener('change', ()=>{ if(rUpload.checked){ a.mode='upload'; saveAttachments(); renderInputArea(); renderPreview(); } });
+  rLink.addEventListener('change', ()=>{ if(rLink.checked){ a.mode='link'; saveAttachments(); renderInputArea(); renderPreview(); } });
+
+  renderInputArea(); renderPreview();
+  card.appendChild(inputWrap);
+  card.appendChild(preview);
+
+  return card;
+}
+
+function buildAttachments(){
+  const wrap = document.getElementById('attachmentsList');
+  wrap.innerHTML = "";
+  attachments.forEach(a => wrap.appendChild(makeAttachmentCard(a)));
+  document.getElementById('attachmentsEmptyNote').style.display = attachments.length ? 'none' : 'block';
+}
+
+function addAttachment(){
+  attachments.push({ id:'a'+(attachmentIdCounter++), type: ATTACHMENT_TYPES[0], title:'', mode:'upload', url:'', dataUrl:'', fileName:'' });
+  buildAttachments();
+  saveAttachments();
+}
+
+function removeAttachment(id){
+  if(!confirm('هل تريد حذف هذا المرفق؟')) return;
+  attachments = attachments.filter(a => a.id !== id);
+  buildAttachments();
+  saveAttachments();
+}
+
+function save(){
+  try{
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({mentor, owner, meta, stageIndex, kaMentor, kaOwner, kaChecklist, gateState, goals, goalIdCounter, sessions, sessionIdCounter, needsAssessment, attachmentIdCounter, savedAt: Date.now()}));
+    const note = document.getElementById('saveNote');
+    note.textContent = 'تم الحفظ تلقائياً في هذا المتصفح — ' + new Date().toLocaleTimeString('ar-JO');
+  }catch(e){
+    const note = document.getElementById('saveNote');
+    if(note) note.textContent = 'تعذّر حفظ بيانات التقييم — مساحة التخزين في المتصفح ممتلئة، يُنصح بحذف بعض المرفقات المحمَّلة محلياً.';
+  }
+}
+
+function saveAttachments(){
+  try{
+    localStorage.setItem(ATTACHMENTS_STORAGE_KEY, JSON.stringify({attachments, savedAt: Date.now()}));
+  }catch(e){
+    const note = document.getElementById('saveNote');
+    if(note) note.textContent = 'تعذّر حفظ المرفقات محلياً لأن حجمها تجاوز مساحة التخزين المتاحة — بيانات التقييم نفسها محفوظة وسليمة، لكن يُنصح باستخدام روابط خارجية للملفات الكبيرة بدل رفعها مباشرة.';
+  }
+}
+
+function load(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(!raw) return;
+    const data = JSON.parse(raw);
+    if(Array.isArray(data.mentor) && data.mentor.length===N) mentor = data.mentor;
+    if(Array.isArray(data.owner) && data.owner.length===N) owner = data.owner;
+    if(data.meta && typeof data.meta === 'object') meta = Object.assign(meta, data.meta);
+    if(Number.isInteger(data.stageIndex) && data.stageIndex>=0 && data.stageIndex<STAGES.length) stageIndex = data.stageIndex;
+    if(Array.isArray(data.kaMentor) && data.kaMentor.length===KN) kaMentor = data.kaMentor;
+    if(Array.isArray(data.kaOwner) && data.kaOwner.length===KN) kaOwner = data.kaOwner;
+    if(data.kaChecklist && typeof data.kaChecklist === 'object') kaChecklist = Object.assign(kaChecklist, data.kaChecklist);
+    if(data.gateState && typeof data.gateState === 'object') gateState = data.gateState;
+    if(Array.isArray(data.goals)) goals = data.goals;
+    if(Number.isInteger(data.goalIdCounter)) goalIdCounter = data.goalIdCounter;
+    if(Array.isArray(data.sessions)) sessions = data.sessions;
+    if(Number.isInteger(data.sessionIdCounter)) sessionIdCounter = data.sessionIdCounter;
+    if(Number.isInteger(data.attachmentIdCounter)) attachmentIdCounter = data.attachmentIdCounter;
+    if(data.needsAssessment && typeof data.needsAssessment === 'object'){
+      needsAssessment.overview = Object.assign(needsAssessment.overview, data.needsAssessment.overview || {});
+      if(Array.isArray(data.needsAssessment.domains) && data.needsAssessment.domains.length===KN) needsAssessment.domains = data.needsAssessment.domains;
+      needsAssessment.performance = Object.assign(needsAssessment.performance, data.needsAssessment.performance || {});
+      needsAssessment.challengesRequests = Object.assign(needsAssessment.challengesRequests, data.needsAssessment.challengesRequests || {});
+      needsAssessment.analysis = Object.assign(needsAssessment.analysis, data.needsAssessment.analysis || {});
+    }
+  }catch(e){ /* ignore */ }
+  loadAttachments();
+}
+
+function loadAttachments(){
+  try{
+    const raw = localStorage.getItem(ATTACHMENTS_STORAGE_KEY);
+    if(!raw) return;
+    const data = JSON.parse(raw);
+    if(Array.isArray(data.attachments)) attachments = data.attachments;
+  }catch(e){ /* ignore */ }
+}
+
+function resetAll(){
+  if(!confirm('هل أنت متأكد من رغبتك في مسح جميع التقييمات والبيانات؟')) return;
+  mentor = new Array(N).fill(null);
+  owner = new Array(N).fill(null);
+  meta = { mentorName:'', mentorCountry:'', mentorPhoneCode:'', mentorPhoneNumber:'', mentorEmail:'', mentorExpertise:[], ownerName:'', ownerPhoneCode:'', ownerPhoneNumber:'', ownerEmail:'', projectName:'', country:'', region:'', sector:'', operatingSince:'', businessType:'', registrationStatus:'', date:'' };
+  kaMentor = new Array(KN).fill(null);
+  kaOwner = new Array(KN).fill(null);
+  kaChecklist = defaultKaChecklist();
+  gateState = {};
+  stageIndex = 0;
+  goals = []; goalIdCounter = 0;
+  sessions = []; sessionIdCounter = 0;
+  attachments = []; attachmentIdCounter = 0;
+  needsAssessment = {
+    overview: { activity:'', achievements:'', challenges:'', differentiation:'' },
+    domains: new Array(KN).fill(''),
+    performance: { avgSales:'', avgCustomers:'', teamSize:'', mainCosts:'', trend:'' },
+    challengesRequests: { biggestChallenges:'', supportExpected:'' },
+    analysis: { strengths:'', gaps:'', prioritySummary:'', referrals:'' }
+  };
+  save();
+  syncInputs();
+  syncMeta();
+  syncNeedsAssessment();
+  buildNADomains();
+  buildKATable();
+  buildStagePicker();
+  buildGate();
+  buildGoals();
+  buildSessions();
+  buildAttachments();
+  render();
+  renderKA();
+}
+
+function printSummary(){
+  document.body.classList.add('print-summary');
+  const cleanup = () => { document.body.classList.remove('print-summary'); window.removeEventListener('afterprint', cleanup); };
+  window.addEventListener('afterprint', cleanup);
+  window.print();
+  // شبكة أمان في حال لم يُطلَق حدث afterprint في بعض المتصفحات
+  setTimeout(cleanup, 3000);
+}
+
+function doExport(){
+  const payload = {mentor, owner, meta, stageIndex, kaMentor, kaOwner, kaChecklist, gateState, goals, sessions, needsAssessment, attachments, axes: AXES.map(a=>a.label), knowledgeAreas: KA.map(k=>k.label), exportedAt: new Date().toISOString()};
+  const blob = new Blob([JSON.stringify(payload, null, 1)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const stamp = new Date().toISOString().slice(0,10);
+  const safeProject = (meta.projectName || 'تشخيص_الأعمال').replace(/[\\/:*?"<>|]/g,'').trim() || 'تشخيص_الأعمال';
+  a.href = url; a.download = safeProject + '_' + stamp + '.json';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function doImport(evt){
+  const file = evt.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e){
+    try{
+      const data = JSON.parse(e.target.result);
+      if(Array.isArray(data.mentor) && data.mentor.length===N) mentor = data.mentor;
+      if(Array.isArray(data.owner) && data.owner.length===N) owner = data.owner;
+      if(data.meta && typeof data.meta === 'object') meta = Object.assign({mentorName:'',mentorCountry:'',mentorPhoneCode:'',mentorPhoneNumber:'',mentorEmail:'',mentorExpertise:[],ownerName:'',ownerPhoneCode:'',ownerPhoneNumber:'',ownerEmail:'',projectName:'',country:'',region:'',sector:'',operatingSince:'',businessType:'',registrationStatus:'',date:''}, data.meta);
+      if(Number.isInteger(data.stageIndex) && data.stageIndex>=0 && data.stageIndex<STAGES.length) stageIndex = data.stageIndex; else stageIndex = 0;
+      if(Array.isArray(data.kaMentor) && data.kaMentor.length===KN) kaMentor = data.kaMentor; else kaMentor = new Array(KN).fill(null);
+      if(Array.isArray(data.kaOwner) && data.kaOwner.length===KN) kaOwner = data.kaOwner; else kaOwner = new Array(KN).fill(null);
+      kaChecklist = (data.kaChecklist && typeof data.kaChecklist === 'object') ? data.kaChecklist : defaultKaChecklist();
+      gateState = (data.gateState && typeof data.gateState === 'object') ? data.gateState : {};
+      goals = Array.isArray(data.goals) ? data.goals : [];
+      goalIdCounter = goals.length;
+      sessions = Array.isArray(data.sessions) ? data.sessions : [];
+      sessionIdCounter = sessions.length;
+      attachments = Array.isArray(data.attachments) ? data.attachments : [];
+      attachmentIdCounter = attachments.length;
+      if(data.needsAssessment && typeof data.needsAssessment === 'object'){
+        needsAssessment.overview = Object.assign({activity:'',achievements:'',challenges:'',differentiation:''}, data.needsAssessment.overview || {});
+        needsAssessment.domains = (Array.isArray(data.needsAssessment.domains) && data.needsAssessment.domains.length===KN) ? data.needsAssessment.domains : new Array(KN).fill('');
+        needsAssessment.performance = Object.assign({avgSales:'',avgCustomers:'',teamSize:'',mainCosts:'',trend:''}, data.needsAssessment.performance || {});
+        needsAssessment.challengesRequests = Object.assign({biggestChallenges:'',supportExpected:''}, data.needsAssessment.challengesRequests || {});
+        needsAssessment.analysis = Object.assign({strengths:'',gaps:'',prioritySummary:'',referrals:''}, data.needsAssessment.analysis || {});
+      }
+      save(); syncInputs(); syncMeta(); syncNeedsAssessment(); buildNADomains(); buildKATable(); buildStagePicker(); buildGate(); buildGoals(); buildSessions(); buildAttachments(); render(); renderKA();
+    }catch(err){ alert('تعذّر قراءة الملف — يرجى التأكد من أنه ملف تشخيص صحيح.'); }
+  };
+  reader.readAsText(file);
+  evt.target.value = '';
+}
+
+kaChecklist = defaultKaChecklist();
+load();
+buildTable();
+buildKATable();
+buildStagePicker();
+buildGate();
+buildGoals();
+buildSessions();
+buildAttachments();
+wireMeta();
+wireNeedsAssessment();
+render();
+renderKA();
+document.getElementById('copyrightNote').textContent = '© ' + new Date().getFullYear() + ' رامي الشعر. جميع الحقوق محفوظة.';
+</script>
+</body>
+</html>
