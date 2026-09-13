@@ -22,6 +22,60 @@
   .head .rule{width:210px; height:2px; background:var(--navy); margin:12px auto 0; position:relative;}
   .head .rule::after{content:"";position:absolute; right:50%; transform:translateX(50%); top:-2px; width:32px; height:6px; background:var(--gold);}
   .intro-note{max-width:620px; margin:16px auto 0; text-align:center; font-size:13px; color:var(--muted); line-height:1.9; font-weight:500;}
+
+  .process-track{display:flex; justify-content:center; align-items:flex-start; max-width:1000px; margin:18px auto 0; gap:0;}
+  .process-node{flex:1; display:flex; flex-direction:column; align-items:center; cursor:pointer; position:relative; padding:0 4px;}
+  .process-node .circle{width:34px; height:34px; border-radius:50%; background:#fff; border:2.5px solid var(--line); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px; color:var(--muted); z-index:2;}
+  .process-node.active .circle{background:var(--teal); border-color:var(--teal); color:#fff;}
+  .process-node.done .circle{background:var(--navy); border-color:var(--navy); color:#fff;}
+  .process-node .plabel{font-size:10.5px; font-weight:700; color:var(--ink); text-align:center; margin-top:6px; line-height:1.4;}
+  .process-node:not(:last-child)::after{content:''; position:absolute; top:17px; right:calc(-50% + 17px); width:calc(100% - 34px); height:2px; background:var(--line); z-index:1;}
+  .process-node.done:not(:last-child)::after{background:var(--navy);}
+
+  .fm-block{max-width:900px; margin:14px auto 0; background:#fff; border:1px solid var(--line); border-radius:12px; padding:16px 20px; box-shadow:0 2px 8px rgba(11,37,69,.04);}
+  .fm-block h4{font-size:13.5px; font-weight:800; color:var(--navy); margin:0 0 10px;}
+  .fm-item{display:flex; align-items:flex-start; gap:8px; padding:5px 0; font-size:13px; color:var(--ink);}
+  .fm-item input{margin-top:3px; accent-color:var(--teal); cursor:pointer;}
+  .fm-item label{cursor:pointer; line-height:1.7;}
+  .fm-cols{display:flex; gap:18px; flex-wrap:wrap;}
+  .fm-col{flex:1; min-width:260px;}
+  .fm-col.do h5{color:#1e7a3d;}
+  .fm-col.dont h5{color:#a33;}
+  .fm-col h5{font-size:12.5px; font-weight:800; margin:0 0 8px;}
+  .fm-col ul{margin:0; padding-inline-start:18px; font-size:12.5px; color:var(--ink); line-height:1.9;}
+
+  .rc-chain{max-width:700px; margin:12px auto 0; display:flex; flex-direction:column; gap:10px;}
+  .rc-row{display:flex; align-items:center; gap:10px;}
+  .rc-num{flex:none; width:28px; height:28px; border-radius:50%; background:var(--gold); color:#fff; font-weight:800; font-size:13px; display:flex; align-items:center; justify-content:center;}
+  .rc-row input{flex:1; border:1.5px solid var(--line); border-radius:8px; padding:8px 10px; font-family:'Tajawal',Arial,sans-serif; font-size:13.5px;}
+  .rc-result{max-width:700px; margin:10px auto 0; background:#f6f5f0; border:1.5px dashed var(--navy); border-radius:10px; padding:12px 16px; font-size:13px; font-weight:700; color:var(--navy); text-align:center;}
+
+  .me-cols{display:flex; gap:16px; flex-wrap:wrap; max-width:1000px; margin:14px auto 0;}
+  .me-card{flex:1; min-width:230px; background:#fff; border:1px solid var(--line); border-radius:12px; padding:16px 18px; box-shadow:0 2px 8px rgba(11,37,69,.04);}
+  .me-card h4{font-size:13px; font-weight:800; color:var(--navy); margin:0 0 4px;}
+  .me-card .sub{font-size:11px; color:var(--muted); margin-bottom:10px;}
+  .me-rate{display:flex; align-items:center; justify-content:space-between; gap:8px; font-size:12.5px; margin-bottom:10px;}
+  .me-rate select{border:1.5px solid var(--line); border-radius:6px; padding:4px 6px; font-family:'Tajawal',Arial,sans-serif; font-size:12.5px;}
+  .me-metric{display:flex; align-items:center; justify-content:space-between; padding:6px 0; border-bottom:1px dashed var(--line); font-size:12px;}
+  .me-metric:last-child{border-bottom:none;}
+  .me-metric .v{font-weight:800; color:var(--navy);}
+  .me-flag-row{display:flex; align-items:center; gap:8px; margin-bottom:8px;}
+  .me-flag-row select{flex:none; border:1.5px solid var(--line); border-radius:6px; padding:5px 8px; font-family:'Tajawal',Arial,sans-serif; font-size:12.5px;}
+  .progress-log-row{display:flex; gap:8px; align-items:center; margin-bottom:6px;}
+  .progress-log-row input{border:1.5px solid var(--line); border-radius:6px; padding:5px 8px; font-family:'Tajawal',Arial,sans-serif; font-size:12.5px;}
+  .progress-log-row input.plog-date{width:130px;}
+  .progress-log-row input.plog-val{width:90px;}
+  .progress-mini-chart{width:100%; height:70px; margin-top:8px;}
+
+  .dash-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:12px; max-width:1100px; margin:14px auto 0;}
+  .dash-card{background:#fff; border:1px solid var(--line); border-radius:12px; padding:14px 16px; text-align:center; box-shadow:0 2px 8px rgba(11,37,69,.04);}
+  .dash-card .dv{font-size:24px; font-weight:900; color:var(--navy);}
+  .dash-card .dl{font-size:11px; font-weight:700; color:var(--muted); margin-top:4px;}
+  .dash-card .dring{width:70px; height:70px; margin:0 auto 6px;}
+  .dash-flags{max-width:1100px; margin:14px auto 0; background:#fff; border:1px solid var(--line); border-radius:12px; padding:14px 18px;}
+  .dash-flags h4{font-size:13px; font-weight:800; color:var(--navy); margin:0 0 8px;}
+  .dash-flag-item{font-size:12.5px; padding:6px 0; border-bottom:1px dashed var(--line); display:flex; gap:8px;}
+  .dash-flag-item .fdate{color:var(--muted); flex:none;}
   .attach-note{max-width:900px; margin:8px auto 0; font-size:12px; color:var(--muted); text-align:center; line-height:1.8;}
   .attach-card .mode-row{display:flex; gap:16px; margin-bottom:10px; font-size:12.5px; font-weight:700;}
   .attach-card .mode-row label{display:flex; align-items:center; gap:5px; cursor:pointer;}
@@ -265,7 +319,7 @@
   .na-domain.open .na-domain-head{background:#eef1f6;}
   .na-questions{list-style:none; margin:0 0 12px; padding:0; display:flex; flex-direction:column; gap:6px;}
   .na-questions li{font-size:12.5px; color:var(--muted); line-height:1.7; padding-inline-start:16px; position:relative;}
-  .na-questions li::before{content:'—'; position:absolute; right:0; color:var(--gold);}
+  .na-questions li::before{content:'•'; position:absolute; right:0; color:var(--gold);}
   .na-domain-body textarea{width:100%; min-height:70px;}
   .na-arrow{transition:.2s; color:var(--muted); font-size:12px;}
   .na-domain.open .na-arrow{transform:rotate(90deg);}
@@ -299,6 +353,24 @@
     body.print-summary .na-domain-head{cursor:default;}
   }
   @media (max-width:640px){ .head h1{font-size:22px;} table.cmp th, table.cmp td{font-size:12px; padding:7px 4px;} input.score{width:42px; font-size:12px;} .meta{flex-direction:column;} }
+
+  .tab-nav{display:flex; justify-content:center; flex-wrap:wrap; gap:6px; max-width:1100px; margin:16px auto 0; border-bottom:2px solid var(--line); padding-bottom:0;}
+  .tab-btn{
+    background:none; border:none; border-bottom:3px solid transparent; padding:10px 14px; font-family:'Tajawal',Arial,sans-serif;
+    font-weight:800; font-size:13px; color:var(--muted); cursor:pointer; white-space:nowrap;
+  }
+  .tab-btn:hover{color:var(--navy);}
+  .tab-btn.active{color:var(--navy); border-bottom-color:var(--gold);}
+  .tab-panel{display:none;}
+  .tab-panel.active{display:block; animation:fadeIn .2s ease;}
+  @keyframes fadeIn{from{opacity:0;} to{opacity:1;}}
+  .toolbar-fixed{max-width:1000px; margin:16px auto 0;}
+  .guide-block{max-width:900px; margin:14px auto 0; background:#fff; border:1px solid var(--line); border-radius:12px; padding:18px 22px; box-shadow:0 2px 8px rgba(11,37,69,.04);}
+  .guide-block h3{font-size:15px; font-weight:800; color:var(--navy); margin:0 0 8px;}
+  .guide-block p{font-size:13px; color:var(--ink); line-height:1.9; margin:0 0 10px;}
+  .guide-block ul{margin:0; padding-inline-start:20px; font-size:13px; color:var(--ink); line-height:1.9;}
+  @media print{ .tab-nav{display:none;} .tab-panel{display:block !important;} }
+  @media (max-width:640px){ .tab-btn{font-size:11px; padding:8px 9px;} }
 </style>
 </head>
 <body>
@@ -306,9 +378,34 @@
   <div class="head">
     <h1>منظومة الإرشاد الريادي المتكامل</h1>
     <div class="rule"></div>
-    <p class="intro-note">أداة واحدة تُرافق دورة الإرشاد من أولها لآخرها: تُحدَّد مرحلة المشروع، يُبنى تشخيص مترابط الأرقام من التفصيل إلى الخلاصة، تُصاغ أهداف SMART، ويُوثَّق التقدّم جلسة بعد جلسة — وكل رقم فيها يُعرف من أين جاء.</p>
+    <p class="intro-note">أداة واحدة تُرافق دورة الإرشاد من أولها لآخرها: تُحدَّد مرحلة المشروع، يُبنى تشخيص مترابط الأرقام من التفصيل إلى الخلاصة، تُصاغ أهداف SMART، ويُوثَّق التقدّم جلسة بعد جلسة، وكل رقم فيها معروف مصدره.</p>
   </div>
 
+  <div class="toolbar-fixed">
+  <div class="toolbar">
+    <button class="btn" onclick="doExport()">تنزيل نسخة (Export)</button>
+    <button class="btn" onclick="document.getElementById('fileInput').click()">تحميل نسخة (Import)</button>
+    <input type="file" id="fileInput" accept="application/json" onchange="doImport(event)">
+    <button class="btn gold" onclick="window.print()">طباعة كاملة (بكل التفاصيل)</button>
+    <button class="btn gold" onclick="printSummary()">طباعة ملخص</button>
+    <button class="btn danger" onclick="resetAll()">تفريغ الكل</button>
+  </div>
+  <div class="save-note" id="saveNote"></div>
+
+  </div>
+
+  <div class="tab-nav" id="tabNav">
+    <button class="tab-btn active" data-tab="tabOverview">نظرة عامة</button>
+    <button class="tab-btn" data-tab="tabDiagnosis">التشخيص</button>
+    <button class="tab-btn" data-tab="tabGate">بوابة الانتقال</button>
+    <button class="tab-btn" data-tab="tabGoals">الأهداف والخطة</button>
+    <button class="tab-btn" data-tab="tabSessions">الجلسات</button>
+    <button class="tab-btn" data-tab="tabME">المتابعة والقياس</button>
+    <button class="tab-btn" data-tab="tabAttachments">المرفقات</button>
+    <button class="tab-btn" data-tab="tabGuide">دليل الاستخدام</button>
+  </div>
+
+  <div class="tab-panel active" id="tabOverview">
   <div class="section-title">
     <h2>معلومات المرشد</h2>
   </div>
@@ -402,30 +499,39 @@
 
   <div class="section-title">
     <h2>مرحلة المشروع الحالية</h2>
-    <p>اختر المرحلة التي يمر بها المشروع الآن — هذا الاختيار يحدد أولوية مجالات المعرفة وقائمة بوابة الانتقال أدناه</p>
+    <p>اختر المرحلة التي يمر بها المشروع الآن، وهذا الاختيار يحدد أولوية مجالات المعرفة وقائمة بوابة الانتقال أدناه</p>
   </div>
   <div class="stage-picker" id="stagePicker"></div>
   <p class="stage-note" id="stageNote"></p>
 
-  <div class="toolbar">
-    <button class="btn" onclick="doExport()">تنزيل نسخة (Export)</button>
-    <button class="btn" onclick="document.getElementById('fileInput').click()">تحميل نسخة (Import)</button>
-    <input type="file" id="fileInput" accept="application/json" onchange="doImport(event)">
-    <button class="btn gold" onclick="window.print()">طباعة كاملة (بكل التفاصيل)</button>
-    <button class="btn gold" onclick="printSummary()">طباعة ملخص</button>
-    <button class="btn danger" onclick="resetAll()">تفريغ الكل</button>
+  <div class="section-title">
+    <h2>مسار عملية الإرشاد</h2>
+    <p>موقع المرشد الآن ضمن خطوات عملية الإرشاد نفسها، وهذا مسار مستقل عن مرحلة نمو المشروع أدناه</p>
   </div>
-  <div class="save-note" id="saveNote"></div>
+  <div class="process-track" id="processTrack"></div>
 
+  <div class="section-title">
+    <h2>لوحة القيادة</h2>
+    <p>لمحة شاملة تتحدّث تلقائياً من كل بيانات الأداة</p>
+  </div>
+  <div class="dash-grid" id="dashGrid"></div>
+  <div class="dash-flags" id="dashFlagsBox" style="display:none;">
+    <h4>ملاحظات الحماية والحدود المسجَّلة</h4>
+    <div id="dashFlagsList"></div>
+  </div>
+
+  </div>
+
+  <div class="tab-panel" id="tabDiagnosis">
   <div class="section-title">
     <h2>التشخيص العام</h2>
     <p>نظرة سريعة على المحاور التسعة الأساسية للمشروع</p>
   </div>
 
   <div class="summary">
-    <div class="card mentor"><div class="who">إجمالي المرشد</div><div class="val" id="mentorTotal">–</div><div class="out">من 90</div></div>
-    <div class="card owner"><div class="who">إجمالي صاحب المشروع</div><div class="val" id="ownerTotal">–</div><div class="out">من 90</div></div>
-    <div class="card delta"><div class="who">الفرق الكلي</div><div class="val" id="totalDelta">–</div><div class="out">نقطة</div></div>
+    <div class="card mentor"><div class="who">إجمالي المرشد</div><div class="val" id="mentorTotal"></div><div class="out">من 90</div></div>
+    <div class="card owner"><div class="who">إجمالي صاحب المشروع</div><div class="val" id="ownerTotal"></div><div class="out">من 90</div></div>
+    <div class="card delta"><div class="who">الفرق الكلي</div><div class="val" id="totalDelta"></div><div class="out">نقطة</div></div>
   </div>
 
   <div class="stage">
@@ -452,7 +558,7 @@
     </thead>
     <tbody id="cmpBody"></tbody>
     <tfoot>
-      <tr class="total"><td class="dim">المجموع</td><td id="sumMentor">—</td><td id="sumOwner">—</td><td id="sumDelta">—</td></tr>
+      <tr class="total"><td class="dim">المجموع</td><td id="sumMentor"></td><td id="sumOwner"></td><td id="sumDelta"></td></tr>
     </tfoot>
   </table>
   <p class="table-note">العلامة ⚭ تشير إلى أن قيمة المحور محسوبة تلقائياً من نتائج المسح التفصيلي أدناه، ومنها محور جاهزية رائد/ة الأعمال المحسوب من مجالي تخطيط الأعمال والموارد البشرية باعتبارهما أقرب انعكاس لفهمه لمشروعه وقدرته على الإدارة والتنظيم والقيادة.</p>
@@ -552,6 +658,14 @@
   </div>
 
   <div class="section-title">
+    <h2>تحليل الأسباب الجذرية</h2>
+    <p>أداة مساعدة تُستخدم أثناء تقييم الاحتياجات، للوصول من كل تحدٍّ ظاهر إلى سببه الحقيقي عبر سؤال لماذا خمس مرات متتالية. يمكن إضافة عدد غير محدود من التحليلات، وكل واحد منها يُحفَظ لحاله</p>
+  </div>
+  <div class="card-list" id="rcList"></div>
+  <p class="empty-note" id="rcEmptyNote">لم تتم إضافة أي تحليل بعد</p>
+  <button class="add-card-btn" onclick="addRootCause()">+ إضافة تحليل سبب جذري جديد</button>
+
+  <div class="section-title">
     <h2>المسح التفصيلي حسب مجالات المعرفة</h2>
     <p>اثنا عشر مجالاً معرفياً؛ عمود الأولوية يتغيّر تلقائياً حسب المرحلة المختارة أعلاه</p>
   </div>
@@ -562,7 +676,7 @@
     </thead>
     <tbody id="kaBody"></tbody>
     <tfoot>
-      <tr class="total"><td class="dim">المجموع</td><td></td><td id="kaSumMentor">—</td><td id="kaSumOwner">—</td><td id="kaSumDelta">—</td></tr>
+      <tr class="total"><td class="dim">المجموع</td><td></td><td id="kaSumMentor"></td><td id="kaSumOwner"></td><td id="kaSumDelta"></td></tr>
     </tfoot>
   </table>
 
@@ -575,6 +689,9 @@
   </div>
   <p class="table-note">تعرض هذه الشبكة نفس بيانات جدول المسح التفصيلي أعلاه بصورة بصرية؛ أي تعديل على تقييم أي مجال معرفة ينعكس هنا وعلى محاور التشخيص العام المرتبطة به فوراً.</p>
 
+  </div>
+
+  <div class="tab-panel" id="tabGate">
   <div class="section-title">
     <h2>بوابة الانتقال للمرحلة القادمة</h2>
     <p>قائمة تحقق موضوعية تحدد مدى جاهزية المشروع للانتقال من المرحلة الحالية إلى ما بعدها</p>
@@ -582,7 +699,7 @@
 
   <div class="gate-box">
     <div class="gate-head">
-      <h3 id="gateTitle">—</h3>
+      <h3 id="gateTitle"></h3>
       <div class="gate-readiness">
         <div class="gate-bar"><div class="gate-bar-fill" id="gateBarFill" style="width:0%"></div></div>
         <div class="pct" id="gatePct">0%</div>
@@ -591,13 +708,25 @@
     <div id="gateItems"></div>
   </div>
 
+  </div>
+
+  <div class="tab-panel" id="tabGoals">
   <div class="section-title">
     <h2>الأهداف بصيغة SMART</h2>
-    <p>هدف واحد أو أكثر لكل احتياج ذي أولوية، مرتبط بمجال معرفي محدد — يُعَدّ مرة واحدة في بداية دورة الإرشاد</p>
+    <p>هدف واحد أو أكثر لكل احتياج ذي أولوية، مرتبط بمجال معرفي محدد، يُعَدّ مرة واحدة في بداية دورة الإرشاد</p>
   </div>
   <div class="card-list" id="goalsList"></div>
   <p class="empty-note" id="goalsEmptyNote">لم تتم إضافة أي هدف بعد</p>
   <button class="add-card-btn" onclick="addGoal()">+ إضافة هدف جديد</button>
+
+  </div>
+
+  <div class="tab-panel" id="tabSessions">
+  <div class="section-title">
+    <h2>دليل اللقاء الأول</h2>
+    <p>خارطة عملية للقاء التعارف الأول بين المرشد وصاحب المشروع، بخمس محطات مرتبة</p>
+  </div>
+  <div id="fmList"></div>
 
   <div class="section-title">
     <h2>سجل الجلسات</h2>
@@ -608,6 +737,62 @@
   <p class="empty-note" id="sessionsEmptyNote">لم تتم إضافة أي جلسة بعد</p>
   <button class="add-card-btn" onclick="addSession()">+ إضافة جلسة جديدة</button>
 
+  </div>
+
+  <div class="tab-panel" id="tabME">
+  <div class="section-title">
+    <h2>المتابعة والقياس</h2>
+    <p>أربعة أبعاد رقمية تتابع صحة عملية الإرشاد نفسها، إلى جانب تشخيص المشروع أعلاه</p>
+  </div>
+  <div class="me-cols">
+    <div class="me-card">
+      <h4>التجربة</h4>
+      <div class="sub">مدى شعور الطرفين بأن الإرشاد مفيد ومتجاوب</div>
+      <div class="me-rate">
+        <span>الإرشاد مفيد وواضح</span>
+        <select id="meExp1"></select>
+      </div>
+      <div class="me-rate">
+        <span>يستجيب للاحتياجات بتوقيت مناسب</span>
+        <select id="meExp2"></select>
+      </div>
+      <div class="me-metric"><span>متوسط التجربة</span><span class="v" id="meExpAvg"></span></div>
+    </div>
+
+    <div class="me-card">
+      <h4>التقدم</h4>
+      <div class="sub">حركة فعلية نحو الأهداف، عبر مؤشر رقمي مرتبط بأحد الأهداف</div>
+      <div class="field-col" style="margin-bottom:8px;">
+        <label style="font-size:11px;font-weight:700;color:var(--muted);display:block;margin-bottom:4px;">الهدف المتابَع</label>
+        <select id="meProgressGoal"></select>
+      </div>
+      <div id="progressLogRows"></div>
+      <button type="button" class="ka-toggle" id="addProgressPointBtn" style="width:100%; margin-top:6px;">تسجيل نقطة قياس جديدة</button>
+      <svg id="progressMiniChart" class="progress-mini-chart" viewBox="0 0 300 70"></svg>
+    </div>
+
+    <div class="me-card">
+      <h4>العملية</h4>
+      <div class="sub">مؤشرات محسوبة تلقائياً من بيانات الأداة</div>
+      <div class="me-metric"><span>الوقت حتى أول جلسة</span><span class="v" id="meProcTime"></span></div>
+      <div class="me-metric"><span>عدد الجلسات المسجَّلة</span><span class="v" id="meProcSessions"></span></div>
+      <div class="me-metric"><span>نسبة اكتمال التوثيق</span><span class="v" id="meProcDocs"></span></div>
+    </div>
+
+    <div class="me-card">
+      <h4>الحماية والحدود</h4>
+      <div class="sub">أي ملاحظة أو قلق مبكر يخص السلامة أو السلوك المهني</div>
+      <div class="me-flag-row">
+        <select id="meFlagLevel"></select>
+      </div>
+      <textarea id="meFlagNote" placeholder="اكتب الملاحظة إن وُجدت"></textarea>
+      <button type="button" class="ka-toggle" id="addFlagBtn" style="width:100%; margin-top:8px;">تسجيل الملاحظة</button>
+    </div>
+  </div>
+
+  </div>
+
+  <div class="tab-panel" id="tabAttachments">
   <div class="section-title">
     <h2>التوثيق والمرفقات</h2>
     <p>صور، فيديوهات، مستندات، أو روابط خارجية (كملفات جوجل درايف) داعمة للتشخيص أو الجلسات</p>
@@ -616,6 +801,47 @@
   <div class="card-list" id="attachmentsList"></div>
   <p class="empty-note" id="attachmentsEmptyNote">لم تتم إضافة أي مرفق بعد</p>
   <button class="add-card-btn" onclick="addAttachment()">+ إضافة مرفق جديد</button>
+
+  </div>
+
+  <div class="tab-panel" id="tabGuide">
+  <div class="guide-block">
+    <h3>الهدف من هذه المنظومة</h3>
+    <p>أداة واحدة تُرافق دورة الإرشاد الريادي من أول لقاء وحتى إغلاق الدورة، بحيث يبقى كل رقم فيها مرتبطاً بمصدره، وكل قرار مبنياً على بيانات موثقة لا على انطباع عام.</p>
+  </div>
+  <div class="guide-block">
+    <h3>نظرة عامة</h3>
+    <p>بيانات المرشد وصاحب المشروع والمشروع، اختيار المرحلة التي يمر بها المشروع حالياً، متابعة موقع المرشد ضمن خطوات عملية الإرشاد نفسها، ولوحة قيادة تلخّص كل شيء تلقائياً.</p>
+  </div>
+  <div class="guide-block">
+    <h3>التشخيص</h3>
+    <p>يبدأ بالتشخيص العام (تسعة محاور محسوبة تلقائياً)، ثم تقييم الاحتياجات بالأسئلة الإرشادية لكل مجال معرفي، مع أداة تحليل الأسباب الجذرية عند الحاجة لفهم تحدٍّ معين بعمق، وينتهي بالمسح التفصيلي الذي يقيس كل مجال معرفي رقمياً ويغذّي المحاور التسعة تلقائياً.</p>
+  </div>
+  <div class="guide-block">
+    <h3>بوابة الانتقال</h3>
+    <p>قائمة تحقق موضوعية بخمسة معايير قابلة للقياس لكل مرحلة، تحدد جاهزية المشروع الفعلية للانتقال إلى المرحلة القادمة.</p>
+  </div>
+  <div class="guide-block">
+    <h3>الأهداف والخطة</h3>
+    <p>صياغة الأهداف بصيغة SMART، مع نموذج تحقق كامل من كل معيار من معايير الهدف الذكي، وتقييم عام يُحسب تلقائياً من إجابات هذا النموذج.</p>
+  </div>
+  <div class="guide-block">
+    <h3>الجلسات</h3>
+    <p>دليل عملي لإدارة اللقاء الأول بخمس محطات مرتبة، وسجل جلسات يوثق كل لقاء لاحق ويمكن ربطه بأحد الأهداف الذكية لتتبع التقدم جلسة بعد جلسة.</p>
+  </div>
+  <div class="guide-block">
+    <h3>المتابعة والقياس</h3>
+    <p>أربعة أبعاد رقمية منفصلة عن تشخيص المشروع نفسه: تجربة الطرفين مع الإرشاد، التقدم الفعلي نحو الأهداف عبر مؤشر رقمي متابَع بالتاريخ، مؤشرات العملية المحسوبة تلقائياً، وأي ملاحظة تخص الحماية والحدود المهنية.</p>
+  </div>
+  <div class="guide-block">
+    <h3>المرفقات</h3>
+    <p>مكان لتوثيق الصور والفيديوهات والمستندات والروابط الخارجية الداعمة للتشخيص أو الجلسات.</p>
+  </div>
+  <div class="guide-block">
+    <h3>الاستخدام أونلاين وأوفلاين</h3>
+    <p>يمكن فتح هذا الملف مباشرة من أي جهاز دون إنترنت، وتُحفَظ البيانات محلياً في متصفح ذلك الجهاز فقط. لنقل البيانات بين جهازين أو بين النسخة المحلية والنسخة المنشورة على الإنترنت، يُستخدم زر تنزيل نسخة لحفظ ملف البيانات، ثم زر تحميل نسخة لاسترجاعه في المكان الآخر بكل تفاصيله.</p>
+  </div>
+  </div>
 
   <p class="hint">
     اختر مرحلة المشروع الحالية أولاً، ثم يُدخِل كلٌّ من المرشد وصاحب المشروع تقييمه الخاص من (1 إلى 10) للمحاور التسعة الأساسية ولمجالات المعرفة الاثني عشر، وتُحدَّث شبكة العنكبوت والجداول وبوابة الانتقال تلقائياً فور الإدخال.
@@ -639,7 +865,6 @@
       </span>
     </div>
   </footer>
-</div>
 
 <script>
 const AXES = [{"label": "وضوح المشروع", "short": ["وضوح المشروع"], "color": "#4d208c"}, {"label": "قوة المنتج / الخدمة", "short": ["قوة المنتج /", "الخدمة"], "color": "#8c2083"}, {"label": "معرفة العملاء", "short": ["معرفة العملاء"], "color": "#8c203b"}, {"label": "التسويق والوصول للعملاء", "short": ["التسويق والوصول", "للعملاء"], "color": "#8c4d20"}, {"label": "المبيعات والدخل", "short": ["المبيعات والدخل"], "color": "#838c20"}, {"label": "إدارة المبيعات", "short": ["إدارة المبيعات"], "color": "#3b8c20"}, {"label": "الإدارة المالية", "short": ["الإدارة المالية"], "color": "#208c4d"}, {"label": "الشراكات وبناء العلاقات", "short": ["الشراكات و", "بناء العلاقات"], "color": "#20838c"}, {"label": "جاهزية رائد/ة الأعمال", "short": ["جاهزية رائد/ة", "الأعمال"], "color": "#203b8c"}];
@@ -720,8 +945,20 @@ const KA_CHECKLISTS = {
   11: {knowledge: ["الإلمام بمفهوم التصدير ومتطلباته الأساسية", "الإلمام بإجراءات الجمارك والشهادات المطلوبة", "الإلمام بأساسيات الشحن الدولي والتغليف التصديري", "الإلمام بمعايير الأسواق المستهدفة للتصدير", "الإلمام بطرق التسعير للأسواق الخارجية"], status: ["تم تقييم جاهزية المنتج أو الخدمة للأسواق الخارجية", "توجد معرفة بمتطلبات سوق خارجي محدد واحد على الأقل", "سبق التعامل مع عميل أو طلب من خارج السوق المحلي", "تتوفر القدرة الإنتاجية لتلبية طلبات تصدير محتملة", "توجد خطة أو نية واضحة للتوسع خارج السوق المحلي"]}
 };
 const OBJECTIVE_KA_INDICES = [7, 9];
+const PROCESS_PHASES = ["تقييم الاحتياجات","صياغة الأهداف الذكية","بناء خطة الإرشاد","تنسيق الجلسات","تنفيذ الجلسات الإرشادية","المتابعة والتقييم"];
+const FIRST_MEETING_STAGES = [
+  { title:"بناء الألفة والتعارف", items:["ترحيب بسيط وواضح بنبرة ودودة","تعريف موجز بالمرشد ودوره في الإرشاد دون مبالغة","خلق جو إنساني قبل الدخول في النماذج والأوراق","مساحة كافية لصاحب المشروع ليعرض قصته"]},
+  { title:"توضيح التوقعات والحدود", items:["عدد الجلسات المتوقعة ومدة كل جلسة","قنوات التواصل بين الجلسات","حدود دور المرشد وما هو خارج نطاقه","مبدأ السرية والخصوصية"]},
+  { title:"مراجعة وتحديث تقييم الاحتياجات", items:["استخدام تقييم الاحتياجات المعبَّأ مسبقاً إن وُجد كنقطة انطلاق","التحقق من صحة المعلومات وتعديل ما يلزم","فتح حوار صريح حول التحديات الحقيقية"]},
+  { title:"تحديد الأولويات وصياغة الأهداف", items:["اختيار من واحد إلى ثلاثة احتياجات ذات أولوية","صياغة هدف أو هدفين بصيغة SMART لفترة العمل القادمة"]},
+  { title:"رسم ملامح خطة الإرشاد", items:["حديث عام عمّا يمكن العمل عليه خلال فترة الإرشاد","الاتفاق على موعد الجلسة القادمة وما سيتم التركيز عليه"]}
+];
+const FM_DO = ["استخدام لغة بسيطة وقريبة من واقع صاحب المشروع","إظهار اهتمام حقيقي بسماع القصة كاملة","مشاركة جملة أو جملتين عن خلفية المرشد ودوره","طرح أسئلة تعريفية تساعد على الفهم المتبادل"];
+const FM_DONT = ["البدء مباشرة بأسئلة تقنية أو أرقام قبل أي تعارف","إطلاق أحكام مبكرة على السوق أو الفكرة","احتكار الحديث عن تجربة المرشد الشخصية","استخدام نبرة تحقيق أو استجواب في البداية"];
+const RATING_5 = ["اختيار","1 ضعيف جداً","2 ضعيف","3 متوسط","4 جيد","5 ممتاز"];
+const FLAG_LEVELS = ["اختيار المستوى","لا يوجد قلق","ملاحظة بسيطة للمتابعة","قلق يستدعي تدخلاً"];
 function fmtVal(v){
-  if(v===null || v===undefined || isNaN(v)) return '—';
+  if(v===null || v===undefined || isNaN(v)) return '';
   const r = Math.round(v*10)/10;
   return Number.isInteger(r) ? String(r) : r.toFixed(1);
 }
@@ -767,7 +1004,7 @@ function populateMetaSelects(){
   Object.keys(META_SELECT_MAP).forEach(id=>{
     const sel = document.getElementById(id);
     sel.innerHTML = "";
-    const optEmpty = document.createElement('option'); optEmpty.value=''; optEmpty.textContent='— اختيار —';
+    const optEmpty = document.createElement('option'); optEmpty.value=''; optEmpty.textContent='اختيار';
     sel.appendChild(optEmpty);
     META_SELECT_OPTIONS[id].forEach(v=>{
       const o = document.createElement('option'); o.value = v; o.textContent = v;
@@ -778,7 +1015,7 @@ function populateMetaSelects(){
   ['metaMentorPhoneCode','metaOwnerPhoneCode'].forEach(selId=>{
     const codeSel = document.getElementById(selId);
     codeSel.innerHTML = "";
-    const optEmpty = document.createElement('option'); optEmpty.value=''; optEmpty.textContent='— رمز الدولة —';
+    const optEmpty = document.createElement('option'); optEmpty.value=''; optEmpty.textContent='رمز الدولة';
     codeSel.appendChild(optEmpty);
     DIAL_CODES.forEach(d=>{
       const o = document.createElement('option'); o.value = d.code; o.textContent = d.country + ' (' + d.code + ')';
@@ -791,7 +1028,7 @@ function buildExpertiseUI(){
   const select = document.getElementById('mentorExpertiseSelect');
   const tagsWrap = document.getElementById('mentorExpertiseTags');
   select.innerHTML = "";
-  const optPlaceholder = document.createElement('option'); optPlaceholder.value=''; optPlaceholder.textContent='— إضافة مجال معرفة —';
+  const optPlaceholder = document.createElement('option'); optPlaceholder.value=''; optPlaceholder.textContent='إضافة مجال معرفة';
   select.appendChild(optPlaceholder);
   KA.forEach(k=>{
     if(meta.mentorExpertise.includes(k.label)) return;
@@ -989,6 +1226,125 @@ function buildNADomains(){
 // ===== Stage selection =====
 let stageIndex = 0;
 
+// ===== مسار عملية الإرشاد =====
+let processPhase = 0;
+function buildProcessTrack(){
+  const wrap = document.getElementById('processTrack');
+  wrap.innerHTML = "";
+  PROCESS_PHASES.forEach((p,i)=>{
+    const node = document.createElement('div');
+    node.className = 'process-node' + (i===processPhase ? ' active' : (i<processPhase ? ' done':''));
+    node.addEventListener('click', ()=>{ processPhase = i; buildProcessTrack(); save(); updateDashboard(); });
+    const circle = document.createElement('div'); circle.className='circle'; circle.textContent = (i+1);
+    const label = document.createElement('div'); label.className='plabel'; label.textContent = p;
+    node.appendChild(circle); node.appendChild(label);
+    wrap.appendChild(node);
+  });
+}
+
+// ===== دليل اللقاء الأول =====
+let fmChecks = FIRST_MEETING_STAGES.map(s => s.items.map(()=>false));
+function buildFirstMeetingGuide(){
+  const wrap = document.getElementById('fmList');
+  wrap.innerHTML = "";
+  FIRST_MEETING_STAGES.forEach((stage, si)=>{
+    const block = document.createElement('div'); block.className = 'fm-block';
+    const h = document.createElement('h4'); h.textContent = (si+1) + '. ' + stage.title; block.appendChild(h);
+    stage.items.forEach((item, ii)=>{
+      const row = document.createElement('div'); row.className = 'fm-item';
+      const cb = document.createElement('input'); cb.type='checkbox'; cb.id = 'fmChk'+si+'_'+ii;
+      if(!fmChecks[si]) fmChecks[si] = stage.items.map(()=>false);
+      cb.checked = fmChecks[si][ii];
+      cb.addEventListener('change', ()=>{ fmChecks[si][ii] = cb.checked; save(); });
+      const lbl = document.createElement('label'); lbl.setAttribute('for', cb.id); lbl.textContent = item;
+      row.appendChild(cb); row.appendChild(lbl);
+      block.appendChild(row);
+    });
+    wrap.appendChild(block);
+  });
+
+  const doDontBlock = document.createElement('div'); doDontBlock.className = 'fm-block';
+  const h2 = document.createElement('h4'); h2.textContent = 'ممارسات بناء الألفة'; doDontBlock.appendChild(h2);
+  const cols = document.createElement('div'); cols.className = 'fm-cols';
+  const doCol = document.createElement('div'); doCol.className = 'fm-col do';
+  doCol.innerHTML = '<h5>يُفضَّل</h5>';
+  const doUl = document.createElement('ul'); FM_DO.forEach(x=>{ const li=document.createElement('li'); li.textContent=x; doUl.appendChild(li); }); doCol.appendChild(doUl);
+  const dontCol = document.createElement('div'); dontCol.className = 'fm-col dont';
+  dontCol.innerHTML = '<h5>يُفضَّل تجنبه</h5>';
+  const dontUl = document.createElement('ul'); FM_DONT.forEach(x=>{ const li=document.createElement('li'); li.textContent=x; dontUl.appendChild(li); }); dontCol.appendChild(dontUl);
+  cols.appendChild(doCol); cols.appendChild(dontCol);
+  doDontBlock.appendChild(cols);
+  wrap.appendChild(doDontBlock);
+}
+
+// ===== تحليل الأسباب الجذرية =====
+let rootCauses = [];
+let rcIdCounter = 0;
+
+function makeRootCauseCard(rc){
+  const card = document.createElement('div'); card.className = 'goal-card';
+
+  const top = document.createElement('div'); top.className = 'card-top';
+  const badge = document.createElement('span'); badge.className = 'card-badge'; badge.textContent = 'تحليل';
+  const rm = document.createElement('button'); rm.className = 'remove-btn'; rm.textContent = 'حذف';
+  rm.addEventListener('click', ()=> removeRootCause(rc.id));
+  top.appendChild(badge); top.appendChild(rm);
+  card.appendChild(top);
+
+  const row1 = document.createElement('div'); row1.className = 'field-row';
+  const col1 = document.createElement('div'); col1.className = 'field-col'; col1.style.flexBasis = '100%';
+  col1.innerHTML = '<label>التحدي أو المشكلة الظاهرة</label>';
+  const probInp = document.createElement('input'); probInp.type = 'text'; probInp.value = rc.problem || '';
+  probInp.style.cssText = 'width:100%; border:1.5px solid var(--line); border-radius:8px; padding:8px 10px; font-family:"Tajawal",Arial,sans-serif; font-size:13.5px;';
+  probInp.addEventListener('input', ()=>{ rc.problem = probInp.value; save(); });
+  col1.appendChild(probInp);
+  row1.appendChild(col1);
+  card.appendChild(row1);
+
+  const chain = document.createElement('div'); chain.className = 'rc-chain';
+  for(let i=0;i<5;i++){
+    const row = document.createElement('div'); row.className = 'rc-row';
+    const num = document.createElement('div'); num.className = 'rc-num'; num.textContent = i+1;
+    const inp = document.createElement('input'); inp.type='text'; inp.placeholder = 'لماذا؟'; inp.value = rc.answers[i];
+    inp.addEventListener('input', ()=>{ rc.answers[i] = inp.value; save(); updateRCResult(rc, resultEl); });
+    row.appendChild(num); row.appendChild(inp);
+    chain.appendChild(row);
+  }
+  card.appendChild(chain);
+
+  const resultEl = document.createElement('div'); resultEl.className = 'rc-result';
+  card.appendChild(resultEl);
+  updateRCResult(rc, resultEl);
+
+  return card;
+}
+
+function updateRCResult(rc, el){
+  const lastFilled = rc.answers.filter(x=>x.trim()!=='').length;
+  if(lastFilled===0){ el.textContent = 'ابدأ بكتابة التحدي، ثم اسأل لماذا خمس مرات متتالية للوصول إلى السبب الجذري'; return; }
+  el.textContent = 'السبب الجذري المرشَّح حتى الآن: ' + rc.answers[lastFilled-1];
+}
+
+function buildRootCause(){
+  const wrap = document.getElementById('rcList');
+  wrap.innerHTML = "";
+  rootCauses.forEach(rc => wrap.appendChild(makeRootCauseCard(rc)));
+  document.getElementById('rcEmptyNote').style.display = rootCauses.length ? 'none' : 'block';
+}
+
+function addRootCause(){
+  rootCauses.push({ id:'rc'+(rcIdCounter++), problem:'', answers:['','','','',''] });
+  buildRootCause();
+  save();
+}
+
+function removeRootCause(id){
+  if(!confirm('هل تريد حذف هذا التحليل؟')) return;
+  rootCauses = rootCauses.filter(rc => rc.id !== id);
+  buildRootCause();
+  save();
+}
+
 function buildStagePicker(){
   const wrap = document.getElementById('stagePicker');
   wrap.innerHTML = "";
@@ -1016,7 +1372,7 @@ function selectStage(i){
 function updateStageNote(){
   const note = document.getElementById('stageNote');
   const st = STAGES[stageIndex];
-  note.textContent = 'المرحلة المختارة: ' + st.name + ' — ' + st.desc;
+  note.textContent = 'المرحلة المختارة: ' + st.name + '. ' + st.desc;
 }
 
 
@@ -1165,11 +1521,11 @@ function buildTable(){
 
     const tdM = document.createElement('td');
     if(isComputed){
-      const sp = document.createElement('span'); sp.className='computed-val mentor'; sp.id='dimM'+i; sp.textContent='—';
+      const sp = document.createElement('span'); sp.className='computed-val mentor'; sp.id='dimM'+i; sp.textContent='';
       tdM.appendChild(sp);
     } else {
       const inpM = document.createElement('input');
-      inpM.type='number'; inpM.min=1; inpM.max=10; inpM.className='score mentor'; inpM.placeholder='—';
+      inpM.type='number'; inpM.min=1; inpM.max=10; inpM.className='score mentor'; inpM.placeholder='';
       inpM.id = 'inpM'+i;
       if(mentor[i]!==null) inpM.value = mentor[i];
       inpM.addEventListener('input', ()=>{ mentor[i] = clampVal(inpM.value); save(); updateRow(i); render(); });
@@ -1178,11 +1534,11 @@ function buildTable(){
 
     const tdO = document.createElement('td');
     if(isComputed){
-      const sp = document.createElement('span'); sp.className='computed-val owner'; sp.id='dimO'+i; sp.textContent='—';
+      const sp = document.createElement('span'); sp.className='computed-val owner'; sp.id='dimO'+i; sp.textContent='';
       tdO.appendChild(sp);
     } else {
       const inpO = document.createElement('input');
-      inpO.type='number'; inpO.min=1; inpO.max=10; inpO.className='score owner'; inpO.placeholder='—';
+      inpO.type='number'; inpO.min=1; inpO.max=10; inpO.className='score owner'; inpO.placeholder='';
       inpO.id = 'inpO'+i;
       if(owner[i]!==null) inpO.value = owner[i];
       inpO.addEventListener('input', ()=>{ owner[i] = clampVal(inpO.value); save(); updateRow(i); render(); });
@@ -1235,22 +1591,22 @@ function updateRow(i){
   if(m!==null && o!==null && m!==undefined && o!==undefined){
     const d = o-m;
     tdD.innerHTML = '<span class="'+(d>0?'delta-pos':(d<0?'delta-neg':'delta-zero'))+'">'+(d>0?'+':'')+fmtVal(d)+'</span>';
-  } else { tdD.textContent = '—'; }
+  } else { tdD.textContent = ''; }
 }
 
 function updateTotalsRow(){
   let sumM=0,sumO=0,cM=0,cO=0;
   mentor.forEach(v=>{ if(v!==null && v!==undefined){ sumM+=v; cM++; } });
   owner.forEach(v=>{ if(v!==null && v!==undefined){ sumO+=v; cO++; } });
-  document.getElementById('sumMentor').textContent = cM? fmtVal(sumM) : '—';
-  document.getElementById('sumOwner').textContent = cO? fmtVal(sumO) : '—';
+  document.getElementById('sumMentor').textContent = cM? fmtVal(sumM) : '';
+  document.getElementById('sumOwner').textContent = cO? fmtVal(sumO) : '';
   const sd = document.getElementById('sumDelta');
   if(cM && cO){
     const totalD = sumO - sumM;
     sd.textContent = (totalD>0?'+':'') + fmtVal(totalD);
     sd.className = totalD>0? 'delta-pos' : (totalD<0? 'delta-neg':'delta-zero');
   } else {
-    sd.textContent = '—'; sd.className = '';
+    sd.textContent = ''; sd.className = '';
   }
 }
 
@@ -1259,14 +1615,14 @@ function renderSummary(){
   const oVals = owner.filter(v=>v!==null);
   const mSum = mVals.reduce((a,b)=>a+b,0);
   const oSum = oVals.reduce((a,b)=>a+b,0);
-  document.getElementById('mentorTotal').textContent = mVals.length? mSum : '–';
-  document.getElementById('ownerTotal').textContent = oVals.length? oSum : '–';
+  document.getElementById('mentorTotal').textContent = mVals.length? mSum : '';
+  document.getElementById('ownerTotal').textContent = oVals.length? oSum : '';
   const dEl = document.getElementById('totalDelta');
   if(mVals.length && oVals.length){
     const d = oSum - mSum;
     dEl.textContent = (d>0?'+':'') + d;
     dEl.className = 'val ' + (d>0?'delta-pos':(d<0?'delta-neg':'delta-zero'));
-  } else { dEl.textContent = '–'; dEl.className='val'; }
+  } else { dEl.textContent = ''; dEl.className='val'; }
 }
 
 function clampVal(raw){
@@ -1497,22 +1853,22 @@ function updateKARow(i){
   if(m!==null && o!==null){
     const d = o-m;
     tdD.innerHTML = '<span class="'+(d>0?'delta-pos':(d<0?'delta-neg':'delta-zero'))+'">'+(d>0?'+':'')+d+'</span>';
-  } else { tdD.textContent = '—'; }
+  } else { tdD.textContent = ''; }
 }
 
 function updateKATotalsRow(){
   let sumM=0,sumO=0,cM=0,cO=0;
   kaMentor.forEach(v=>{ if(v!==null){ sumM+=v; cM++; } });
   kaOwner.forEach(v=>{ if(v!==null){ sumO+=v; cO++; } });
-  document.getElementById('kaSumMentor').textContent = cM? sumM : '—';
-  document.getElementById('kaSumOwner').textContent = cO? sumO : '—';
+  document.getElementById('kaSumMentor').textContent = cM? sumM : '';
+  document.getElementById('kaSumOwner').textContent = cO? sumO : '';
   const sd = document.getElementById('kaSumDelta');
   if(cM && cO){
     const totalD = sumO - sumM;
     sd.textContent = (totalD>0?'+':'') + totalD;
     sd.className = totalD>0? 'delta-pos' : (totalD<0? 'delta-neg':'delta-zero');
   } else {
-    sd.textContent = '—'; sd.className = '';
+    sd.textContent = ''; sd.className = '';
   }
 }
 
@@ -1667,7 +2023,7 @@ function makeGoalCard(g){
   const col1 = document.createElement('div'); col1.className = 'field-col'; col1.style.flexBasis = '100%';
   col1.innerHTML = '<label>مجال المعرفة المرتبط</label>';
   const sel = document.createElement('select');
-  const optEmpty = document.createElement('option'); optEmpty.value=''; optEmpty.textContent='— اختيار مجال المعرفة —';
+  const optEmpty = document.createElement('option'); optEmpty.value=''; optEmpty.textContent='اختيار مجال المعرفة';
   sel.appendChild(optEmpty);
   KA.forEach(k=>{
     const o = document.createElement('option'); o.value = k.label; o.textContent = k.label;
@@ -1788,14 +2144,17 @@ function addGoal(){
   });
   buildGoals();
   refreshSessionGoalOptions();
+  wireProgressGoalSelect();
   save();
 }
 
 function removeGoal(id){
   if(!confirm('هل تريد حذف هذا الهدف؟')) return;
   goals = goals.filter(g => g.id !== id);
+  delete progressLogs[id];
   buildGoals();
   refreshSessionGoalOptions();
+  wireProgressGoalSelect();
   save();
 }
 
@@ -1807,7 +2166,7 @@ function goalLabelFor(g, idx){
   const kaText = g.ka === '__other__' ? (g.kaOther || 'مجال آخر') : (g.ka || 'مجال غير محدد');
   const stmt = (g.statement || '').trim();
   const stmtShort = stmt ? (stmt.length > 34 ? stmt.slice(0,34) + '…' : stmt) : 'بلا صياغة بعد';
-  return 'هدف ' + (idx+1) + ' — ' + kaText + ': ' + stmtShort;
+  return 'هدف ' + (idx+1) + '، ' + kaText + ': ' + stmtShort;
 }
 
 function makeSessionCard(s, num){
@@ -1848,7 +2207,7 @@ function makeSessionCard(s, num){
   const timeFrom = document.createElement('input'); timeFrom.type = 'time'; timeFrom.value = s.timeFrom || '';
   timeFrom.style.cssText = 'width:auto; flex:1; min-width:0;';
   timeFrom.addEventListener('input', ()=>{ s.timeFrom = timeFrom.value; save(); });
-  const dash = document.createElement('span'); dash.textContent = '–'; dash.style.cssText = 'color:var(--muted); flex:none;';
+  const dash = document.createElement('span'); dash.textContent = 'إلى'; dash.style.cssText = 'color:var(--muted); flex:none; font-size:11px;';
   const timeTo = document.createElement('input'); timeTo.type = 'time'; timeTo.value = s.timeTo || '';
   timeTo.style.cssText = 'width:auto; flex:1; min-width:0;';
   timeTo.addEventListener('input', ()=>{ s.timeTo = timeTo.value; save(); });
@@ -1862,7 +2221,7 @@ function makeSessionCard(s, num){
   const col2 = document.createElement('div'); col2.className = 'field-col'; col2.style.flexBasis = '100%';
   col2.innerHTML = '<label>الهدف المرتبط بهذه الجلسة</label>';
   const sel = document.createElement('select'); sel.className = 'goal-select';
-  const optNone = document.createElement('option'); optNone.value=''; optNone.textContent='— غير مرتبطة بهدف محدد —';
+  const optNone = document.createElement('option'); optNone.value=''; optNone.textContent='غير مرتبطة بهدف محدد';
   sel.appendChild(optNone);
   goals.forEach((g,gi)=>{
     const o = document.createElement('option'); o.value = g.id; o.textContent = goalLabelFor(g,gi);
@@ -2062,6 +2421,215 @@ function makeAttachmentCard(a){
   return card;
 }
 
+// ===== المتابعة والقياس =====
+let meExperience = { q1:'', q2:'' };
+let progressLogs = {};
+let protectionFlags = [];
+let flagIdCounter = 0;
+
+function wireMEExperience(){
+  const s1 = document.getElementById('meExp1');
+  const s2 = document.getElementById('meExp2');
+  [s1,s2].forEach(sel=>{
+    sel.innerHTML = "";
+    RATING_5.forEach((r,i)=>{ const o=document.createElement('option'); o.value=i? String(i):''; o.textContent=r; sel.appendChild(o); });
+  });
+  s1.value = meExperience.q1 || '';
+  s2.value = meExperience.q2 || '';
+  s1.addEventListener('change', ()=>{ meExperience.q1 = s1.value; save(); updateMEExperience(); });
+  s2.addEventListener('change', ()=>{ meExperience.q2 = s2.value; save(); updateMEExperience(); });
+  updateMEExperience();
+}
+function updateMEExperience(){
+  const vals = [meExperience.q1, meExperience.q2].filter(v=>v).map(Number);
+  const el = document.getElementById('meExpAvg');
+  el.textContent = vals.length ? fmtVal(vals.reduce((a,b)=>a+b,0)/vals.length) + ' / 5' : '';
+}
+
+function wireProgressGoalSelect(){
+  const sel = document.getElementById('meProgressGoal');
+  sel.innerHTML = "";
+  if(goals.length===0){
+    const o = document.createElement('option'); o.value=''; o.textContent='لا توجد أهداف مضافة بعد';
+    sel.appendChild(o);
+  } else {
+    goals.forEach((g,gi)=>{
+      const o = document.createElement('option'); o.value = g.id; o.textContent = goalLabelFor(g,gi);
+      sel.appendChild(o);
+    });
+  }
+  sel.onchange = renderProgressLog;
+  renderProgressLog();
+}
+function renderProgressLog(){
+  const sel = document.getElementById('meProgressGoal');
+  const goalId = sel.value;
+  const wrap = document.getElementById('progressLogRows');
+  wrap.innerHTML = "";
+  if(!goalId){ drawProgressChart([]); return; }
+  const logs = progressLogs[goalId] || [];
+  logs.forEach((entry, idx)=>{
+    const row = document.createElement('div'); row.className = 'progress-log-row';
+    const d = document.createElement('input'); d.type='date'; d.className='plog-date'; d.value = entry.date;
+    d.addEventListener('input', ()=>{ entry.date = d.value; save(); drawProgressChart(progressLogs[goalId]); });
+    const v = document.createElement('input'); v.type='number'; v.className='plog-val'; v.value = entry.value; v.placeholder='القيمة';
+    v.addEventListener('input', ()=>{ entry.value = v.value; save(); drawProgressChart(progressLogs[goalId]); });
+    const del = document.createElement('button'); del.type='button'; del.textContent='حذف'; del.style.cssText='background:none;border:none;color:#a33;cursor:pointer;font-size:12px;';
+    del.addEventListener('click', ()=>{ progressLogs[goalId].splice(idx,1); save(); renderProgressLog(); });
+    row.appendChild(d); row.appendChild(v); row.appendChild(del);
+    wrap.appendChild(row);
+  });
+  drawProgressChart(logs);
+}
+function addProgressPoint(){
+  const sel = document.getElementById('meProgressGoal');
+  const goalId = sel.value;
+  if(!goalId) return;
+  if(!progressLogs[goalId]) progressLogs[goalId] = [];
+  progressLogs[goalId].push({ date:'', value:'' });
+  save();
+  renderProgressLog();
+}
+function drawProgressChart(logs){
+  const svg = document.getElementById('progressMiniChart');
+  svg.innerHTML = "";
+  const pts = logs.filter(l=>l.date && l.value!=='').map(l=>({date:l.date, value:parseFloat(l.value)})).sort((a,b)=>a.date.localeCompare(b.date));
+  if(pts.length < 2){
+    const t = document.createElementNS("http://www.w3.org/2000/svg","text");
+    t.setAttribute('x','150'); t.setAttribute('y','38'); t.setAttribute('text-anchor','middle');
+    t.setAttribute('font-size','11'); t.setAttribute('fill','#b5b0a0');
+    t.textContent = 'أضِف نقطتين على الأقل لعرض المنحنى';
+    svg.appendChild(t);
+    return;
+  }
+  const vals = pts.map(p=>p.value);
+  const minV = Math.min(...vals), maxV = Math.max(...vals);
+  const range = (maxV - minV) || 1;
+  const w = 300, h = 70, pad = 8;
+  const stepX = (w - pad*2) / (pts.length - 1);
+  const coords = pts.map((p,i)=>{
+    const x = pad + i*stepX;
+    const y = h - pad - ((p.value - minV)/range) * (h - pad*2);
+    return [x,y];
+  });
+  const path = document.createElementNS("http://www.w3.org/2000/svg","polyline");
+  path.setAttribute('points', coords.map(c=>c.join(',')).join(' '));
+  path.setAttribute('fill','none'); path.setAttribute('stroke', '#0e6e6a'); path.setAttribute('stroke-width','2');
+  svg.appendChild(path);
+  coords.forEach(c=>{
+    const circ = document.createElementNS("http://www.w3.org/2000/svg","circle");
+    circ.setAttribute('cx',c[0]); circ.setAttribute('cy',c[1]); circ.setAttribute('r','3'); circ.setAttribute('fill','#b8902e');
+    svg.appendChild(circ);
+  });
+}
+
+function computeProcessMetrics(){
+  const dates = sessions.map(s=>s.date).filter(Boolean).sort();
+  let timeToFirst = '';
+  if(meta.date && dates.length){
+    const d0 = new Date(meta.date), d1 = new Date(dates[0]);
+    const diffDays = Math.round((d1-d0)/(1000*60*60*24));
+    if(!isNaN(diffDays)) timeToFirst = diffDays + ' يوم';
+  }
+  const sessionCount = sessions.length;
+  let filled = 0, total = 0;
+  [meta.mentorName, meta.ownerName, meta.projectName].forEach(v=>{ total++; if(v) filled++; });
+  mentor.forEach(v=>{ total++; if(v!==null && v!==undefined) filled++; });
+  kaMentor.forEach(v=>{ total++; if(v!==null) filled++; });
+  goals.forEach(g=>{ total++; if(g.statement) filled++; });
+  const docRate = total ? Math.round((filled/total)*100) : 0;
+  const elT = document.getElementById('meProcTime'); if(elT) elT.textContent = timeToFirst;
+  const elS = document.getElementById('meProcSessions'); if(elS) elS.textContent = sessionCount;
+  const elD = document.getElementById('meProcDocs'); if(elD) elD.textContent = docRate + '%';
+}
+
+function wireFlags(){
+  const sel = document.getElementById('meFlagLevel');
+  sel.innerHTML = "";
+  FLAG_LEVELS.forEach((f,i)=>{ const o=document.createElement('option'); o.value=i?String(i):''; o.textContent=f; sel.appendChild(o); });
+  document.getElementById('addFlagBtn').addEventListener('click', ()=>{
+    const level = sel.value;
+    const note = document.getElementById('meFlagNote').value.trim();
+    if(!level || !note){ alert('يرجى اختيار المستوى وكتابة الملاحظة'); return; }
+    protectionFlags.push({ id:'f'+(flagIdCounter++), level, note, date: new Date().toISOString().slice(0,10) });
+    document.getElementById('meFlagNote').value = '';
+    sel.value = '';
+    save();
+    updateDashboard();
+  });
+}
+
+// ===== لوحة القيادة =====
+function ringSVG(pct, color){
+  const r = 28, c = 2*Math.PI*r;
+  const offset = c - (pct/100)*c;
+  return '<svg viewBox="0 0 70 70"><circle cx="35" cy="35" r="'+r+'" fill="none" stroke="#eee" stroke-width="7"/>' +
+    '<circle cx="35" cy="35" r="'+r+'" fill="none" stroke="'+color+'" stroke-width="7" stroke-dasharray="'+c+'" stroke-dashoffset="'+offset+'" stroke-linecap="round" transform="rotate(-90 35 35)"/>' +
+    '<text x="35" y="40" text-anchor="middle" font-size="15" font-weight="800" fill="'+color+'">'+Math.round(pct)+'%</text></svg>';
+}
+
+function updateDashboard(){
+  computeProcessMetrics();
+  const grid = document.getElementById('dashGrid');
+  if(!grid) return;
+  grid.innerHTML = "";
+
+  const cards = [];
+  cards.push({ label:'مرحلة المشروع', value: STAGES[stageIndex].name });
+  cards.push({ label:'مرحلة عملية الإرشاد', value: PROCESS_PHASES[processPhase] });
+
+  const st = STAGES[stageIndex];
+  const arr = gateState[st.id] || [];
+  const gatePct = arr.length ? Math.round((arr.filter(Boolean).length/arr.length)*100) : 0;
+  cards.push({ ring:true, label:'جاهزية بوابة الانتقال', value:gatePct, color:'#0b2545' });
+
+  const dimVals = mentor.filter(v=>v!==null && v!==undefined);
+  const dimAvg = dimVals.length ? (dimVals.reduce((a,b)=>a+b,0)/dimVals.length) : null;
+  cards.push({ label:'متوسط المحاور التسعة', value: dimAvg!==null ? fmtVal(dimAvg)+' / 10' : '' });
+
+  cards.push({ label:'عدد الأهداف الذكية', value: goals.length });
+  const strongGoals = goals.filter(g=>{
+    if(!g.verify) return false;
+    const r = computeOverallRating(g);
+    return r === 'هدف قوي بصيغة SMART';
+  }).length;
+  cards.push({ label:'أهداف مكتملة المعايير', value: strongGoals + ' من ' + goals.length });
+
+  cards.push({ label:'الجلسات المسجَّلة', value: sessions.length });
+  cards.push({ label:'المرفقات الموثَّقة', value: attachments.length });
+
+  cards.forEach(c=>{
+    const card = document.createElement('div'); card.className = 'dash-card';
+    if(c.ring){
+      const ringWrap = document.createElement('div'); ringWrap.className='dring';
+      ringWrap.innerHTML = ringSVG(c.value, c.color);
+      card.appendChild(ringWrap);
+    } else {
+      const v = document.createElement('div'); v.className='dv'; v.textContent = c.value;
+      card.appendChild(v);
+    }
+    const l = document.createElement('div'); l.className='dl'; l.textContent = c.label;
+    card.appendChild(l);
+    grid.appendChild(card);
+  });
+
+  const flagsBox = document.getElementById('dashFlagsBox');
+  const flagsList = document.getElementById('dashFlagsList');
+  if(protectionFlags.length){
+    flagsBox.style.display = 'block';
+    flagsList.innerHTML = "";
+    protectionFlags.slice().reverse().forEach(f=>{
+      const item = document.createElement('div'); item.className='dash-flag-item';
+      const d = document.createElement('span'); d.className='fdate'; d.textContent = f.date;
+      const t = document.createElement('span'); t.textContent = FLAG_LEVELS[Number(f.level)] + '. ' + f.note;
+      item.appendChild(d); item.appendChild(t);
+      flagsList.appendChild(item);
+    });
+  } else {
+    flagsBox.style.display = 'none';
+  }
+}
+
 function buildAttachments(){
   const wrap = document.getElementById('attachmentsList');
   wrap.innerHTML = "";
@@ -2084,12 +2652,13 @@ function removeAttachment(id){
 
 function save(){
   try{
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({mentor, owner, meta, stageIndex, kaMentor, kaOwner, kaChecklist, gateState, goals, goalIdCounter, sessions, sessionIdCounter, needsAssessment, attachmentIdCounter, savedAt: Date.now()}));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({mentor, owner, meta, stageIndex, kaMentor, kaOwner, kaChecklist, gateState, goals, goalIdCounter, sessions, sessionIdCounter, needsAssessment, attachmentIdCounter, processPhase, fmChecks, rootCauses, rcIdCounter, meExperience, progressLogs, protectionFlags, flagIdCounter, savedAt: Date.now()}));
     const note = document.getElementById('saveNote');
-    note.textContent = 'تم الحفظ تلقائياً في هذا المتصفح — ' + new Date().toLocaleTimeString('ar-JO');
+    note.textContent = 'تم الحفظ تلقائياً في هذا المتصفح، ' + new Date().toLocaleTimeString('ar-JO');
+    updateDashboard();
   }catch(e){
     const note = document.getElementById('saveNote');
-    if(note) note.textContent = 'تعذّر حفظ بيانات التقييم — مساحة التخزين في المتصفح ممتلئة، يُنصح بحذف بعض المرفقات المحمَّلة محلياً.';
+    if(note) note.textContent = 'تعذّر حفظ بيانات التقييم، لأن مساحة التخزين في المتصفح ممتلئة. يُنصح بحذف بعض المرفقات المحمَّلة محلياً.';
   }
 }
 
@@ -2098,8 +2667,9 @@ function saveAttachments(){
     localStorage.setItem(ATTACHMENTS_STORAGE_KEY, JSON.stringify({attachments, savedAt: Date.now()}));
   }catch(e){
     const note = document.getElementById('saveNote');
-    if(note) note.textContent = 'تعذّر حفظ المرفقات محلياً لأن حجمها تجاوز مساحة التخزين المتاحة — بيانات التقييم نفسها محفوظة وسليمة، لكن يُنصح باستخدام روابط خارجية للملفات الكبيرة بدل رفعها مباشرة.';
+    if(note) note.textContent = 'تعذّر حفظ المرفقات محلياً لأن حجمها تجاوز مساحة التخزين المتاحة. بيانات التقييم نفسها محفوظة وسليمة، لكن يُنصح باستخدام روابط خارجية للملفات الكبيرة بدل رفعها مباشرة.';
   }
+  if(typeof updateDashboard === 'function') updateDashboard();
 }
 
 function load(){
@@ -2127,6 +2697,14 @@ function load(){
       needsAssessment.challengesRequests = Object.assign(needsAssessment.challengesRequests, data.needsAssessment.challengesRequests || {});
       needsAssessment.analysis = Object.assign(needsAssessment.analysis, data.needsAssessment.analysis || {});
     }
+    if(Number.isInteger(data.processPhase) && data.processPhase>=0 && data.processPhase<PROCESS_PHASES.length) processPhase = data.processPhase;
+    if(Array.isArray(data.fmChecks)) fmChecks = data.fmChecks;
+    if(Array.isArray(data.rootCauses)) rootCauses = data.rootCauses;
+    if(Number.isInteger(data.rcIdCounter)) rcIdCounter = data.rcIdCounter;
+    if(data.meExperience && typeof data.meExperience === 'object') meExperience = Object.assign(meExperience, data.meExperience);
+    if(data.progressLogs && typeof data.progressLogs === 'object') progressLogs = data.progressLogs;
+    if(Array.isArray(data.protectionFlags)) protectionFlags = data.protectionFlags;
+    if(Number.isInteger(data.flagIdCounter)) flagIdCounter = data.flagIdCounter;
   }catch(e){ /* ignore */ }
   loadAttachments();
 }
@@ -2160,6 +2738,12 @@ function resetAll(){
     challengesRequests: { biggestChallenges:'', supportExpected:'' },
     analysis: { strengths:'', gaps:'', prioritySummary:'', referrals:'' }
   };
+  processPhase = 0;
+  fmChecks = FIRST_MEETING_STAGES.map(s => s.items.map(()=>false));
+  rootCauses = []; rcIdCounter = 0;
+  meExperience = { q1:'', q2:'' };
+  progressLogs = {};
+  protectionFlags = []; flagIdCounter = 0;
   save();
   syncInputs();
   syncMeta();
@@ -2171,8 +2755,14 @@ function resetAll(){
   buildGoals();
   buildSessions();
   buildAttachments();
+  buildProcessTrack();
+  buildFirstMeetingGuide();
+  buildRootCause();
+  wireMEExperience();
+  wireProgressGoalSelect();
   render();
   renderKA();
+  updateDashboard();
 }
 
 function printSummary(){
@@ -2185,7 +2775,7 @@ function printSummary(){
 }
 
 function doExport(){
-  const payload = {mentor, owner, meta, stageIndex, kaMentor, kaOwner, kaChecklist, gateState, goals, sessions, needsAssessment, attachments, axes: AXES.map(a=>a.label), knowledgeAreas: KA.map(k=>k.label), exportedAt: new Date().toISOString()};
+  const payload = {mentor, owner, meta, stageIndex, kaMentor, kaOwner, kaChecklist, gateState, goals, sessions, needsAssessment, attachments, processPhase, fmChecks, rootCauses, meExperience, progressLogs, protectionFlags, axes: AXES.map(a=>a.label), knowledgeAreas: KA.map(k=>k.label), exportedAt: new Date().toISOString()};
   const blob = new Blob([JSON.stringify(payload, null, 1)], {type:'application/json'});
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -2224,8 +2814,18 @@ function doImport(evt){
         needsAssessment.challengesRequests = Object.assign({biggestChallenges:'',supportExpected:''}, data.needsAssessment.challengesRequests || {});
         needsAssessment.analysis = Object.assign({strengths:'',gaps:'',prioritySummary:'',referrals:''}, data.needsAssessment.analysis || {});
       }
-      save(); syncInputs(); syncMeta(); syncNeedsAssessment(); buildNADomains(); buildKATable(); buildStagePicker(); buildGate(); buildGoals(); buildSessions(); buildAttachments(); render(); renderKA();
-    }catch(err){ alert('تعذّر قراءة الملف — يرجى التأكد من أنه ملف تشخيص صحيح.'); }
+      if(Number.isInteger(data.processPhase) && data.processPhase>=0 && data.processPhase<PROCESS_PHASES.length) processPhase = data.processPhase; else processPhase = 0;
+      fmChecks = Array.isArray(data.fmChecks) ? data.fmChecks : FIRST_MEETING_STAGES.map(s => s.items.map(()=>false));
+      rootCauses = Array.isArray(data.rootCauses) ? data.rootCauses : [];
+      rcIdCounter = rootCauses.length;
+      meExperience = (data.meExperience && typeof data.meExperience==='object') ? Object.assign({q1:'',q2:''}, data.meExperience) : {q1:'',q2:''};
+      progressLogs = (data.progressLogs && typeof data.progressLogs==='object') ? data.progressLogs : {};
+      protectionFlags = Array.isArray(data.protectionFlags) ? data.protectionFlags : [];
+      flagIdCounter = protectionFlags.length;
+      save(); syncInputs(); syncMeta(); syncNeedsAssessment(); buildNADomains(); buildKATable(); buildStagePicker(); buildGate(); buildGoals(); buildSessions(); buildAttachments();
+      buildProcessTrack(); buildFirstMeetingGuide(); buildRootCause(); wireMEExperience(); wireProgressGoalSelect();
+      render(); renderKA(); updateDashboard();
+    }catch(err){ alert('تعذّر قراءة الملف. يرجى التأكد من أنه ملف تشخيص صحيح.'); }
   };
   reader.readAsText(file);
   evt.target.value = '';
@@ -2242,9 +2842,27 @@ buildSessions();
 buildAttachments();
 wireMeta();
 wireNeedsAssessment();
+buildProcessTrack();
+buildFirstMeetingGuide();
+buildRootCause();
+wireMEExperience();
+wireProgressGoalSelect();
+wireFlags();
+document.getElementById('addProgressPointBtn').addEventListener('click', addProgressPoint);
 render();
 renderKA();
+updateDashboard();
 document.getElementById('copyrightNote').textContent = '© ' + new Date().getFullYear() + ' رامي الشعر. جميع الحقوق محفوظة.';
+
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+    window.scrollTo(0, 0);
+  });
+});
 </script>
 </body>
 </html>
