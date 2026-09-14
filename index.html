@@ -134,15 +134,8 @@
   .legend i.mentor{background:var(--mentor);}
   .legend i.owner{background:var(--owner);}
 
-  .scale-guide{max-width:760px; margin:24px auto 0; background:#fff; border:1px solid var(--line); border-radius:12px; padding:16px 20px; box-shadow:0 2px 10px rgba(11,37,69,.05);}
-  .scale-guide h3{margin:0 0 12px; font-size:15px; font-weight:800; color:var(--navy); text-align:center;}
-  .scale-guide .row{display:flex; align-items:center; gap:12px; padding:7px 0; border-bottom:1px dashed var(--line);}
-  .scale-guide .row:last-child{border-bottom:none;}
-  .scale-guide .range{
-    flex:none; min-width:52px; text-align:center; font-weight:800; font-size:13px; color:#fff;
-    border-radius:7px; padding:5px 0;
-  }
-  .scale-guide .desc{font-size:13.5px; color:var(--ink); font-weight:500;}
+  .summary-heading{margin-top:44px; padding-top:28px; border-top:1px dashed var(--line);}
+  .stage-summary{max-width:460px; opacity:.96;}
 
   .section-title{max-width:900px; margin:36px auto 4px; text-align:center;}
   .section-title h2{font-size:19px; font-weight:800; color:var(--navy); margin:0 0 4px;}
@@ -342,7 +335,7 @@
   @media print{
     .toolbar,.hint,.save-note,.add-card-btn,.remove-btn,#fileInput,.ka-toggle{display:none !important;}
     body{padding:0; background:#fff;}
-    .goal-card,.session-card,.gate-box,.scale-guide,.stage-card,table.cmp,.stage{break-inside:avoid;}
+    .goal-card,.session-card,.gate-box,.stage-card,table.cmp,.stage{break-inside:avoid;}
     .section-title{break-after:avoid;}
     .card-list{break-inside:auto;}
     .ka-detail-wrap{display:block !important;}
@@ -525,7 +518,35 @@
   <div class="tab-panel" id="tabDiagnosis">
   <div class="section-title">
     <h2>التشخيص العام</h2>
-    <p>نظرة سريعة على المحاور التسعة الأساسية للمشروع</p>
+    <p>اختر مرحلة المشروع من تبويب اللمحة العامة، ثم ابدأ بتعبئة المسح التفصيلي أدناه لكل من المرشد وصاحب المشروع، وستظهر جميع النتائج والملخصات تلقائياً فور الإدخال</p>
+  </div>
+
+  <div class="section-title">
+    <h2>المسح التفصيلي حسب مجالات المعرفة</h2>
+    <p>اثنا عشر مجالاً معرفياً؛ عمود الأولوية يتغيّر تلقائياً حسب المرحلة المختارة بتبويب اللمحة العامة. ابدأ من هنا لأن كل النتائج والملخصات أدناه تُحسب تلقائياً من هذه القيم</p>
+  </div>
+
+  <table class="cmp" id="kaTable">
+    <thead>
+      <tr><th style="text-align:right">مجال المعرفة</th><th>الأولوية بهذه المرحلة</th><th>المرشد</th><th>صاحب المشروع</th><th>الفرق</th></tr>
+    </thead>
+    <tbody id="kaBody"></tbody>
+    <tfoot>
+      <tr class="total"><td class="dim">المجموع</td><td></td><td id="kaSumMentor"></td><td id="kaSumOwner"></td><td id="kaSumDelta"></td></tr>
+    </tfoot>
+  </table>
+
+  <div class="stage">
+    <svg id="radarKA" viewBox="0 0 640 640" xmlns="http://www.w3.org/2000/svg"></svg>
+  </div>
+  <div class="legend">
+    <span><i class="mentor"></i> المرشد</span>
+    <span><i class="owner"></i> صاحب المشروع</span>
+  </div>
+
+  <div class="section-title summary-heading">
+    <h2>الملخص التنفيذي</h2>
+    <p>المحاور التسعة الأساسية للمشروع، محسوبة تلقائياً من نتائج المسح التفصيلي أعلاه</p>
   </div>
 
   <div class="summary">
@@ -534,22 +555,13 @@
     <div class="card delta"><div class="who">الفرق الكلي</div><div class="val" id="totalDelta"></div><div class="out">نقطة</div></div>
   </div>
 
-  <div class="stage">
+  <div class="stage stage-summary">
     <svg id="radar" viewBox="0 0 640 640" xmlns="http://www.w3.org/2000/svg"></svg>
   </div>
 
   <div class="legend">
     <span><i class="mentor"></i> المرشد</span>
     <span><i class="owner"></i> صاحب المشروع</span>
-  </div>
-
-  <div class="scale-guide">
-    <h3>سلم التقييم</h3>
-    <div class="row"><span class="range" style="background:#8a8a92">1-2</span><span class="desc">لا يوجد وضوح تقريباً هنا</span></div>
-    <div class="row"><span class="range" style="background:#7d6a52">3-4</span><span class="desc">بعض المعرفة ولكن ليس بما يكفي</span></div>
-    <div class="row"><span class="range" style="background:#6e6b45">5-6</span><span class="desc">الأداء مقبول ولكن بشكل غير منتظم</span></div>
-    <div class="row"><span class="range" style="background:#0e6e6a">7-8</span><span class="desc">شعور بالثقة</span></div>
-    <div class="row"><span class="range" style="background:#b8902e">9-10</span><span class="desc">إحدى نقاط القوة</span></div>
   </div>
 
   <table class="cmp" id="cmpTable">
@@ -561,11 +573,11 @@
       <tr class="total"><td class="dim">المجموع</td><td id="sumMentor"></td><td id="sumOwner"></td><td id="sumDelta"></td></tr>
     </tfoot>
   </table>
-  <p class="table-note">العلامة ⚭ تشير إلى أن قيمة المحور محسوبة تلقائياً من نتائج المسح التفصيلي أدناه، ومنها محور جاهزية رائد/ة الأعمال المحسوب من مجالي تخطيط الأعمال والموارد البشرية باعتبارهما أقرب انعكاس لفهمه لمشروعه وقدرته على الإدارة والتنظيم والقيادة.</p>
+  <p class="table-note">كل محاور هذا الجدول محسوبة تلقائياً من نتائج المسح التفصيلي أعلاه، ومنها محور جاهزية رائد/ة الأعمال المحسوب من مجالي تخطيط الأعمال والموارد البشرية باعتبارهما أقرب انعكاس لفهمه لمشروعه وقدرته على الإدارة والتنظيم والقيادة.</p>
 
   <div class="section-title">
     <h2>تقييم الاحتياجات</h2>
-    <p>أسئلة إرشادية أساسية تتراكم عليها أسئلة إضافية مع تقدّم المشروع من مرحلة إلى أخرى، وملاحظات نوعية تُبنى عليها أرقام المسح التفصيلي أدناه</p>
+    <p>أسئلة إرشادية أساسية تتراكم عليها أسئلة إضافية مع تقدّم المشروع من مرحلة إلى أخرى، وملاحظات نوعية مكمّلة لأرقام المسح التفصيلي أعلاه</p>
   </div>
 
   <div class="na-block">
@@ -664,30 +676,6 @@
   <div class="card-list" id="rcList"></div>
   <p class="empty-note" id="rcEmptyNote">لم تتم إضافة أي تحليل بعد</p>
   <button class="add-card-btn" onclick="addRootCause()">+ إضافة تحليل سبب جذري جديد</button>
-
-  <div class="section-title">
-    <h2>المسح التفصيلي حسب مجالات المعرفة</h2>
-    <p>اثنا عشر مجالاً معرفياً؛ عمود الأولوية يتغيّر تلقائياً حسب المرحلة المختارة أعلاه</p>
-  </div>
-
-  <table class="cmp" id="kaTable">
-    <thead>
-      <tr><th style="text-align:right">مجال المعرفة</th><th>الأولوية بهذه المرحلة</th><th>المرشد</th><th>صاحب المشروع</th><th>الفرق</th></tr>
-    </thead>
-    <tbody id="kaBody"></tbody>
-    <tfoot>
-      <tr class="total"><td class="dim">المجموع</td><td></td><td id="kaSumMentor"></td><td id="kaSumOwner"></td><td id="kaSumDelta"></td></tr>
-    </tfoot>
-  </table>
-
-  <div class="stage">
-    <svg id="radarKA" viewBox="0 0 640 640" xmlns="http://www.w3.org/2000/svg"></svg>
-  </div>
-  <div class="legend">
-    <span><i class="mentor"></i> المرشد</span>
-    <span><i class="owner"></i> صاحب المشروع</span>
-  </div>
-  <p class="table-note">تعرض هذه الشبكة نفس بيانات جدول المسح التفصيلي أعلاه بصورة بصرية؛ أي تعديل على تقييم أي مجال معرفة ينعكس هنا وعلى محاور التشخيص العام المرتبطة به فوراً.</p>
 
   </div>
 
@@ -815,7 +803,7 @@
   </div>
   <div class="guide-block">
     <h3>التشخيص</h3>
-    <p>يبدأ بالتشخيص العام (تسعة محاور محسوبة تلقائياً)، ثم تقييم الاحتياجات بالأسئلة الإرشادية لكل مجال معرفي، مع أداة تحليل الأسباب الجذرية عند الحاجة لفهم تحدٍّ معين بعمق، وينتهي بالمسح التفصيلي الذي يقيس كل مجال معرفي رقمياً ويغذّي المحاور التسعة تلقائياً.</p>
+    <p>يبدأ بالمسح التفصيلي الذي يقيس كل مجال معرفي رقمياً لكل من المرشد وصاحب المشروع، وهو مصدر البيانات الأساسي؛ يليه مباشرة الملخص التنفيذي بالمحاور التسعة المحسوبة تلقائياً من هذا المسح، ثم تقييم الاحتياجات بالأسئلة الإرشادية لكل مجال معرفي، مع أداة تحليل الأسباب الجذرية عند الحاجة لفهم تحدٍّ معين بعمق.</p>
   </div>
   <div class="guide-block">
     <h3>بوابة الانتقال</h3>
