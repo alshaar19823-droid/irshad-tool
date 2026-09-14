@@ -44,11 +44,16 @@
   .fm-col h5{font-size:12.5px; font-weight:800; margin:0 0 8px;}
   .fm-col ul{margin:0; padding-inline-start:18px; font-size:12.5px; color:var(--ink); line-height:1.9;}
 
-  .rc-chain{max-width:700px; margin:12px auto 0; display:flex; flex-direction:column; gap:10px;}
+  .rc-chain{max-width:760px; margin:0 auto; display:flex; flex-direction:column; gap:10px;}
   .rc-row{display:flex; align-items:center; gap:10px;}
+  .rc-header{padding:0 0 2px; margin-bottom:-2px;}
+  .rc-col-label{flex:1; font-size:12px; font-weight:800; color:var(--navy); text-align:center;}
   .rc-num{flex:none; width:28px; height:28px; border-radius:50%; background:var(--gold); color:#fff; font-weight:800; font-size:13px; display:flex; align-items:center; justify-content:center;}
   .rc-row input{flex:1; border:1.5px solid var(--line); border-radius:8px; padding:8px 10px; font-family:'Tajawal',Arial,sans-serif; font-size:13.5px;}
-  .rc-result{max-width:700px; margin:10px auto 0; background:#f6f5f0; border:1.5px dashed var(--navy); border-radius:10px; padding:12px 16px; font-size:13px; font-weight:700; color:var(--navy); text-align:center;}
+  .rc-result{max-width:760px; margin:10px auto 0; background:#f6f5f0; border:1.5px dashed var(--navy); border-radius:10px; padding:12px 16px; font-size:13px; font-weight:700; color:var(--navy); text-align:center;}
+  .rc-final-wrap{max-width:760px; margin:14px auto 0; background:rgba(184,144,46,.08); border:1.5px solid var(--gold); border-radius:10px; padding:12px 16px;}
+  .rc-final-wrap label{display:block; font-size:13px; font-weight:800; color:var(--gold); margin-bottom:8px;}
+  .rc-final-input{width:100%; border:1.5px solid var(--line); border-radius:8px; padding:8px 10px; font-family:'Tajawal',Arial,sans-serif; font-size:13.5px; resize:vertical;}
 
   .me-cols{display:flex; gap:16px; flex-wrap:wrap; max-width:1000px; margin:14px auto 0;}
   .me-card{flex:1; min-width:230px; background:#fff; border:1px solid var(--line); border-radius:12px; padding:16px 18px; box-shadow:0 2px 8px rgba(11,37,69,.04);}
@@ -1297,16 +1302,25 @@ function makeRootCauseCard(rc){
   card.appendChild(row1);
 
   const chainLabel = document.createElement('p'); chainLabel.className = 'checklist-score-note';
-  chainLabel.textContent = 'اسأل لماذا خمس مرات متتالية، واكتب جوابك داخل كل صندوق فارغ أمام كل رقم';
+  chainLabel.textContent = 'اسأل لماذا خمس مرات متتالية؛ اكتب صيغة السؤال يمين وجوابك يسار، وكل جواب هو أساس السؤال التالي';
   card.appendChild(chainLabel);
+
+  const header = document.createElement('div'); header.className = 'rc-row rc-header';
+  const spacer = document.createElement('div'); spacer.className = 'rc-num'; spacer.style.background = 'transparent';
+  const qLabel = document.createElement('div'); qLabel.className = 'rc-col-label'; qLabel.textContent = 'السؤال (لماذا؟)';
+  const aLabel = document.createElement('div'); aLabel.className = 'rc-col-label'; aLabel.textContent = 'الجواب';
+  header.appendChild(spacer); header.appendChild(qLabel); header.appendChild(aLabel);
+  card.appendChild(header);
 
   const chain = document.createElement('div'); chain.className = 'rc-chain';
   for(let i=0;i<5;i++){
     const row = document.createElement('div'); row.className = 'rc-row';
     const num = document.createElement('div'); num.className = 'rc-num'; num.textContent = i+1;
-    const inp = document.createElement('input'); inp.type='text'; inp.placeholder = 'اكتب هنا إجابتك عن سؤال لماذا رقم '+(i+1); inp.value = rc.answers[i];
-    inp.addEventListener('input', ()=>{ rc.answers[i] = inp.value; save(); updateRCResult(rc, resultEl); });
-    row.appendChild(num); row.appendChild(inp);
+    const qInp = document.createElement('input'); qInp.type='text'; qInp.placeholder = i===0 ? 'مثال: لماذا حدثت هذه المشكلة؟' : 'لماذا حدث السبب رقم '+i+'؟'; qInp.value = rc.questions[i] || '';
+    qInp.addEventListener('input', ()=>{ rc.questions[i] = qInp.value; save(); });
+    const aInp = document.createElement('input'); aInp.type='text'; aInp.placeholder = 'اكتب جوابك هنا'; aInp.value = rc.answers[i];
+    aInp.addEventListener('input', ()=>{ rc.answers[i] = aInp.value; save(); updateRCResult(rc, resultEl); });
+    row.appendChild(num); row.appendChild(qInp); row.appendChild(aInp);
     chain.appendChild(row);
   }
   card.appendChild(chain);
@@ -1315,24 +1329,32 @@ function makeRootCauseCard(rc){
   card.appendChild(resultEl);
   updateRCResult(rc, resultEl);
 
+  const finalWrap = document.createElement('div'); finalWrap.className = 'rc-final-wrap';
+  const finalLabel = document.createElement('label'); finalLabel.textContent = 'السبب الجذري النهائي (دوّن هنا الفرق بينه وبين المشكلة الظاهرة أعلاه)';
+  const finalInp = document.createElement('textarea'); finalInp.rows = 2; finalInp.className='rc-final-input';
+  finalInp.value = rc.finalCause || '';
+  finalInp.addEventListener('input', ()=>{ rc.finalCause = finalInp.value; save(); });
+  finalWrap.appendChild(finalLabel); finalWrap.appendChild(finalInp);
+  card.appendChild(finalWrap);
+
   return card;
 }
 
 function updateRCResult(rc, el){
   const lastFilled = rc.answers.filter(x=>x.trim()!=='').length;
   if(lastFilled===0){ el.textContent = 'ابدأ بكتابة التحدي، ثم اسأل لماذا خمس مرات متتالية للوصول إلى السبب الجذري'; return; }
-  el.textContent = 'السبب الجذري المرشَّح حتى الآن: ' + rc.answers[lastFilled-1];
+  el.textContent = 'مقترح تلقائي للسبب الجذري حتى الآن: ' + rc.answers[lastFilled-1] + ' — يمكنك تثبيته أو تعديله بصندوق السبب الجذري النهائي أدناه';
 }
 
 function buildRootCause(){
   const wrap = document.getElementById('rcList');
   wrap.innerHTML = "";
-  rootCauses.forEach(rc => wrap.appendChild(makeRootCauseCard(rc)));
+  rootCauses.forEach(rc => { if(!Array.isArray(rc.questions)) rc.questions = ['','','','','']; if(typeof rc.finalCause !== 'string') rc.finalCause = ''; wrap.appendChild(makeRootCauseCard(rc)); });
   document.getElementById('rcEmptyNote').style.display = rootCauses.length ? 'none' : 'block';
 }
 
 function addRootCause(){
-  rootCauses.push({ id:'rc'+(rcIdCounter++), problem:'', answers:['','','','',''] });
+  rootCauses.push({ id:'rc'+(rcIdCounter++), problem:'', questions:['','','','',''], answers:['','','','',''], finalCause:'' });
   buildRootCause();
   save();
 }
