@@ -1296,11 +1296,15 @@ function makeRootCauseCard(rc){
   row1.appendChild(col1);
   card.appendChild(row1);
 
+  const chainLabel = document.createElement('p'); chainLabel.className = 'checklist-score-note';
+  chainLabel.textContent = 'اسأل لماذا خمس مرات متتالية، واكتب جوابك داخل كل صندوق فارغ أمام كل رقم';
+  card.appendChild(chainLabel);
+
   const chain = document.createElement('div'); chain.className = 'rc-chain';
   for(let i=0;i<5;i++){
     const row = document.createElement('div'); row.className = 'rc-row';
     const num = document.createElement('div'); num.className = 'rc-num'; num.textContent = i+1;
-    const inp = document.createElement('input'); inp.type='text'; inp.placeholder = 'لماذا؟'; inp.value = rc.answers[i];
+    const inp = document.createElement('input'); inp.type='text'; inp.placeholder = 'اكتب هنا إجابتك عن سؤال لماذا رقم '+(i+1); inp.value = rc.answers[i];
     inp.addEventListener('input', ()=>{ rc.answers[i] = inp.value; save(); updateRCResult(rc, resultEl); });
     row.appendChild(num); row.appendChild(inp);
     chain.appendChild(row);
