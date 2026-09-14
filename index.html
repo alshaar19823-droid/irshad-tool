@@ -32,17 +32,6 @@
   .process-node:not(:last-child)::after{content:''; position:absolute; top:17px; right:calc(-50% + 17px); width:calc(100% - 34px); height:2px; background:var(--line); z-index:1;}
   .process-node.done:not(:last-child)::after{background:var(--navy);}
 
-  .fm-block{max-width:900px; margin:14px auto 0; background:#fff; border:1px solid var(--line); border-radius:12px; padding:16px 20px; box-shadow:0 2px 8px rgba(11,37,69,.04);}
-  .fm-block h4{font-size:13.5px; font-weight:800; color:var(--navy); margin:0 0 10px;}
-  .fm-item{display:flex; align-items:flex-start; gap:8px; padding:5px 0; font-size:13px; color:var(--ink);}
-  .fm-item input{margin-top:3px; accent-color:var(--teal); cursor:pointer;}
-  .fm-item label{cursor:pointer; line-height:1.7;}
-  .fm-cols{display:flex; gap:18px; flex-wrap:wrap;}
-  .fm-col{flex:1; min-width:260px;}
-  .fm-col.do h5{color:#1e7a3d;}
-  .fm-col.dont h5{color:#a33;}
-  .fm-col h5{font-size:12.5px; font-weight:800; margin:0 0 8px;}
-  .fm-col ul{margin:0; padding-inline-start:18px; font-size:12.5px; color:var(--ink); line-height:1.9;}
 
   .rc-chain{max-width:760px; margin:0 auto; display:flex; flex-direction:column; gap:10px;}
   .rc-row{display:flex; align-items:center; gap:10px;}
@@ -60,6 +49,8 @@
   .me-card h4{font-size:13px; font-weight:800; color:var(--navy); margin:0 0 4px;}
   .me-card .sub{font-size:11px; color:var(--muted); margin-bottom:10px;}
   .me-rate{display:flex; align-items:center; justify-content:space-between; gap:8px; font-size:12.5px; margin-bottom:10px;}
+  .me-subhead{font-size:11.5px; font-weight:800; color:var(--gold); margin:14px 0 8px; padding-top:10px; border-top:1px dashed var(--line);}
+  .me-subhead:first-of-type{margin-top:2px; padding-top:0; border-top:none;}
   .me-rate select{border:1.5px solid var(--line); border-radius:6px; padding:4px 6px; font-family:'Tajawal',Arial,sans-serif; font-size:12.5px;}
   .me-metric{display:flex; align-items:center; justify-content:space-between; padding:6px 0; border-bottom:1px dashed var(--line); font-size:12px;}
   .me-metric:last-child{border-bottom:none;}
@@ -189,6 +180,7 @@
     box-shadow:0 2px 10px rgba(11,37,69,.05); position:relative;
   }
   .card-top{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:12px;}
+  .goal-status-select{border:1.5px solid var(--line); border-radius:20px; padding:4px 10px; font-family:'Tajawal',Arial,sans-serif; font-size:12px; font-weight:700; color:var(--navy); background:#fff;}
   .card-badge{
     background:var(--navy); color:#fff; font-size:12px; font-weight:800; border-radius:7px;
     padding:4px 10px; flex:none;
@@ -723,12 +715,6 @@
 
   <div class="tab-panel" id="tabSessions">
   <div class="section-title">
-    <h2>دليل اللقاء الأول</h2>
-    <p>خارطة عملية للقاء التعارف الأول بين المرشد وصاحب المشروع، بخمس محطات مرتبة</p>
-  </div>
-  <div id="fmList"></div>
-
-  <div class="section-title">
     <h2>سجل الجلسات</h2>
     <p>سجل يُستكمل بعد كل جلسة إرشادية؛ يمكن ربط كل جلسة بأحد الأهداف الذكية أعلاه لتتبع التقدم بشكل تكاملي</p>
   </div>
@@ -746,47 +732,74 @@
   </div>
   <div class="me-cols">
     <div class="me-card">
-      <h4>التجربة</h4>
-      <div class="sub">مدى شعور الطرفين بأن الإرشاد مفيد ومتجاوب</div>
-      <div class="me-rate">
-        <span>الإرشاد مفيد وواضح</span>
-        <select id="meExp1"></select>
-      </div>
-      <div class="me-rate">
-        <span>يستجيب للاحتياجات بتوقيت مناسب</span>
-        <select id="meExp2"></select>
-      </div>
-      <div class="me-metric"><span>متوسط التجربة</span><span class="v" id="meExpAvg"></span></div>
+      <h4>① التجربة</h4>
+      <div class="sub">مدى شعور كل طرف بأن الإرشاد مفيد ومتجاوب، ومؤشر استعداد للتوصية به</div>
+      <p class="me-subhead">تقييم المرشد</p>
+      <div class="me-rate"><span>الإرشاد مفيد وواضح</span><select id="meExpM1"></select></div>
+      <div class="me-rate"><span>يستجيب للاحتياجات بتوقيت مناسب</span><select id="meExpM2"></select></div>
+      <p class="me-subhead">تقييم صاحب المشروع</p>
+      <div class="me-rate"><span>الإرشاد مفيد وواضح</span><select id="meExpO1"></select></div>
+      <div class="me-rate"><span>يستجيب للاحتياجات بتوقيت مناسب</span><select id="meExpO2"></select></div>
+      <div class="me-rate"><span>احتمالية أن يوصي غيره بهذا الإرشاد (0 إلى 10)</span><select id="meNPS"></select></div>
+      <div class="me-metric"><span>متوسط تجربة المرشد</span><span class="v" id="meExpMAvg"></span></div>
+      <div class="me-metric"><span>متوسط تجربة صاحب المشروع</span><span class="v" id="meExpOAvg"></span></div>
+      <div class="me-metric"><span>مؤشر الاستعداد للتوصية</span><span class="v" id="meNPSVal"></span></div>
     </div>
 
     <div class="me-card">
-      <h4>التقدم</h4>
-      <div class="sub">حركة فعلية نحو الأهداف، عبر مؤشر رقمي مرتبط بأحد الأهداف</div>
+      <h4>② التقدم</h4>
+      <div class="sub">حركة فعلية نحو الأهداف الذكية، ونسبة إنجازها الكلية، وتطور ثقة صاحب المشروع بإدارة مشروعه بنفسه</div>
+      <div class="me-metric"><span>نسبة الأهداف المكتملة</span><span class="v" id="meGoalCompletion"></span></div>
       <div class="field-col" style="margin-bottom:8px;">
-        <label style="font-size:11px;font-weight:700;color:var(--muted);display:block;margin-bottom:4px;">الهدف المتابَع</label>
+        <label style="font-size:11px;font-weight:700;color:var(--muted);display:block;margin-bottom:4px;">الهدف المتابَع بالمنحنى أدناه</label>
         <select id="meProgressGoal"></select>
       </div>
       <div id="progressLogRows"></div>
       <button type="button" class="ka-toggle" id="addProgressPointBtn" style="width:100%; margin-top:6px;">تسجيل نقطة قياس جديدة</button>
       <svg id="progressMiniChart" class="progress-mini-chart" viewBox="0 0 300 70"></svg>
+      <p class="me-subhead">ثقة صاحب المشروع بالإدارة الذاتية لمشروعه</p>
+      <div class="me-rate"><span>عند بداية الإرشاد</span><select id="meConfBefore"></select></div>
+      <div class="me-rate"><span>الآن</span><select id="meConfAfter"></select></div>
+      <div class="me-metric"><span>الفرق</span><span class="v" id="meConfDelta"></span></div>
     </div>
 
     <div class="me-card">
-      <h4>العملية</h4>
-      <div class="sub">مؤشرات محسوبة تلقائياً من بيانات الأداة</div>
+      <h4>③ العملية</h4>
+      <div class="sub">مؤشرات محسوبة تلقائياً من بيانات الأداة تعكس انتظام العملية الإرشادية نفسها</div>
       <div class="me-metric"><span>الوقت حتى أول جلسة</span><span class="v" id="meProcTime"></span></div>
       <div class="me-metric"><span>عدد الجلسات المسجَّلة</span><span class="v" id="meProcSessions"></span></div>
       <div class="me-metric"><span>نسبة اكتمال التوثيق</span><span class="v" id="meProcDocs"></span></div>
+      <div class="me-metric"><span>انتظام الجلسات (متوسط الفاصل بالأيام)</span><span class="v" id="meProcGap"></span></div>
+      <div class="me-metric"><span>نسبة الجلسات المؤجلة أو الملغاة</span><span class="v" id="meProcCancelRate"></span></div>
+      <div class="me-metric"><span>متوسط مدة الجلسة</span><span class="v" id="meProcDuration"></span></div>
     </div>
 
     <div class="me-card">
-      <h4>الحماية والحدود</h4>
+      <h4>④ الحماية والحدود</h4>
       <div class="sub">أي ملاحظة أو قلق مبكر يخص السلامة أو السلوك المهني</div>
       <div class="me-flag-row">
         <select id="meFlagLevel"></select>
       </div>
       <textarea id="meFlagNote" placeholder="اكتب الملاحظة إن وُجدت"></textarea>
       <button type="button" class="ka-toggle" id="addFlagBtn" style="width:100%; margin-top:8px;">تسجيل الملاحظة</button>
+    </div>
+
+    <div class="me-card">
+      <h4>⑤ الأثر</h4>
+      <div class="sub">مقارنة نتائج التشخيص بين نقطة انطلاق تحددها أنت ولحظة القياس الحالية، إلى جانب أثر ملموس على المشروع</div>
+      <div class="me-metric"><span>درجة التشخيص الإجمالية الآن (من 180)</span><span class="v" id="meImpactNow"></span></div>
+      <div class="me-metric"><span>نقطة الأساس المثبَّتة</span><span class="v" id="meImpactBaseline"></span></div>
+      <button type="button" class="ka-toggle" id="setBaselineBtn" style="width:100%; margin-top:6px;">تثبيت الدرجة الحالية كنقطة أساس</button>
+      <div class="me-metric"><span>الفرق منذ نقطة الأساس</span><span class="v" id="meImpactDelta"></span></div>
+      <p class="me-subhead">مؤشرات أثر إضافية (تُدخَل يدوياً)</p>
+      <div class="field-col" style="margin-bottom:8px;">
+        <label style="font-size:11px;font-weight:700;color:var(--muted);display:block;margin-bottom:4px;">نسبة نمو المبيعات أو الإيرادات الشهرية</label>
+        <input type="text" id="meSalesGrowth" placeholder="مثال: 15%">
+      </div>
+      <div class="field-col">
+        <label style="font-size:11px;font-weight:700;color:var(--muted);display:block;margin-bottom:4px;">عدد الوظائف المستحدثة</label>
+        <input type="number" id="meJobsCreated" min="0">
+      </div>
     </div>
   </div>
 
@@ -827,7 +840,7 @@
   </div>
   <div class="guide-block">
     <h3>الجلسات</h3>
-    <p>دليل عملي لإدارة اللقاء الأول بخمس محطات مرتبة، وسجل جلسات يوثق كل لقاء لاحق ويمكن ربطه بأحد الأهداف الذكية لتتبع التقدم جلسة بعد جلسة.</p>
+    <p>سجل جلسات يوثق كل لقاء إرشادي بتفاصيله وحالته، ويمكن ربط كل جلسة بأحد الأهداف الذكية لتتبع التقدم جلسة بعد جلسة.</p>
   </div>
   <div class="guide-block">
     <h3>المتابعة والقياس</h3>
@@ -946,15 +959,6 @@ const KA_CHECKLISTS = {
 };
 const OBJECTIVE_KA_INDICES = [7, 9];
 const PROCESS_PHASES = ["تقييم الاحتياجات","صياغة الأهداف الذكية","بناء خطة الإرشاد","تنسيق الجلسات","تنفيذ الجلسات الإرشادية","المتابعة والتقييم"];
-const FIRST_MEETING_STAGES = [
-  { title:"بناء الألفة والتعارف", items:["ترحيب بسيط وواضح بنبرة ودودة","تعريف موجز بالمرشد ودوره في الإرشاد دون مبالغة","خلق جو إنساني قبل الدخول في النماذج والأوراق","مساحة كافية لصاحب المشروع ليعرض قصته"]},
-  { title:"توضيح التوقعات والحدود", items:["عدد الجلسات المتوقعة ومدة كل جلسة","قنوات التواصل بين الجلسات","حدود دور المرشد وما هو خارج نطاقه","مبدأ السرية والخصوصية"]},
-  { title:"مراجعة وتحديث تقييم الاحتياجات", items:["استخدام تقييم الاحتياجات المعبَّأ مسبقاً إن وُجد كنقطة انطلاق","التحقق من صحة المعلومات وتعديل ما يلزم","فتح حوار صريح حول التحديات الحقيقية"]},
-  { title:"تحديد الأولويات وصياغة الأهداف", items:["اختيار من واحد إلى ثلاثة احتياجات ذات أولوية","صياغة هدف أو هدفين بصيغة SMART لفترة العمل القادمة"]},
-  { title:"رسم ملامح خطة الإرشاد", items:["حديث عام عمّا يمكن العمل عليه خلال فترة الإرشاد","الاتفاق على موعد الجلسة القادمة وما سيتم التركيز عليه"]}
-];
-const FM_DO = ["استخدام لغة بسيطة وقريبة من واقع صاحب المشروع","إظهار اهتمام حقيقي بسماع القصة كاملة","مشاركة جملة أو جملتين عن خلفية المرشد ودوره","طرح أسئلة تعريفية تساعد على الفهم المتبادل"];
-const FM_DONT = ["البدء مباشرة بأسئلة تقنية أو أرقام قبل أي تعارف","إطلاق أحكام مبكرة على السوق أو الفكرة","احتكار الحديث عن تجربة المرشد الشخصية","استخدام نبرة تحقيق أو استجواب في البداية"];
 const RATING_5 = ["اختيار","1 ضعيف جداً","2 ضعيف","3 متوسط","4 جيد","5 ممتاز"];
 const FLAG_LEVELS = ["اختيار المستوى","لا يوجد قلق","ملاحظة بسيطة للمتابعة","قلق يستدعي تدخلاً"];
 function fmtVal(v){
@@ -1240,41 +1244,6 @@ function buildProcessTrack(){
     node.appendChild(circle); node.appendChild(label);
     wrap.appendChild(node);
   });
-}
-
-// ===== دليل اللقاء الأول =====
-let fmChecks = FIRST_MEETING_STAGES.map(s => s.items.map(()=>false));
-function buildFirstMeetingGuide(){
-  const wrap = document.getElementById('fmList');
-  wrap.innerHTML = "";
-  FIRST_MEETING_STAGES.forEach((stage, si)=>{
-    const block = document.createElement('div'); block.className = 'fm-block';
-    const h = document.createElement('h4'); h.textContent = (si+1) + '. ' + stage.title; block.appendChild(h);
-    stage.items.forEach((item, ii)=>{
-      const row = document.createElement('div'); row.className = 'fm-item';
-      const cb = document.createElement('input'); cb.type='checkbox'; cb.id = 'fmChk'+si+'_'+ii;
-      if(!fmChecks[si]) fmChecks[si] = stage.items.map(()=>false);
-      cb.checked = fmChecks[si][ii];
-      cb.addEventListener('change', ()=>{ fmChecks[si][ii] = cb.checked; save(); });
-      const lbl = document.createElement('label'); lbl.setAttribute('for', cb.id); lbl.textContent = item;
-      row.appendChild(cb); row.appendChild(lbl);
-      block.appendChild(row);
-    });
-    wrap.appendChild(block);
-  });
-
-  const doDontBlock = document.createElement('div'); doDontBlock.className = 'fm-block';
-  const h2 = document.createElement('h4'); h2.textContent = 'ممارسات بناء الألفة'; doDontBlock.appendChild(h2);
-  const cols = document.createElement('div'); cols.className = 'fm-cols';
-  const doCol = document.createElement('div'); doCol.className = 'fm-col do';
-  doCol.innerHTML = '<h5>يُفضَّل</h5>';
-  const doUl = document.createElement('ul'); FM_DO.forEach(x=>{ const li=document.createElement('li'); li.textContent=x; doUl.appendChild(li); }); doCol.appendChild(doUl);
-  const dontCol = document.createElement('div'); dontCol.className = 'fm-col dont';
-  dontCol.innerHTML = '<h5>يُفضَّل تجنبه</h5>';
-  const dontUl = document.createElement('ul'); FM_DONT.forEach(x=>{ const li=document.createElement('li'); li.textContent=x; dontUl.appendChild(li); }); dontCol.appendChild(dontUl);
-  cols.appendChild(doCol); cols.appendChild(dontCol);
-  doDontBlock.appendChild(cols);
-  wrap.appendChild(doDontBlock);
 }
 
 // ===== تحليل الأسباب الجذرية =====
@@ -2042,9 +2011,16 @@ function makeGoalCard(g){
 
   const top = document.createElement('div'); top.className = 'card-top';
   const badge = document.createElement('span'); badge.className = 'card-badge'; badge.textContent = 'هدف';
+  const statusSel = document.createElement('select'); statusSel.className = 'goal-status-select';
+  ['لم يبدأ','قيد التنفيذ','مكتمل'].forEach(opt=>{
+    const o = document.createElement('option'); o.value = opt; o.textContent = opt;
+    if((g.status||'لم يبدأ') === opt) o.selected = true;
+    statusSel.appendChild(o);
+  });
+  statusSel.addEventListener('change', ()=>{ g.status = statusSel.value; save(); updateDashboard(); });
   const rm = document.createElement('button'); rm.className = 'remove-btn'; rm.textContent = 'حذف';
   rm.addEventListener('click', ()=> removeGoal(g.id));
-  top.appendChild(badge); top.appendChild(rm);
+  top.appendChild(badge); top.appendChild(statusSel); top.appendChild(rm);
   card.appendChild(top);
 
   // الصف الأول: مجال المعرفة المرتبط
@@ -2168,7 +2144,7 @@ function newVerifyState(){
 function addGoal(){
   goals.push({
     id:'g'+(goalIdCounter++), ka:'', kaOther:'', statement:'', indicators:'',
-    targetDate:'', sessionsExpected:'', milestones:'',
+    targetDate:'', sessionsExpected:'', milestones:'', status:'لم يبدأ',
     verify: newVerifyState()
   });
   buildGoals();
@@ -2228,6 +2204,18 @@ function makeSessionCard(s, num){
   modeSel.addEventListener('change', ()=>{ s.mode = modeSel.value; save(); });
   col1b.appendChild(modeSel);
   row1.appendChild(col1b);
+
+  const col1x = document.createElement('div'); col1x.className = 'field-col narrow';
+  col1x.innerHTML = '<label>حالة الجلسة</label>';
+  const statusSel = document.createElement('select');
+  ['تمت','مؤجلة','ملغاة'].forEach(opt=>{
+    const o = document.createElement('option'); o.value = opt; o.textContent = opt;
+    if((s.status||'تمت') === opt) o.selected = true;
+    statusSel.appendChild(o);
+  });
+  statusSel.addEventListener('change', ()=>{ s.status = statusSel.value; save(); updateDashboard(); });
+  col1x.appendChild(statusSel);
+  row1.appendChild(col1x);
 
   const col1c = document.createElement('div'); col1c.className = 'field-col narrow'; col1c.style.width = '230px'; col1c.style.flex = 'none';
   col1c.innerHTML = '<label>وقت الجلسة</label>';
@@ -2330,7 +2318,7 @@ function refreshSessionGoalOptions(){
 }
 
 function addSession(){
-  sessions.push({ id:'s'+(sessionIdCounter++), date:'', mode:'حضوري', timeFrom:'', timeTo:'', goalId:'', points:'', challenges:'', nextSteps:'', tasks:'', notes:'' });
+  sessions.push({ id:'s'+(sessionIdCounter++), date:'', mode:'حضوري', status:'تمت', timeFrom:'', timeTo:'', goalId:'', points:'', challenges:'', nextSteps:'', tasks:'', notes:'' });
   buildSessions();
   save();
 }
@@ -2451,28 +2439,108 @@ function makeAttachmentCard(a){
 }
 
 // ===== المتابعة والقياس =====
-let meExperience = { q1:'', q2:'' };
+let meExperience = { mentorQ1:'', mentorQ2:'', ownerQ1:'', ownerQ2:'', nps:'', confBefore:'', confAfter:'' };
+let impactData = { baselineTotal:null, baselineDate:'', salesGrowth:'', jobsCreated:'' };
+const NPS_SCALE = ['اختيار','0','1','2','3','4','5','6','7','8','9','10'];
 let progressLogs = {};
 let protectionFlags = [];
 let flagIdCounter = 0;
 
 function wireMEExperience(){
-  const s1 = document.getElementById('meExp1');
-  const s2 = document.getElementById('meExp2');
-  [s1,s2].forEach(sel=>{
+  const ratingFields = [
+    ['meExpM1','mentorQ1'], ['meExpM2','mentorQ2'],
+    ['meExpO1','ownerQ1'], ['meExpO2','ownerQ2'],
+    ['meConfBefore','confBefore'], ['meConfAfter','confAfter']
+  ];
+  ratingFields.forEach(([elId,key])=>{
+    const sel = document.getElementById(elId);
+    if(!sel) return;
     sel.innerHTML = "";
     RATING_5.forEach((r,i)=>{ const o=document.createElement('option'); o.value=i? String(i):''; o.textContent=r; sel.appendChild(o); });
+    sel.value = meExperience[key] || '';
+    sel.addEventListener('change', ()=>{ meExperience[key] = sel.value; save(); updateMEExperience(); });
   });
-  s1.value = meExperience.q1 || '';
-  s2.value = meExperience.q2 || '';
-  s1.addEventListener('change', ()=>{ meExperience.q1 = s1.value; save(); updateMEExperience(); });
-  s2.addEventListener('change', ()=>{ meExperience.q2 = s2.value; save(); updateMEExperience(); });
+  const nps = document.getElementById('meNPS');
+  if(nps){
+    nps.innerHTML = "";
+    NPS_SCALE.forEach((r,i)=>{ const o=document.createElement('option'); o.value = i? String(i-1) : ''; o.textContent = r; nps.appendChild(o); });
+    nps.value = meExperience.nps || '';
+    nps.addEventListener('change', ()=>{ meExperience.nps = nps.value; save(); updateMEExperience(); });
+  }
   updateMEExperience();
 }
 function updateMEExperience(){
-  const vals = [meExperience.q1, meExperience.q2].filter(v=>v).map(Number);
-  const el = document.getElementById('meExpAvg');
-  el.textContent = vals.length ? fmtVal(vals.reduce((a,b)=>a+b,0)/vals.length) + ' / 5' : '';
+  const mVals = [meExperience.mentorQ1, meExperience.mentorQ2].filter(v=>v).map(Number);
+  const oVals = [meExperience.ownerQ1, meExperience.ownerQ2].filter(v=>v).map(Number);
+  const elM = document.getElementById('meExpMAvg');
+  const elO = document.getElementById('meExpOAvg');
+  if(elM) elM.textContent = mVals.length ? fmtVal(mVals.reduce((a,b)=>a+b,0)/mVals.length) + ' / 5' : '';
+  if(elO) elO.textContent = oVals.length ? fmtVal(oVals.reduce((a,b)=>a+b,0)/oVals.length) + ' / 5' : '';
+  const elNps = document.getElementById('meNPSVal');
+  if(elNps) elNps.textContent = meExperience.nps !== '' && meExperience.nps !== undefined ? meExperience.nps + ' / 10' : '';
+
+  const before = meExperience.confBefore, after = meExperience.confAfter;
+  const elDelta = document.getElementById('meConfDelta');
+  if(elDelta){
+    if(before && after){
+      const d = Number(after) - Number(before);
+      elDelta.textContent = (d>0?'+':'') + d;
+      elDelta.className = 'v ' + (d>0?'delta-pos':(d<0?'delta-neg':'delta-zero'));
+    } else { elDelta.textContent = ''; elDelta.className = 'v'; }
+  }
+}
+
+function updateGoalCompletion(){
+  const el = document.getElementById('meGoalCompletion');
+  if(!el) return;
+  if(!goals.length){ el.textContent = ''; return; }
+  const done = goals.filter(g => g.status === 'مكتمل').length;
+  el.textContent = Math.round((done/goals.length)*100) + '% (' + done + ' من ' + goals.length + ')';
+}
+
+function updateImpactSection(){
+  const nowTotal = (mentor.filter(v=>v!==null).reduce((a,b)=>a+b,0)) + (owner.filter(v=>v!==null).reduce((a,b)=>a+b,0));
+  const hasNow = mentor.some(v=>v!==null) || owner.some(v=>v!==null);
+  const elNow = document.getElementById('meImpactNow');
+  if(elNow) elNow.textContent = hasNow ? fmtVal(nowTotal) : '';
+
+  const elBase = document.getElementById('meImpactBaseline');
+  if(elBase) elBase.textContent = impactData.baselineTotal !== null ? fmtVal(impactData.baselineTotal) + ' (بتاريخ ' + impactData.baselineDate + ')' : 'لم تُثبَّت بعد';
+
+  const elDelta = document.getElementById('meImpactDelta');
+  if(elDelta){
+    if(impactData.baselineTotal !== null && hasNow){
+      const d = nowTotal - impactData.baselineTotal;
+      elDelta.textContent = (d>0?'+':'') + fmtVal(d);
+      elDelta.className = 'v ' + (d>0?'delta-pos':(d<0?'delta-neg':'delta-zero'));
+    } else { elDelta.textContent = ''; elDelta.className = 'v'; }
+  }
+
+  const sg = document.getElementById('meSalesGrowth');
+  const jc = document.getElementById('meJobsCreated');
+  if(sg && sg.value === '' && impactData.salesGrowth) sg.value = impactData.salesGrowth;
+  if(jc && jc.value === '' && impactData.jobsCreated) jc.value = impactData.jobsCreated;
+}
+
+function wireImpactSection(){
+  const btn = document.getElementById('setBaselineBtn');
+  if(btn){
+    btn.addEventListener('click', ()=>{
+      const hasNow = mentor.some(v=>v!==null) || owner.some(v=>v!==null);
+      if(!hasNow){ alert('لا توجد بيانات تشخيص مُدخَلة بعد؛ عبّئ المسح التفصيلي أولاً قبل تثبيت نقطة الأساس.'); return; }
+      const nowTotal = (mentor.filter(v=>v!==null).reduce((a,b)=>a+b,0)) + (owner.filter(v=>v!==null).reduce((a,b)=>a+b,0));
+      if(!confirm('سيتم تثبيت الدرجة الحالية كنقطة أساس للمقارنة المستقبلية. هل تريد المتابعة؟')) return;
+      impactData.baselineTotal = nowTotal;
+      impactData.baselineDate = new Date().toISOString().slice(0,10);
+      save();
+      updateImpactSection();
+    });
+  }
+  const sg = document.getElementById('meSalesGrowth');
+  const jc = document.getElementById('meJobsCreated');
+  if(sg){ sg.value = impactData.salesGrowth || ''; sg.addEventListener('input', ()=>{ impactData.salesGrowth = sg.value; save(); }); }
+  if(jc){ jc.value = impactData.jobsCreated || ''; jc.addEventListener('input', ()=>{ impactData.jobsCreated = jc.value; save(); }); }
+  updateImpactSection();
 }
 
 function wireProgressGoalSelect(){
@@ -2570,6 +2638,42 @@ function computeProcessMetrics(){
   const elT = document.getElementById('meProcTime'); if(elT) elT.textContent = timeToFirst;
   const elS = document.getElementById('meProcSessions'); if(elS) elS.textContent = sessionCount;
   const elD = document.getElementById('meProcDocs'); if(elD) elD.textContent = docRate + '%';
+
+  // انتظام الجلسات: متوسط الفاصل الزمني بالأيام بين تواريخ الجلسات المرتبة
+  const elGap = document.getElementById('meProcGap');
+  if(elGap){
+    if(dates.length >= 2){
+      let totalGap = 0;
+      for(let i=1;i<dates.length;i++){
+        totalGap += (new Date(dates[i]) - new Date(dates[i-1])) / (1000*60*60*24);
+      }
+      elGap.textContent = fmtVal(totalGap/(dates.length-1)) + ' يوم';
+    } else { elGap.textContent = ''; }
+  }
+
+  // نسبة الجلسات المؤجلة أو الملغاة
+  const elCancel = document.getElementById('meProcCancelRate');
+  if(elCancel){
+    if(sessionCount){
+      const cancelCount = sessions.filter(s => s.status === 'مؤجلة' || s.status === 'ملغاة').length;
+      elCancel.textContent = Math.round((cancelCount/sessionCount)*100) + '%';
+    } else { elCancel.textContent = ''; }
+  }
+
+  // متوسط مدة الجلسة من وقت البدء والانتهاء
+  const elDur = document.getElementById('meProcDuration');
+  if(elDur){
+    const durations = sessions.filter(s => s.timeFrom && s.timeTo).map(s=>{
+      const [h1,m1] = s.timeFrom.split(':').map(Number);
+      const [h2,m2] = s.timeTo.split(':').map(Number);
+      const mins = (h2*60+m2) - (h1*60+m1);
+      return mins > 0 ? mins : null;
+    }).filter(v=>v!==null);
+    elDur.textContent = durations.length ? Math.round(durations.reduce((a,b)=>a+b,0)/durations.length) + ' دقيقة' : '';
+  }
+
+  updateGoalCompletion();
+  updateImpactSection();
 }
 
 function wireFlags(){
@@ -2681,7 +2785,7 @@ function removeAttachment(id){
 
 function save(){
   try{
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({mentor, owner, meta, stageIndex, kaMentor, kaOwner, kaChecklist, gateState, goals, goalIdCounter, sessions, sessionIdCounter, needsAssessment, attachmentIdCounter, processPhase, fmChecks, rootCauses, rcIdCounter, meExperience, progressLogs, protectionFlags, flagIdCounter, savedAt: Date.now()}));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({mentor, owner, meta, stageIndex, kaMentor, kaOwner, kaChecklist, gateState, goals, goalIdCounter, sessions, sessionIdCounter, needsAssessment, attachmentIdCounter, processPhase, rootCauses, rcIdCounter, meExperience, impactData, progressLogs, protectionFlags, flagIdCounter, savedAt: Date.now()}));
     const note = document.getElementById('saveNote');
     note.textContent = 'تم الحفظ تلقائياً في هذا المتصفح، ' + new Date().toLocaleTimeString('ar-JO');
     updateDashboard();
@@ -2727,10 +2831,10 @@ function load(){
       needsAssessment.analysis = Object.assign(needsAssessment.analysis, data.needsAssessment.analysis || {});
     }
     if(Number.isInteger(data.processPhase) && data.processPhase>=0 && data.processPhase<PROCESS_PHASES.length) processPhase = data.processPhase;
-    if(Array.isArray(data.fmChecks)) fmChecks = data.fmChecks;
     if(Array.isArray(data.rootCauses)) rootCauses = data.rootCauses;
     if(Number.isInteger(data.rcIdCounter)) rcIdCounter = data.rcIdCounter;
     if(data.meExperience && typeof data.meExperience === 'object') meExperience = Object.assign(meExperience, data.meExperience);
+    if(data.impactData && typeof data.impactData === 'object') impactData = Object.assign(impactData, data.impactData);
     if(data.progressLogs && typeof data.progressLogs === 'object') progressLogs = data.progressLogs;
     if(Array.isArray(data.protectionFlags)) protectionFlags = data.protectionFlags;
     if(Number.isInteger(data.flagIdCounter)) flagIdCounter = data.flagIdCounter;
@@ -2768,9 +2872,9 @@ function resetAll(){
     analysis: { strengths:'', gaps:'', prioritySummary:'', referrals:'' }
   };
   processPhase = 0;
-  fmChecks = FIRST_MEETING_STAGES.map(s => s.items.map(()=>false));
   rootCauses = []; rcIdCounter = 0;
-  meExperience = { q1:'', q2:'' };
+  meExperience = { mentorQ1:'', mentorQ2:'', ownerQ1:'', ownerQ2:'', nps:'', confBefore:'', confAfter:'' };
+  impactData = { baselineTotal:null, baselineDate:'', salesGrowth:'', jobsCreated:'' };
   progressLogs = {};
   protectionFlags = []; flagIdCounter = 0;
   save();
@@ -2785,9 +2889,9 @@ function resetAll(){
   buildSessions();
   buildAttachments();
   buildProcessTrack();
-  buildFirstMeetingGuide();
   buildRootCause();
   wireMEExperience();
+  wireImpactSection();
   wireProgressGoalSelect();
   render();
   renderKA();
@@ -2804,7 +2908,7 @@ function printSummary(){
 }
 
 function doExport(){
-  const payload = {mentor, owner, meta, stageIndex, kaMentor, kaOwner, kaChecklist, gateState, goals, sessions, needsAssessment, attachments, processPhase, fmChecks, rootCauses, meExperience, progressLogs, protectionFlags, axes: AXES.map(a=>a.label), knowledgeAreas: KA.map(k=>k.label), exportedAt: new Date().toISOString()};
+  const payload = {mentor, owner, meta, stageIndex, kaMentor, kaOwner, kaChecklist, gateState, goals, sessions, needsAssessment, attachments, processPhase, rootCauses, meExperience, impactData, progressLogs, protectionFlags, axes: AXES.map(a=>a.label), knowledgeAreas: KA.map(k=>k.label), exportedAt: new Date().toISOString()};
   const blob = new Blob([JSON.stringify(payload, null, 1)], {type:'application/json'});
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -2844,15 +2948,15 @@ function doImport(evt){
         needsAssessment.analysis = Object.assign({strengths:'',gaps:'',prioritySummary:'',referrals:''}, data.needsAssessment.analysis || {});
       }
       if(Number.isInteger(data.processPhase) && data.processPhase>=0 && data.processPhase<PROCESS_PHASES.length) processPhase = data.processPhase; else processPhase = 0;
-      fmChecks = Array.isArray(data.fmChecks) ? data.fmChecks : FIRST_MEETING_STAGES.map(s => s.items.map(()=>false));
       rootCauses = Array.isArray(data.rootCauses) ? data.rootCauses : [];
       rcIdCounter = rootCauses.length;
-      meExperience = (data.meExperience && typeof data.meExperience==='object') ? Object.assign({q1:'',q2:''}, data.meExperience) : {q1:'',q2:''};
+      meExperience = (data.meExperience && typeof data.meExperience==='object') ? Object.assign({mentorQ1:'',mentorQ2:'',ownerQ1:'',ownerQ2:'',nps:'',confBefore:'',confAfter:''}, data.meExperience) : {mentorQ1:'',mentorQ2:'',ownerQ1:'',ownerQ2:'',nps:'',confBefore:'',confAfter:''};
+      impactData = (data.impactData && typeof data.impactData==='object') ? Object.assign({baselineTotal:null,baselineDate:'',salesGrowth:'',jobsCreated:''}, data.impactData) : {baselineTotal:null,baselineDate:'',salesGrowth:'',jobsCreated:''};
       progressLogs = (data.progressLogs && typeof data.progressLogs==='object') ? data.progressLogs : {};
       protectionFlags = Array.isArray(data.protectionFlags) ? data.protectionFlags : [];
       flagIdCounter = protectionFlags.length;
       save(); syncInputs(); syncMeta(); syncNeedsAssessment(); buildNADomains(); buildKATable(); buildStagePicker(); buildGate(); buildGoals(); buildSessions(); buildAttachments();
-      buildProcessTrack(); buildFirstMeetingGuide(); buildRootCause(); wireMEExperience(); wireProgressGoalSelect();
+      buildProcessTrack(); buildRootCause(); wireMEExperience(); wireImpactSection(); wireProgressGoalSelect();
       render(); renderKA(); updateDashboard();
     }catch(err){ alert('تعذّر قراءة الملف. يرجى التأكد من أنه ملف تشخيص صحيح.'); }
   };
@@ -2872,9 +2976,9 @@ buildAttachments();
 wireMeta();
 wireNeedsAssessment();
 buildProcessTrack();
-buildFirstMeetingGuide();
 buildRootCause();
 wireMEExperience();
+wireImpactSection();
 wireProgressGoalSelect();
 wireFlags();
 document.getElementById('addProgressPointBtn').addEventListener('click', addProgressPoint);
