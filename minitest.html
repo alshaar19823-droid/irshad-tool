@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>اختبار مصغر</title>
+<style>
+  body{font-family:sans-serif; padding:30px; font-size:20px;}
+  .box{border:2px solid #333; border-radius:10px; padding:20px; margin-bottom:20px;}
+  .num{font-size:32px; font-weight:bold; color:#0a5;}
+</style>
+</head>
+<body>
+  <h2>اختبار مصغر لتحديث الأرقام</h2>
+
+  <div class="box">
+    <h3>قسم المرشد</h3>
+    <label><input type="checkbox" id="m1"> بند 1</label><br>
+    <label><input type="checkbox" id="m2"> بند 2</label><br>
+    <label><input type="checkbox" id="m3"> بند 3</label>
+    <p>مجموع المرشد: <span class="num" id="mentorNum">0</span></p>
+  </div>
+
+  <div class="box">
+    <h3>قسم صاحب المشروع</h3>
+    <label><input type="checkbox" id="o1"> بند 1</label><br>
+    <label><input type="checkbox" id="o2"> بند 2</label><br>
+    <label><input type="checkbox" id="o3"> بند 3</label>
+    <p>مجموع صاحب المشروع: <span class="num" id="ownerNum">0</span></p>
+  </div>
+
+  <p style="color:#888">إذا الرقمين فوق تحدثوا صح كل واحد لحاله وأنت عم تفعّل الصناديق، معناها متصفحك شغال تمام والمشكلة كانت كاش قديم. إذا رقم صاحب المشروع ما تحرك أبداً، ابعتلي سكرين شوت لهاي الصفحة بالضبط.</p>
+
+<script>
+  const mBoxes = [document.getElementById('m1'), document.getElementById('m2'), document.getElementById('m3')];
+  const oBoxes = [document.getElementById('o1'), document.getElementById('o2'), document.getElementById('o3')];
+  const mentorNum = document.getElementById('mentorNum');
+  const ownerNum = document.getElementById('ownerNum');
+
+  function updateMentor(){
+    mentorNum.textContent = mBoxes.filter(b=>b.checked).length;
+  }
+  function updateOwner(){
+    ownerNum.textContent = oBoxes.filter(b=>b.checked).length;
+  }
+
+  mBoxes.forEach(b => b.addEventListener('change', updateMentor));
+  oBoxes.forEach(b => b.addEventListener('change', updateOwner));
+</script>
+</body>
+</html>
